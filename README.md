@@ -1,9 +1,9 @@
 # Ayushman Mishra — Unknown / "Hacker Guru Ji" ☠️👾
 
 AI Engineer • Bot Developer • Prompt Engineer  
-Professional · Friendly/Casual — dangerous aesthetics engaged.
+Professional · Friendly/Casual — dangerous aesthetics enabled.
 
-[![Spotify](https://img.shields.io/badge/Spotify-Listen-green?style=for-the-badge&logo=spotify)](https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg) [![Status](https://img.shields.io/badge/Status-Open%20to%20opportunities-brightgreen?style=for-the-badge)](#) [![Danger Mode](https://img.shields.io/badge/Aesthetic-Danger--Mode-red?style=for-the-badge&logo=firefox)](#)
+[![Spotify](https://img.shields.io/badge/Spotify-Listen-green?style=for-the-badge&logo=spotify)](https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg) [![Open to opportunities](https://img.shields.io/badge/Status-Open%20to%20opportunities-brightgreen?style=for-the-badge)](#) [![Danger Mode](https://img.shields.io/badge/Aesthetic-Danger--Mode-red?style=for-the-badge&logo=firefox)](#)
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=Unknown-2829&show_icons=true&theme=radical&hide_border=true" alt="GitHub stats" />
@@ -35,6 +35,7 @@ If you want these to link to public repos or be shown as pinned cards, tell me w
 ---
 
 ## Core skills & tech
+
 - Python (primary) — bots, automation, tooling  
 - Prompt engineering & LLM orchestration  
 - Telegram API bots & real-time integrations  
@@ -45,6 +46,7 @@ If you want these to link to public repos or be shown as pinned cards, tell me w
 ---
 
 ## How I work
+
 - Iterate fast: small experiments, thorough logging, rapid rollback.  
 - Treat prompts like code: version, test, measure.  
 - Mix research and product: prototypes that can be hardened into tools.  
@@ -53,6 +55,7 @@ If you want these to link to public repos or be shown as pinned cards, tell me w
 ---
 
 ## Aesthetic & Branding
+
 This profile embraces a dark, dangerous look — skulls, bold contrast, and terse copy. Options to enhance the page:
 - Animated banner (GIF or SVG) with a black/red palette  
 - Demo GIFs for Telegram bot flows  
@@ -64,12 +67,14 @@ If you want a custom banner, provide an image (or say “make an SVG banner”) 
 ---
 
 ## Listening
-Check my music on Spotify:
+
+Check my music on Spotify:  
 https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg
 
 ---
 
 ## Contact & availability
+
 Pronouns: — (tell me if you'd like them added)  
 Location: — (optional)  
 Open to opportunities: Yes
@@ -78,11 +83,23 @@ Links to include (optional): personal website, email, LinkedIn, X/Twitter, Masto
 
 ---
 
-## Want this README updated / pinned?
-I can:
-- Add direct links to any public repos you want pinned.
-- Insert a custom banner (SVG/GIF) and demo GIFs.
-- Add email/contact links or a hireable badge.
-- Tweak tone or shorten/expand sections.
+## Hi there 👋
+
+<!--
+**Unknown-2829/Unknown-2829** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+
+Here are some ideas to get you started:
+
+- 🔭 I’m currently working on ...
+- 🌱 I’m currently learning ...
+- 👯 I’m looking to collaborate on ...
+- 🤔 I’m looking for help with ...
+- 💬 Ask me about ...
+- 📫 How to reach me: ...
+- 😄 Pronouns: ...
+- ⚡ Fun fact: ...
+-->
 
 ---
+
+If you want any changes (add links, a banner, or pin public repos), tell me and I’ll update the README immediately.
