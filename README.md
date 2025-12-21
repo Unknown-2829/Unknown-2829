@@ -1,7 +1,6 @@
 # Ayushman Mishra — Unknown / "Hacker Guru Ji" ☠️👾
 
 AI Engineer • Bot Developer • Prompt Engineer  
-Professional · Friendly/Casual — dangerous aesthetics enabled.
 
 [![Spotify](https://img.shields.io/badge/Spotify-Listen-green?style=for-the-badge&logo=spotify)](https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg) [![Open to opportunities](https://img.shields.io/badge/Status-Open%20to%20opportunities-brightgreen?style=for-the-badge)](#) [![Danger Mode](https://img.shields.io/badge/Aesthetic-Danger--Mode-red?style=for-the-badge&logo=firefox)](#)
 
@@ -12,25 +11,22 @@ Professional · Friendly/Casual — dangerous aesthetics enabled.
 
 ---
 
-Welcome — I'm Ayushman (widely known as Unknown or "Hacker Guru Ji"). I build experimental, high-iteration AI systems, Telegram bots, custom file tooling, and prompt engineering experiments. My work sits at the crossroads of practical automation and LLM research: fast prototypes, careful instrumentation, and visuals that look a little dangerous.
-
-I used insights from your projects (public + private) to shape this profile while keeping private work private and never exposing sensitive details.
+Welcome — I'm Ayushman (aka Unknown, often called "Hacker Guru Ji"). I build experimental, high-iteration AI systems, Telegram bots, custom file tooling, and prompt engineering experiments. My work lives at the crossroads of practical automation and LLM research: fast prototypes, careful instrumentation, and visuals that look a little dangerous.
 
 ---
 
-## Spotlight — Projects
-(High-level overviews. I do not expose private internals.)
+## Spotlight — Projects(i also mentioned some projects from private repos)
 
 - telegram-DEXTER-AI — Dexter A (Uncensored AI)  
-  Python Telegram assistant/agent focused on advanced prompt control, research-first prototyping, and chat automation.
+  A Python Telegram assistant/agent exploring advanced prompt control, uncensored-behavior research, conversation automation, and rapid prototyping for research scenarios.
 
-- Phantom_id & .unk-extention — Phantom Vault / .unk ecosystem  
-  A custom .unk file format and companion tools (Windows app + utilities) to manage a personal file type and bespoke workflows.
+- Phantom Vault & .unk ecosystem (Phantom_id + .unk-extention)  
+  A personal file format (.unk) and companion tooling: a Windows app and utilities to manage a custom personal file type, desktop integration, format helpers, and sync-friendly scripts.
 
 - llm-prompt-engineering — AI Prompt Experiments  
-  Curated collection of prompt engineering and red‑teaming experiments across modern LLMs (used for robustness, capability testing, and research).
+  A curated collection of prompt engineering and red‑teaming experiments across modern LLMs (ChatGPT-5, Gemini 2.5, etc.) used to test robustness, capabilities, and failure modes.
 
-If you want these to link to public repos or be shown as pinned cards, tell me which ones are safe to expose and I’ll add direct links.
+If any of the above are public and you want them pinned/linked, tell me which ones and I’ll add direct repo links and demo GIFs.
 
 ---
 
@@ -54,52 +50,17 @@ If you want these to link to public repos or be shown as pinned cards, tell me w
 
 ---
 
-## Aesthetic & Branding
-
-This profile embraces a dark, dangerous look — skulls, bold contrast, and terse copy. Options to enhance the page:
-- Animated banner (GIF or SVG) with a black/red palette  
-- Demo GIFs for Telegram bot flows  
-- Danger / Research badges for experimental projects  
-- Icons for the .unk format and Phantom Vault app
-
-If you want a custom banner, provide an image (or say “make an SVG banner”) and I’ll craft one.
-
----
-
 ## Listening
 
-Check my music on Spotify:  
+Give my music a spin on Spotify:  
 https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg
 
 ---
 
 ## Contact & availability
 
-Pronouns: — (tell me if you'd like them added)  
-Location: — (optional)  
+telegram-@unknownlll2829
+email-ghackerguru@gmai.com
 Open to opportunities: Yes
 
-Links to include (optional): personal website, email, LinkedIn, X/Twitter, Mastodon. Tell me which to show and I’ll update the README.
-
 ---
-
-## Hi there 👋
-
-<!--
-**Unknown-2829/Unknown-2829** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
-
----
-
-If you want any changes (add links, a banner, or pin public repos), tell me and I’ll update the README immediately.
