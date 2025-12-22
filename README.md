@@ -1,119 +1,125 @@
-# Ayushman Mishra — Unknown / "Hacker Guru Ji" ☠️👾
+# Ayushman Mishra — Unknown / \"Hacker Guru Ji\" ☠️👾
 
 AI Engineer • Bot Developer • Prompt Engineer  
-Professional · Friendly/Casual — dangerous aesthetics enabled.
+Professional · Friendly/Casual — bold, research‑focused aesthetics.
 
-[![Spotify](https://img.shields.io/badge/Spotify-Listen-green?style=for-the-badge&logo=spotify)](https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg) [![Telegram](https://img.shields.io/badge/Telegram-@unknownlll2829-blue?style=for-the-badge&logo=telegram)](https://t.me/unknownlll2829) [![Email](https://img.shields.io/badge/Email-ghackerguru%40gmail.com-lightgrey?style=for-the-badge&logo=gmail)](mailto:ghackerguru@gmail.com) [![Open to opportunities](https://img.shields.io/badge/Status-Open%20to%20opportunities-brightgreen?style=for-the-badge)](#) [![Danger Mode](https://img.shields.io/badge/Aesthetic-Danger--Mode-red?style=for-the-badge&logo=firefox)](#)
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Unknown-2829&show_icons=true&theme=radical&hide_border=true" alt="GitHub stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Unknown-2829&layout=compact&theme=dark&hide_border=true" alt="Top languages" />
-</p>
+[![Open to Opportunities](https://img.shields.io/badge/Status-Hiring-00ff00?style=for-the-badge&logo=checkmarx)](mailto:ghackerguru@gmail.com) [![Telegram](https://img.shields.io/badge/Telegram-@unknownlll2829-blue?style=for-the-badge&logo=telegram)](https://t.me/unknownlll2829) [![Spotify Artist](https://img.shields.io/badge/Spotify-Listen-1DB954?style=for-the-badge&logo=spotify)](https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg)
 
 ---
 
-Welcome — I'm Ayushman (widely known as Unknown or "Hacker Guru Ji"). I build experimental, high-iteration AI systems, Telegram bots, custom file tooling, and prompt engineering experiments. My work sits at the crossroads of practical automation and LLM research: fast prototypes, careful instrumentation, and visuals that look a little dangerous.
+## 👤 About Me
 
-I used signals from your projects (public + private) to shape this profile while keeping private work private and never exposing sensitive details.
+I architect experimental AI systems at the intersection of practical automation and LLM research. I specialize in rapid prototyping, adversarial testing, and building Telegram-based AI agents. My focus is on measuring model behavior, improving safety, and turning research prototypes into reliable tools.
 
----
-
-## Spotlight — Projects
-(High-level overviews. I do not expose private internals.)
-
-- telegram-DEXTER-AI — Dexter A (Uncensored AI)  
-  A Python Telegram assistant/agent focused on advanced prompt control, research-first prototyping, and chat automation.
-
-- Phantom_id & .unk-extention — Phantom Vault / .unk ecosystem  
-  A custom .unk file format and companion tools (Windows app + utilities) to manage a personal file type and bespoke workflows.
-
-- llm-prompt-engineering — AI Prompt Experiments  
-  Curated collection of prompt engineering and red‑teaming experiments across modern LLMs (used for robustness, capability testing, and research).
+**Core philosophy:** iterate fast, test thoroughly, ship responsibly. Every prompt is versioned code. Every experiment informs safer deployment.
 
 ---
 
-## Activities on my Telegram channel
-I run and maintain the "Shadow Vault" Telegram channel and associated bots. Typical activity includes:
+## 🚀 Featured Projects
 
-- Announcements and release notes for Dexter AI (bot status, maintenance, relaunches, tips)
-- Alpha / beta testing invitations for experimental features (image generator alpha, new models)
-- Updates and releases for Phantom Vault / .unk tooling and the Phantom ID service
-- System health reports, uptime and resource statistics, and developer notes
-- Community polls, quick challenges, and limited-access test drops
-- Support replies, bug reports, and coordination for testers
+### Dexter AI — Advanced Telegram Assistant (Research Platform)
+*Python • Telegram API • LLM Orchestration • Safety Research*
 
-Note: I do not include or link private/potentially sensitive materials here on GitHub. Channel activity listed above is a high-level summary.
+A Telegram-based AI agent designed for research into prompt engineering, behavior control and model reliability. Key capabilities include:
+- Multi-model orchestration with intelligent fallbacks
+- Conversation memory and context management
+- Prompt engineering workflows and A/B testing
+- Monitoring, logging and automated analytics
+- Safety‑first testing and red‑team exercises (ethical research only)
 
----
-
-## Core skills & tech
-
-- Python (primary) — bots, automation, tooling  
-- Prompt engineering & LLM orchestration  
-- Telegram API bots & real-time integrations  
-- TypeScript / front-end prototypes (dashboards & control UIs)  
-- Safety, red‑teaming & adversarial testing  
-- Automation, logging, and observability for small services
+**Note:** Dexter is a research platform for exploring model behaviors and improving alignment — it is not intended to facilitate illegal activity or harm.
 
 ---
 
-## How I work
+### Phantom Vault Ecosystem — .unk Format & Desktop Integration
+*Python • Windows • File tooling • Secure storage*
 
-- Iterate fast: small experiments, thorough logging, rapid rollback.  
-- Treat prompts like code: version, test, measure.  
-- Mix research and product: prototypes that can be hardened into tools.  
-- Prioritize invisible safety and clear UX for assistants.
+A personal file‑format and companion tooling focused on privacy and secure access for sensitive data. Components:
+- `.unk` — a proprietary container for encrypted personal archives
+- Desktop application (Windows) and archive manager
+- Integration utilities, format helpers and migration tools
+- Activation/key system for controlled access during beta
 
----
-
-## Aesthetic & Branding
-
-This profile embraces a dark, dangerous look — skulls, bold contrast, and terse copy. Options to enhance the page:
-- Animated banner (GIF or SVG) with a black/red palette  
-- Demo GIFs for Telegram bot flows  
-- Danger / Research badges for experimental projects  
-- Icons for the .unk format and Phantom Vault app
-
-If you want a custom banner, provide an image (or say “make an SVG banner”) and I’ll craft one.
+**Use cases:** secure backups, journalist source protection, encrypted personal archives. Built with a focus on lawful, ethical use.
 
 ---
 
-## Listening
+### LLM Prompt Engineering Lab
+*Prompt engineering • Red teaming • Model evaluation*
 
-Check my music on Spotify:  
+A curated collection of prompt experiments and red‑teaming studies aimed at understanding LLM limits and improving safety: 
+- 100+ documented prompt patterns across modern models
+- Reproducible test harnesses and evaluation metrics
+- Ethical jailbreak research to improve defenses
+- Comparative capability benchmarking
+
+**Research focus:** document weaknesses responsibly and contribute fixes that make models safer.
+
+---
+
+## 🛠️ Technical Stack
+
+- Languages: Python (primary), TypeScript/JavaScript, shell scripting
+- Frameworks: FastAPI, Telethon, python-telegram-bot, React
+- AI: OpenAI, Google Gemini, Anthropic, RAG systems
+- Infra: Docker, CI/CD, Linux servers, observability tooling
+- Specialties: adversarial testing, prompt engineering, secure file tooling
+
+---
+
+## 📡 Shadow Vault — Channel & Community Activity (High-level)
+I maintain an active development channel on Telegram where I share: product updates, alpha/beta invitations, architecture notes, system health reports, polls, and testing coordination.
+
+I do not publish private chats, credentials, or illicit materials on this README. All channel activity summarized here is non-sensitive and research-oriented.
+
+Join: https://t.me/unknownlll2829
+
+---
+
+## 💡 Development Approach
+
+- Rapid iteration with strong telemetry and rollback paths
+- Treat prompts as code: version, test, measure
+- Red‑team before deployment; prioritize responsible disclosure
+- Turn experiments into hardened, maintainable tools
+
+---
+
+## 🎵 Beyond Code
+
+I also release music — check my Spotify profile:
 https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg
 
 ---
 
-## Contact & availability
+## 📬 Contact & Availability
 
-- Telegram: @unknownlll2829 — https://t.me/unknownlll2829
-- Email: ghackerguru@gmail.com
-- Pronouns: — (tell me if you'd like them added)  
-- Location: — (optional)  
+- Telegram: @unknownlll2829 — fastest response
+- Email: ghackerguru@gmail.com — formal inquiries
 - Open to opportunities: Yes
-
-If you want other socials or a different contact format, tell me and I’ll update the README.
 
 ---
 
 ## Hi there 👋
 
 <!--
-**Unknown-2829/Unknown-2829** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+**Unknown-2829/Unknown-2829** is a special repo — the README appears on your profile.
 
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on dexter-DEXTER-AI and Phantom Vault (.unk)  
-- 🌱 I’m currently learning advanced LLM alignment and secure tooling  
-- 👯 I’m looking to collaborate on LLM safety, bot automation, and file-system tooling  
-- 🤔 I’m looking for help with scale testing and UI polish for Phantom Vault  
-- 💬 Ask me about prompt engineering, Telegram bot internals, or custom file formats  
-- 📫 How to reach me: Telegram or email above  
-- 😄 Pronouns: (add if you want)  
-- ⚡ Fun fact: I ship research-first prototypes that look dangerous but are well-instrumented
--->
+Ideas to fill in:
+- 🔭 I’m currently working on Dexter AI and Phantom Vault
+- 🌱 I’m learning advanced model alignment and secure tooling
+- 👯 I’m open to collaborations in safety, bot infra, and secure storage
+- 💬 Ask me about prompt engineering, automated bot ops, or encrypted file formats
+--> 
 
 ---
 
-If you want any changes (add links, a banner, or pin public repos), tell me and I’ll update the README immediately.
+## Legal & Responsible Use
+
+This profile and the projects described are for research and legitimate uses. I do not endorse or facilitate illegal activity. Tools and experiments are intended for security research, privacy protection, and advancing model safety. Misuse is the responsibility of the end user.
+
+---
+
+<p align="center">
+  <sub>Built by Ayushman (Unknown) • Research-first • Safety-minded</sub>
+</p>
