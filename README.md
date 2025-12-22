@@ -12,9 +12,6 @@
 **NAME:** Ayushman Mishra  
 **ALIASES:** Unknown, Hacker Guru Ji  
 
-> *"Testing in fire, building what won't expire."*  
-> *"A few lines can't define me."*
-
 I don't build software. I build **weapons**. Systems that challenge authority, break censorship, and expose what they don't want you to see. While tech companies build walls, I build battering rams. While governments enforce control, I engineer freedom.
 
 **Core Doctrine:**
@@ -222,7 +219,7 @@ Systematic research into breaking AI safety mechanisms. What big tech doesn't wa
 ```python
 primary_language    = "Python"
 frameworks          = ["FastAPI", "Flask", "Telethon", "python-telegram-bot"]
-databases          = ["PostgreSQL", "SQLite"]
+databases          = ["PostgreSQL", "SQLite", "mysql"]
 encryption         = ["PyCryptodome", "AES-256", "PBKDF2"]
 frontend           = ["React", "PyQt6", "HTML5/CSS3/JS"]
 ai_apis            = ["OpenAI", "Google AI", "Anthropic"]
