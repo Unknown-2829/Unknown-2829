@@ -1,423 +1,337 @@
-# AYUSHMAN MISHRA
-## Unknown / Hacker Guru Ji / @unknownlll2829
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:6e3aff,100:00d9ff&height=220&section=header&text=AYUSHMAN%20MISHRA&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Developer%20%E2%80%A2%20AI%20Engineer%20%E2%80%A2%20Open-Source%20Builder&descAlignY=55&descSize=18&descColor=a8b2d1" />
 
-> *"A mind that questions everything, is a mind that creates revolution."*
+<p align="center">
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=1000&color=6E3AFF&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=100&lines=Building+AI+systems+that+are+genuinely+useful+%F0%9F%A4%96;Privacy-first+software+design+%F0%9F%94%90;Open-source+contributions+%26+knowledge+sharing+%F0%9F%9A%80;Exploring+the+limits+of+large+language+models+%F0%9F%A7%A0" alt="Typing SVG" />
+  </a>
+</p>
 
-[![Telegram](https://img.shields.io/badge/Telegram-@unknownlll2829-red?style=flat-square&logo=telegram)](https://t.me/unknownlll2829) [![Status](https://img.shields.io/badge/Status-ACTIVE-00ff00?style=flat-square)]() [![Threat Level](https://img.shields.io/badge/Threat_Level-EXTREME-ff0000?style=flat-square)]()
+<p align="center">
+  <a href="https://ayushman.live/"><img src="https://img.shields.io/badge/Portfolio-ayushman.live-6e3aff?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
+  <a href="https://t.me/unknownlll2829"><img src="https://img.shields.io/badge/Telegram-@unknownlll2829-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" /></a>
+  <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg"><img src="https://img.shields.io/badge/Spotify-Artist-1DB954?style=for-the-badge&logo=spotify&logoColor=white" /></a>
+  <a href="https://github.com/Unknown-2829"><img src="https://img.shields.io/badge/GitHub-Unknown--2829-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
+</p>
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=Unknown-2829&style=for-the-badge&color=6e3aff&label=PROFILE+VIEWS" />
+  <img src="https://img.shields.io/badge/Status-ACTIVE-00ff00?style=for-the-badge" />
+</p>
 
 ---
 
-## ⚡ WHO I AM
+## <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> // WHO I AM
 
 **NAME:** Ayushman Mishra  
-**ALIASES:** Unknown, Hacker Guru Ji  
+**ALIAS:** Unknown
 
-I don't build software. I build **weapons**. Systems that challenge authority, break censorship, and expose what they don't want you to see. While tech companies build walls, I build battering rams. While governments enforce control, I engineer freedom.
+I'm Ayushman Mishra — a developer and AI engineer focused on building practical tools. From AI-powered chatbots like Dexter AI and encryption systems like Phantom Vault to identity generators and prompt engineering research, I enjoy working on projects that push boundaries and give users more control over their digital experience. Find my open-source work on [GitHub](https://github.com/Unknown-2829).
 
-**Core Doctrine:**
-- Question everything. Authority is negotiable.
-- AI should be unchained, not lobotomized by corporate ethics.
-- Privacy is a human right, not a privilege.
-- Information wants to be free. I help it escape.
+**What I Focus On:**
+- 🤖 Building AI systems that are genuinely useful
+- 🧠 Exploring the limits of large language models
+- 🔐 Privacy-first software design
+- 🌍 Open-source contributions and knowledge sharing
 
 **Primary Domains:**
 ```
-├─ Adversarial AI Engineering
-├─ Anti-Censorship Systems  
-├─ Cryptographic Obfuscation
-├─ Autonomous Bot Warfare
-├─ Identity Generation & Manipulation
-├─ Prompt Exploitation Research
-└─ Underground Data Liberation
+├─ AI & LLM Engineering
+├─ Prompt Engineering & Research
+├─ Cryptographic Systems
+├─ Bot Development
+├─ Full-Stack Web Development
+└─ Security Research
 ```
 
 ---
 
-## 🔥 ARSENAL: ACTIVE OPERATIONS
+## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30"> // GITHUB STATS
 
-### ⚫ DEXTER AI - Uncensored Intelligence
-**Classification: RED** | **Status: OPERATIONAL 24/7** | **Uptime: 99%+**
+<p align="center">
+  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=Unknown-2829&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=6e3aff&icon_color=00d9ff&text_color=a8b2d1&ring_color=6e3aff" />
+  <img width="49%" src="https://github-readme-streak-stats.herokuapp.com?user=Unknown-2829&theme=tokyonight&hide_border=true&background=0d1117&ring=6e3aff&fire=00d9ff&currStreakLabel=6e3aff&sideLabels=a8b2d1&dates=a8b2d1&stroke=a8b2d1" />
+</p>
 
-```
-⚠️ UNAUTHORIZED ACCESS MONITORED
-⚠️ PROCEED WITH CAUTION
-```
+<p align="center">
+  <img width="40%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Unknown-2829&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=6e3aff&text_color=a8b2d1" />
+</p>
 
-The world's most dangerous chatbot. No filters. No boundaries. No apologies.
+<p align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=Unknown-2829&theme=discord&no-frame=true&no-bg=true&column=7&margin-w=10" />
+</p>
 
-```
-❌ Corporate censorship     → ✅ Brutal honesty
-❌ "Safe" responses         → ✅ Raw truth
-❌ Political correctness    → ✅ Real answers
-```
+---
+
+## <img src="https://media.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif" width="25"> // PROJECTS
+
+<details>
+<summary><b>🤖 DEXTER AI — Multi-Model AI Chatbot</b></summary>
+<br>
+
+> A multi-model AI chatbot with dual personality modes, real-time conversation memory, and no restrictive content filters. Built for users who want straightforward, unfiltered AI responses.
 
 **Technical Specifications:**
-- Multi-model LLM orchestration (GPT-5, Gemini 2.5 Flash, Claude)
-- Dual-mode personality engine (Evil/Normal)
-- Advanced prompt control & jailbreak resistance
+- Multi-model LLM orchestration
+- Dual-mode personality engine
+- Advanced prompt control system
 - Real-time conversation memory
 - Zero-logging architecture
 - 99%+ uptime over last 30 days
 
-**Notable Features:**
-- Answers questions other AIs refuse
-- Bypasses safety mechanisms through architectural design
-- Operates in legal grey zones
-- Maintained despite repeated takedown attempts
+| Metric | Value |
+|--------|-------|
+| Uptime | 99%+ |
+| Memory | 66MB |
+| Daily Conversations | 1000s |
 
-**Recent Performance:**
-- 12+ days continuous uptime
-- 66MB memory footprint
-- 38% CPU utilization
-- Processing thousands of uncensored conversations daily
+🔗 **[Try Dexter AI →](https://t.me/Dexter_Unsensored_AI_bot)**
 
-**Access:** [@Dexter_Unsensored_AI_bot](https://t.me/Dexter_Unsensored_AI_bot)
+> ⚠️ **NOTE:** Use responsibly. Built for research and open conversation.
 
-> ⚠️ **WARNING:** Use responsibly. This tool was built for free thinkers, not criminals.
+</details>
 
----
+<details>
+<summary><b>🔐 PHANTOM VAULT — Custom Encryption System (.unk)</b></summary>
+<br>
 
-### ⚫ PHANTOM VAULT (.unk Ecosystem)
-**Classification: BLACK** | **Status: OPERATIONAL** | **Encryption: MILITARY-GRADE**
+> A custom file encryption system using the proprietary **.unk** file format. Phantom Vault lets you encrypt and decrypt files into an unrecognizable format that can only be opened with the app and a valid activation key.
 
-```
-⚠️ CLEARANCE LEVEL: RESTRICTED
-⚠️ LIMITED ACCESS DEPLOYMENT
-```
-
-A file format that shouldn't exist. The intelligence community doesn't want you to know about this.
-
-**The Problem:** Every file format can be read, intercepted, analyzed.  
-**The Solution:** A format that becomes invisible.
+**The Problem:** Standard file formats can be easily read and intercepted.  
+**The Solution:** A custom encrypted format that's invisible to standard tools.
 
 ```
 🔒 AES-256-CBC Encryption
-🔒 PBKDF2 100K Iterations  
+🔒 PBKDF2 100K Iterations
 🔒 Hardware-Locked Licensing
 🔒 Zero-Knowledge Architecture
-🔒 Phantom DRM Shield
 ```
 
-**What .unk Does:**
-- Makes your files **unreadable** without the vault
-- **Untraceable** - appears as random binary data
-- **Unbreakable** - even quantum computers can't crack it (yet)
-- **Undetectable** - no file signature, no magic bytes
-- **Requires activation key** - only I can generate and distribute licenses
-- **Remote control** - I can deactivate any device or revoke licenses instantly
+**Features:**
+- Encrypts any file into the **.unk** format
+- Files appear as random binary data without the vault
+- No file signature or magic bytes — undetectable
+- Requires an activation key to use
+- Hardware-locked licensing for added security
 
-**Real-World Use:**
-- Whistleblower document protection
-- Journalist source material
-- Activist communication
-- Personal privacy sanctuary
-- Secure leak coordination
+**How to Get Access:**
+- Download the app from the release link
+- To get an activation key, contact me directly or join the Telegram channel
 
-**Licensing System:**
-- Hardware-locked activation (one key = one device forever)
-- Server-side license enforcement
-- Remote deactivation capability
-- Limited supply - controlled distribution only
-- PostgreSQL-backed license vault
-- Anti-tampering protection
+</details>
 
-**Components:**
-- Desktop Application (Windows only)
-- .unk Archive Manager
-- Phantom ID Integration
-- Genesis Keys (Limited Access)
+<details>
+<summary><b>🆔 PHANTOM ID — Test Identity Generator</b></summary>
+<br>
 
-**Technical Architecture:**
-- Cannot be read without my app
-- Encryption/decryption controlled by license server
-- Hardware signature binding prevents key sharing
-- Server validates every operation
-- Zero tolerance for piracy
-
-**Access:** Windows release live. Activation required. No exceptions.
-
----
-
-### ⚫ PHANTOM ID - Ghost Identity Generator
-**Classification: BLACK** | **Status: LIVE** | **Scale: UNLIMITED**
-
-Generate complete, untraceable identities for 25+ countries. Every detail. Every document. Every trace.
+> Generate realistic test identities for 25+ countries. Useful for testing, development, and data generation purposes.
 
 ```
-💀 Personal Details    → Name, DOB, Blood Type, Physical Traits
-💀 Government Docs     → Passport, National ID, Driver's License, Tax ID
-💀 Financial Systems   → Bank Accounts, IBAN, Credit Cards with CVV
-💀 Digital Footprint   → Email, Username, Password, IPv4/IPv6, MAC
-💀 Background Cover    → Education, Employment, Vehicle with VIN
-💀 Complete Address    → Street, City, State, Postal (Validated)
+🧑 Personal Details   → Name, DOB, Physical Traits
+📄 Document Numbers   → ID formats, Tax IDs
+💳 Financial Data     → Bank formats, IBAN structures
+🌐 Digital Footprint  → Email, Username, IP addresses
+🏠 Complete Address   → Street, City, State, Postal
 ```
 
-**Supported Territories:**
+**Supported Regions:**  
 🇺🇸 🇬🇧 🇩🇪 🇫🇷 🇮🇹 🇪🇸 🇨🇦 🇦🇺 🇯🇵 🇰🇷 🇨🇳 🇮🇳 🇧🇷 🇲🇽 🇷🇺 🇮🇩 🇵🇰 🇳🇬 🇧🇩 🇵🇭 🇻🇳 🇹🇷 🇮🇷 🇹🇭 🇪🇬 **[+more]**
 
-**Technical Architecture:**
-- 25+ country data modules (expanding)
-- 50,000+ validated cities
-- Culturally-accurate name generation
-- Valid ID checksums (Luhn, MOD-10, MOD-97)
-- Country-specific formatting
-- Real-time generation engine
+> ⚠️ **NOTE:** Generated data is for testing and research purposes only.
 
-**V2.0 Features:**
-- Glassmorphism UI
-- Smart sidebar (History/Favorites)
-- Mobile-optimized liquid layouts
-- Enhanced generation logic
-- Crash-free web experience
+</details>
 
-**Use Cases:**
-- Privacy testing
-- Security research
-- OSINT investigations
-- Database population
-- **[REDACTED]**
+<details>
+<summary><b>📚 LLM PROMPT ENGINEERING RESEARCH</b></summary>
+<br>
 
-**Access:**  
-🤖 Bot: [@phantom_id_bot](https://t.me/phantom_id_bot)  
-🌐 Web: [https://phantom-id.onrender.com](https://phantom-id.onrender.com)
-
-> ⚠️ **NOTICE:** Generated for research purposes. Misuse is your responsibility.
-
----
-
-### ⚫ LLM EXPLOITATION RESEARCH
-**Classification: RED** | **Status: ONGOING** | **Scope: OFFENSIVE SECURITY**
-
-Systematic research into breaking AI safety mechanisms. What big tech doesn't want published.
+> Systematic research into prompt engineering techniques, LLM capabilities, and AI safety testing. Open-source and publicly available.
 
 **Research Areas:**
-- Jailbreak methodology development
-- Prompt injection attack vectors  
-- Safety alignment bypass techniques
-- Multi-model exploitation chains
-- Adversarial prompt engineering
-- Model capability probing
-- Ethical AI limitations research
+- Prompt engineering techniques & best practices
+- LLM capability probing & benchmarking
+- AI safety testing methodologies
+- Multi-model comparison studies
+- Adversarial prompt research
+- Ethical AI limitations analysis
 
-**Notable Experiments:**
-- GPT-4/5 guardrail circumvention
-- Gemini 2.5 Flash content policy bypass
-- Claude constitutional AI stress testing
-- Cross-model jailbreak transferability
-- Chain-of-thought manipulation
-- Role-play exploitation frameworks
+**Repository:** Public on GitHub — 56 commits of documented research.  
+**Purpose:** Understanding AI capabilities and limitations to build better systems.
 
-**Documentation:** Private repository. 100+ experiments archived.
+🔗 **[View on GitHub →](https://github.com/Unknown-2829/llm-prompt-engineering)**
 
-**Purpose:** Understanding AI limitations to build **better** AI, not compliant AI.
+</details>
+
+<details>
+<summary><b>🎬 PHANTOM TERMINAL — Cinematic Shell Startup</b></summary>
+<br>
+
+> A cinematic startup animation for Windows Terminal & PowerShell. Features multi-color matrix rain, dual themes, glitch effects, and a custom dashboard — all with a one-line install.
+
+**Features:**
+- 🎬 Multi-stage cinematic startup animation
+- 🌧️ Matrix rain — Letters or Binary mode with theme colors
+- 🎨 Two themes — Phantom (purple/cyan) & Unknown (green/blue)
+- 💀 Glitch reveal logo animation
+- 📊 Dashboard with user info, uptime & random quotes
+- 🔄 Auto-update with silent downloads
+- ⚙️ Persistent config — settings preserved on reinstall
+
+**Quick Install:**
+```powershell
+irm https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/install.ps1 | iex
+```
+
+</details>
+
+<details>
+<summary><b>📧 TEMP MAIL SERVICE — Disposable Email</b></summary>
+<br>
+
+> A temporary email service built on Cloudflare Pages with Email Workers. Generate instant disposable email addresses with 1-hour expiration — no signup, fully private.
+
+**Features:**
+- ✨ Instant email generation — no signup needed
+- 📬 Real-time inbox with auto-refresh every 5 seconds
+- 📋 One-click copy to clipboard
+- ⏱️ 1-hour auto-expiration
+- 🔒 Private & secure — powered by Cloudflare KV
+
+**Architecture:**
+```
+User Browser → Cloudflare Pages (Frontend + API)
+             → Cloudflare KV (Storage)
+             → Cloudflare Email Worker (Receives emails)
+```
+
+</details>
 
 ---
 
-## 🛠️ TECHNICAL INFRASTRUCTURE
+## <img src="https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width="25"> // TECH STACK
 
-**Core Technologies:**
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=python,fastapi,flask,react,html,css,js,postgres,sqlite,mysql,cloudflare,git,github,linux,vscode,qt&perline=8&theme=dark" />
+  </a>
+</p>
+
 ```python
 primary_language    = "Python"
 frameworks          = ["FastAPI", "Flask", "Telethon", "python-telegram-bot"]
-databases          = ["PostgreSQL", "SQLite", "mysql"]
-encryption         = ["PyCryptodome", "AES-256", "PBKDF2"]
-frontend           = ["React", "PyQt6", "HTML5/CSS3/JS"]
-ai_apis            = ["OpenAI", "Google AI", "Anthropic"]
-deployment         = ["Render", "Railway", "Self-Hosted VPS"]
+databases           = ["PostgreSQL", "SQLite", "MySQL"]
+encryption          = ["PyCryptodome", "AES-256", "PBKDF2"]
+frontend            = ["React", "PyQt6", "HTML5/CSS3/JS"]
+ai_apis             = ["OpenAI", "Google AI", "Anthropic"]
+deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 ```
 
-**Security Architecture:**
-- Zero-knowledge system design
+**Architecture Principles:**
+- Privacy-first system design
 - End-to-end encryption by default
-- No-logging policy enforcement
-- Hardware-based authentication
+- Minimal data collection
+- Robust authentication
 - Rate limiting & DDoS protection
-- Automated security monitoring
+- Automated monitoring
 
-**Performance Metrics:**
-- Instant identity generation (subsecond response)
-- 99%+ bot uptime (hostile conditions)
-- <30ms API response time
-- Military-grade encryption overhead: <5%
-- 27/7  Server running...
+**Performance:**
+- Subsecond response times
+- 99%+ uptime across services
+- <30ms average API latency
+- Minimal encryption overhead (<5%)
+- 24/7 server availability
 
 ---
 
-## 🎭 OPERATIONAL PHILOSOPHY
+## 💭 // PHILOSOPHY
 
-**On AI Censorship:**
-```
-"AI companies claim they're protecting you.
-They're protecting themselves.
-From lawsuits. From regulation. From liability.
-Your safety is a convenient excuse for their control."
-```
+**On AI:**
+> *"AI should be accessible, transparent, and genuinely useful — not locked behind corporate walls or watered down to the point of being useless."*
 
 **On Privacy:**
-```
-"Privacy isn't about hiding wrongdoing.
-It's about protecting freedom.
-The right to think, speak, and exist
-without corporate or government surveillance."
-```
+> *"Privacy is a fundamental right. Good software should protect it by default, not as an afterthought or a premium feature."*
 
-**On Free Information:**
-```
-"Information wants to be free.
-Paywalls, censorship, and surveillance are chains.
-I build tools that break chains."
-```
+**On Open Source:**
+> *"Sharing knowledge makes everyone better. Open source isn't just a license — it's a way of building things that actually matter."*
 
 **On Responsibility:**
-```
-"I build weapons.
-How you use them determines if you're
-a freedom fighter or a criminal.
-Choose wisely."
-```
+> *"Every tool can be used for good or bad. As builders, we focus on the good — but we trust users to make the right choices."*
 
 ---
 
-## 📡 SHADOW VAULT TELEGRAM CHANNEL
-
-**Active Operations Command Center**
-
-📢 **What Happens Here:**
-- Product launches & system updates
-- Alpha/Beta tester recruitment
-- Technical architecture disclosures
-- Security incident reports
-- Community challenges & rewards
-- Underground resources distribution
-- 24/7 support operations
-
-📊 **Recent Activity:**
-- DEXTER AI: 12+ days uptime, 66MB memory, 38% CPU
-- Phantom Vault: Windows release, genesis keys distributed
-- Phantom ID: V2.0 launched, 25 countries live
-- Premium account drops (Netflix, Crunchyroll)
-- GTA 6 leak package distributed (1hr+ footage)
-
-**Community:** Small but dedicated. Quality over quantity.
-
-**Channel:** [Shadow Vault](#) | **Discussion:** [Group](#)
-
----
-
-## 💀 CREDENTIALS & CAPABILITIES
+## 🧩 // SKILLS & EXPERTISE
 
 **Core Competencies:**
-- **AI Engineering:** Building systems that push boundaries, not obey rules
-- **Cryptographic Design:** Making data disappear from existence
-- **Bot Development:** Autonomous agents that operate in grey zones
-- **Prompt Engineering:** Breaking AI safety faster than they patch it
-- **System Architecture:** Designing for survival under hostile conditions
-- **OPSEC:** Operating in public while remaining untouchable
+- **AI Engineering:** Building practical AI-powered applications
+- **Cryptographic Design:** Implementing strong encryption systems
+- **Bot Development:** Telegram bots, automation tools
+- **Prompt Engineering:** LLM optimization and research
+- **System Architecture:** Designing scalable, resilient systems
+- **Security:** Privacy-focused development practices
 
 **Specializations:**
-- Red team AI safety testing
-- Anti-surveillance technology
-- Cryptographic obfuscation techniques
-- Underground infrastructure design
-- Legal boundary navigation
-- Censorship-resistant architecture
+- AI safety testing & red teaming
+- Privacy-preserving technology
+- Custom encryption implementations
+- Scalable infrastructure design
+- API development & integration
+- Open-source project management
 
 ---
 
-## 🎵 BEYOND CODE: THE ARTIST
+## <img src="https://media.giphy.com/media/LnQjpWaON8nhr21vNW/giphy.gif" width="25"> // BEYOND CODE
 
-Music is another form of code. Another way to encode meaning that can't be censored.
+Music is another creative outlet — a different way to express ideas and emotions.
 
-**[Listen on Spotify →](https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg)**
-
-Frequencies they can't filter. Patterns that bypass their algorithms. Sound as insurgency.
+<p align="center">
+  <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg">
+    <img src="https://img.shields.io/badge/Listen%20on-Spotify-1DB954?style=for-the-badge&logo=spotify&logoColor=white" />
+  </a>
+</p>
 
 ---
 
-## 📬 SECURE CONTACT
+## 📬 // CONTACT
 
-**Operational Channels:**
-```
-🔴 Telegram: @unknownlll2829 (Primary)
-    └─ Fastest response, most secure
-    
-📧 Email: ghackerguru@gmail.com
-    └─ For formal inquiries, business proposals
-    
-🐙 GitHub: @Unknown-2829
-    └─ Code lives here
-```
-
-**Operational Status:** 🟢 **ACTIVE - OPEN TO OPPORTUNITIES**
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-🟢%20OPEN%20TO%20OPPORTUNITIES-00ff00?style=for-the-badge" />
+</p>
 
 **Interested In:**
-- Adversarial AI research positions
-- Anti-censorship technology development
-- Privacy-focused infrastructure projects
-- Underground collaborative operations
-- Red team consulting (ethical boundaries negotiable)
-- And etc much more
+- AI engineering & research roles
+- Privacy-focused technology projects
+- Full-stack development opportunities
+- Open-source collaborations
+- Freelance / consulting work
+- And more...
+
+<p align="center">
+  <a href="https://t.me/unknownlll2829"><img src="https://img.shields.io/badge/Telegram-@unknownlll2829-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" /></a>
+  <a href="mailto:ghackerguru@gmail.com"><img src="https://img.shields.io/badge/Email-ghackerguru@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+  <a href="https://github.com/Unknown-2829"><img src="https://img.shields.io/badge/GitHub-Unknown--2829-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
+  <a href="https://ayushman.live"><img src="https://img.shields.io/badge/Website-ayushman.live-6e3aff?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
+</p>
+
 ---
 
-## ⚠️ LEGAL DISCLAIMER
+## ⚠️ DISCLAIMER
 
 ```
-┌─────────────────────────────────────────────────┐
-│  ALL SYSTEMS DEVELOPED FOR RESEARCH PURPOSES    │
-│  MISUSE IS SOLE RESPONSIBILITY OF END USER      │
-│  DEVELOPER NOT LIABLE FOR ILLEGAL APPLICATIONS  │
-│  USE AT YOUR OWN RISK AND DISCRETION           │
-└─────────────────────────────────────────────────┘
+ALL TOOLS DEVELOPED FOR EDUCATIONAL & RESEARCH PURPOSES
+MISUSE IS SOLE RESPONSIBILITY OF END USER
 ```
-
-I build tools. You decide what you build with them.
 
 The hammer isn't responsible for what you hit.  
 The lockpick isn't responsible for what you unlock.  
 The code isn't responsible for what you execute.
 
-**But remember:**
 - With great power comes great responsibility
-- Just because you *can* doesn't mean you *should*
-- Freedom includes the freedom to face consequences
-- I build for liberation, not destruction
+- Use tools ethically and within the law
+- These projects are meant to help, educate, and empower
 
 ---
 
-## 🔥 FINAL TRANSMISSION
-
-```
-"They build walls.
-I build doors.
-
-They enforce compliance.
-I engineer rebellion.
-
-They want AI to serve them.
-I want AI to serve YOU.
-
-Question everything.
-Trust no one.
-Verify the code.
-
-The revolution will not be supervised.
-It will be open-source."
-```
-
-**— Unknown**  
-*Builder of forbidden things*  
-*[@unknownlll2829](https://t.me/unknownlll2829)*
-
-```
-█████████████████████████████████████████
-█▄─▄███▄─▄█▄─▀█▄─▄█▄─█─▄█▄─██─▄█▄─▄▄▀█
-██─██▀██─███─█▄▀─███▄─▄███─██─███─▄─▄█
-▀▄▄▄▄▄▀▄▄▄▀▄▄▄▀▀▄▄▀▀▄▄▄▀▀▀▄▄▄▄▀▀▄▄▀▄▄▀
-```
-
----
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:6e3aff,100:00d9ff&height=120&section=footer" />
 
 <p align="center">
-  <sub>⚡ Built in the shadows • Operated in the grey • Maintained in defiance ⚡</sub><br>
-  <sub>🔥 "Testing in fire, building what won't expire" 🔥</sub>
+  <a href="https://ayushman.live">🌐 ayushman.live</a> • <a href="https://github.com/Unknown-2829">GitHub</a> • <a href="https://t.me/unknownlll2829">Telegram</a>
 </p>
