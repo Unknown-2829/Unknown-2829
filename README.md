@@ -4,10 +4,10 @@
   <a href="https://ayushman.live/"><img src="https://img.shields.io/badge/Portfolio-ayushman.live-6e3aff?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
   <a href="https://t.me/unknownlll2829"><img src="https://img.shields.io/badge/Telegram-@unknownlll2829-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" /></a>
   <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg"><img src="https://img.shields.io/badge/Spotify-Artist-1DB954?style=for-the-badge&logo=spotify&logoColor=white" /></a>
-  <a href="https://github.com/Unknown-2829"><img src="https://img.shields.io/badge/GitHub-Unknown--2829-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
 </p>
 
 <p align="center">
+  <a href="https://github.com/Unknown-2829"><img src="https://img.shields.io/badge/GitHub-Unknown--2829-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
   <img src="https://img.shields.io/badge/Status-ACTIVE-00ff00?style=for-the-badge" />
 </p>
 
@@ -41,12 +41,7 @@ Primary Domains:
 ## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30"> // GITHUB STATS
 
 <p align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=Unknown-2829&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=6e3aff&icon_color=00d9ff&text_color=a8b2d1&ring_color=6e3aff" />
   <img width="49%" src="https://streak-stats.demolab.com?user=Unknown-2829&theme=tokyonight&hide_border=true&background=0d1117&ring=6e3aff&fire=00d9ff&currStreakLabel=6e3aff&sideLabels=a8b2d1&dates=a8b2d1&stroke=a8b2d1" />
-</p>
-
-<p align="center">
-  <img width="40%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Unknown-2829&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=6e3aff&text_color=a8b2d1" />
 </p>
 
 ---
