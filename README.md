@@ -1,12 +1,6 @@
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:6e3aff,100:00d9ff&height=220&section=header&text=AYUSHMAN%20MISHRA&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Developer%20%E2%80%A2%20AI%20Engineer%20%E2%80%A2%20Open-Source%20Builder&descAlignY=55&descSize=18&descColor=a8b2d1" />
 
 <p align="center">
-  <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=1000&color=6E3AFF&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=100&lines=Building+AI+systems+that+are+genuinely+useful+%F0%9F%A4%96;Privacy-first+software+design+%F0%9F%94%90;Open-source+contributions+%26+knowledge+sharing+%F0%9F%9A%80;Exploring+the+limits+of+large+language+models+%F0%9F%A7%A0" alt="Typing SVG" />
-  </a>
-</p>
-
-<p align="center">
   <a href="https://ayushman.live/"><img src="https://img.shields.io/badge/Portfolio-ayushman.live-6e3aff?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
   <a href="https://t.me/unknownlll2829"><img src="https://img.shields.io/badge/Telegram-@unknownlll2829-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" /></a>
   <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg"><img src="https://img.shields.io/badge/Spotify-Artist-1DB954?style=for-the-badge&logo=spotify&logoColor=white" /></a>
@@ -14,7 +8,6 @@
 </p>
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=Unknown-2829&style=for-the-badge&color=6e3aff&label=PROFILE+VIEWS" />
   <img src="https://img.shields.io/badge/Status-ACTIVE-00ff00?style=for-the-badge" />
 </p>
 
@@ -27,13 +20,13 @@
 
 I'm Ayushman Mishra — a developer and AI engineer focused on building practical tools. From AI-powered chatbots like Dexter AI and encryption systems like Phantom Vault to identity generators and prompt engineering research, I enjoy working on projects that push boundaries and give users more control over their digital experience. Find my open-source work on [GitHub](https://github.com/Unknown-2829).
 
-**What I Focus On:**
+What I Focus On:
 - 🤖 Building AI systems that are genuinely useful
 - 🧠 Exploring the limits of large language models
 - 🔐 Privacy-first software design
 - 🌍 Open-source contributions and knowledge sharing
 
-**Primary Domains:**
+Primary Domains:
 ```
 ├─ AI & LLM Engineering
 ├─ Prompt Engineering & Research
@@ -49,15 +42,11 @@ I'm Ayushman Mishra — a developer and AI engineer focused on building practica
 
 <p align="center">
   <img width="49%" src="https://github-readme-stats.vercel.app/api?username=Unknown-2829&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=6e3aff&icon_color=00d9ff&text_color=a8b2d1&ring_color=6e3aff" />
-  <img width="49%" src="https://github-readme-streak-stats.herokuapp.com?user=Unknown-2829&theme=tokyonight&hide_border=true&background=0d1117&ring=6e3aff&fire=00d9ff&currStreakLabel=6e3aff&sideLabels=a8b2d1&dates=a8b2d1&stroke=a8b2d1" />
+  <img width="49%" src="https://streak-stats.demolab.com?user=Unknown-2829&theme=tokyonight&hide_border=true&background=0d1117&ring=6e3aff&fire=00d9ff&currStreakLabel=6e3aff&sideLabels=a8b2d1&dates=a8b2d1&stroke=a8b2d1" />
 </p>
 
 <p align="center">
   <img width="40%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Unknown-2829&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=6e3aff&text_color=a8b2d1" />
-</p>
-
-<p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=Unknown-2829&theme=discord&no-frame=true&no-bg=true&column=7&margin-w=10" />
 </p>
 
 ---
@@ -70,7 +59,7 @@ I'm Ayushman Mishra — a developer and AI engineer focused on building practica
 
 > A multi-model AI chatbot with dual personality modes, real-time conversation memory, and no restrictive content filters. Built for users who want straightforward, unfiltered AI responses.
 
-**Technical Specifications:**
+Technical Specifications:
 - Multi-model LLM orchestration
 - Dual-mode personality engine
 - Advanced prompt control system
@@ -84,7 +73,7 @@ I'm Ayushman Mishra — a developer and AI engineer focused on building practica
 | Memory | 66MB |
 | Daily Conversations | 1000s |
 
-🔗 **[Try Dexter AI →](https://t.me/Dexter_Unsensored_AI_bot)**
+[Try Dexter AI →](https://t.me/Dexter_Unsensored_AI_bot)
 
 > ⚠️ **NOTE:** Use responsibly. Built for research and open conversation.
 
@@ -106,14 +95,14 @@ I'm Ayushman Mishra — a developer and AI engineer focused on building practica
 🔒 Zero-Knowledge Architecture
 ```
 
-**Features:**
-- Encrypts any file into the **.unk** format
+Features:
+- Encrypts any file into the .unk format
 - Files appear as random binary data without the vault
 - No file signature or magic bytes — undetectable
 - Requires an activation key to use
 - Hardware-locked licensing for added security
 
-**How to Get Access:**
+How to Get Access:
 - Download the app from the release link
 - To get an activation key, contact me directly or join the Telegram channel
 
@@ -134,7 +123,7 @@ I'm Ayushman Mishra — a developer and AI engineer focused on building practica
 ```
 
 **Supported Regions:**  
-🇺🇸 🇬🇧 🇩🇪 🇫🇷 🇮🇹 🇪🇸 🇨🇦 🇦🇺 🇯🇵 🇰🇷 🇨🇳 🇮🇳 🇧🇷 🇲🇽 🇷🇺 🇮🇩 🇵🇰 🇳🇬 🇧🇩 🇵🇭 🇻🇳 🇹🇷 🇮🇷 🇹🇭 🇪🇬 **[+more]**
+🇺🇸 🇬🇧 🇩🇪 🇫🇷 🇮🇹 🇪🇸 🇨🇦 🇦🇺 🇯🇵 🇰🇷 🇨🇳 🇮🇳 🇧🇷 🇲🇽 🇷🇺 🇮🇩 🇵🇰 🇳🇬 🇧🇩 🇵🇭 🇻🇳 🇹🇷 🇮🇷 🇹🇭 🇪🇬 [+more]
 
 > ⚠️ **NOTE:** Generated data is for testing and research purposes only.
 
@@ -146,7 +135,7 @@ I'm Ayushman Mishra — a developer and AI engineer focused on building practica
 
 > Systematic research into prompt engineering techniques, LLM capabilities, and AI safety testing. Open-source and publicly available.
 
-**Research Areas:**
+Research Areas:
 - Prompt engineering techniques & best practices
 - LLM capability probing & benchmarking
 - AI safety testing methodologies
@@ -154,10 +143,10 @@ I'm Ayushman Mishra — a developer and AI engineer focused on building practica
 - Adversarial prompt research
 - Ethical AI limitations analysis
 
-**Repository:** Public on GitHub — 56 commits of documented research.  
-**Purpose:** Understanding AI capabilities and limitations to build better systems.
+Repository: Public on GitHub — 56 commits of documented research.  
+Purpose: Understanding AI capabilities and limitations to build better systems.
 
-🔗 **[View on GitHub →](https://github.com/Unknown-2829/llm-prompt-engineering)**
+[View on GitHub →](https://github.com/Unknown-2829/llm-prompt-engineering)
 
 </details>
 
@@ -167,7 +156,7 @@ I'm Ayushman Mishra — a developer and AI engineer focused on building practica
 
 > A cinematic startup animation for Windows Terminal & PowerShell. Features multi-color matrix rain, dual themes, glitch effects, and a custom dashboard — all with a one-line install.
 
-**Features:**
+Features:
 - 🎬 Multi-stage cinematic startup animation
 - 🌧️ Matrix rain — Letters or Binary mode with theme colors
 - 🎨 Two themes — Phantom (purple/cyan) & Unknown (green/blue)
@@ -176,7 +165,7 @@ I'm Ayushman Mishra — a developer and AI engineer focused on building practica
 - 🔄 Auto-update with silent downloads
 - ⚙️ Persistent config — settings preserved on reinstall
 
-**Quick Install:**
+Quick Install:
 ```powershell
 irm https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/install.ps1 | iex
 ```
@@ -189,14 +178,14 @@ irm https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/install
 
 > A temporary email service built on Cloudflare Pages with Email Workers. Generate instant disposable email addresses with 1-hour expiration — no signup, fully private.
 
-**Features:**
+Features:
 - ✨ Instant email generation — no signup needed
 - 📬 Real-time inbox with auto-refresh every 5 seconds
 - 📋 One-click copy to clipboard
 - ⏱️ 1-hour auto-expiration
 - 🔒 Private & secure — powered by Cloudflare KV
 
-**Architecture:**
+Architecture:
 ```
 User Browser → Cloudflare Pages (Frontend + API)
              → Cloudflare KV (Storage)
@@ -225,7 +214,7 @@ ai_apis             = ["OpenAI", "Google AI", "Anthropic"]
 deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 ```
 
-**Architecture Principles:**
+Architecture Principles:
 - Privacy-first system design
 - End-to-end encryption by default
 - Minimal data collection
@@ -233,7 +222,7 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 - Rate limiting & DDoS protection
 - Automated monitoring
 
-**Performance:**
+Performance:
 - Subsecond response times
 - 99%+ uptime across services
 - <30ms average API latency
@@ -244,37 +233,60 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 
 ## 💭 // PHILOSOPHY
 
-**On AI:**
+On AI:
 > *"AI should be accessible, transparent, and genuinely useful — not locked behind corporate walls or watered down to the point of being useless."*
 
-**On Privacy:**
+On Privacy:
 > *"Privacy is a fundamental right. Good software should protect it by default, not as an afterthought or a premium feature."*
 
-**On Open Source:**
+On Open Source:
 > *"Sharing knowledge makes everyone better. Open source isn't just a license — it's a way of building things that actually matter."*
 
-**On Responsibility:**
+On Responsibility:
 > *"Every tool can be used for good or bad. As builders, we focus on the good — but we trust users to make the right choices."*
 
 ---
 
 ## 🧩 // SKILLS & EXPERTISE
 
-**Core Competencies:**
-- **AI Engineering:** Building practical AI-powered applications
-- **Cryptographic Design:** Implementing strong encryption systems
-- **Bot Development:** Telegram bots, automation tools
-- **Prompt Engineering:** LLM optimization and research
-- **System Architecture:** Designing scalable, resilient systems
-- **Security:** Privacy-focused development practices
+Core Competencies:
+- **AI Engineering** — Building practical AI-powered applications
+- **Cryptographic Design** — Implementing strong encryption systems
+- **Bot Development** — Telegram bots, automation tools
+- **Prompt Engineering** — LLM optimization and research
+- **System Architecture** — Designing scalable, resilient systems
+- **Security** — Privacy-focused development practices
 
-**Specializations:**
+Specializations:
 - AI safety testing & red teaming
 - Privacy-preserving technology
 - Custom encryption implementations
 - Scalable infrastructure design
 - API development & integration
 - Open-source project management
+
+---
+
+## 📡 // SHADOW VAULT TELEGRAM CHANNEL
+
+The central hub for all project updates, releases, and community activity.
+
+What Happens Here:
+- Product launches & system updates
+- Alpha/Beta tester recruitment
+- Technical architecture disclosures
+- Security incident reports
+- Community challenges & rewards
+- 24/7 support operations
+
+Recent Activity:
+- DEXTER AI: 99%+ uptime, 66MB memory footprint
+- Phantom Vault: Windows release live, activation keys distributed
+- Phantom ID: V2.0 launched, 25+ countries live
+
+Community: Small but dedicated. Quality over quantity.
+
+Channel: [Shadow Vault](https://t.me/unknownlll2829) | Discussion: [Group](https://t.me/unknownlll2829)
 
 ---
 
@@ -296,7 +308,7 @@ Music is another creative outlet — a different way to express ideas and emotio
   <img src="https://img.shields.io/badge/Status-🟢%20OPEN%20TO%20OPPORTUNITIES-00ff00?style=for-the-badge" />
 </p>
 
-**Interested In:**
+Interested In:
 - AI engineering & research roles
 - Privacy-focused technology projects
 - Full-stack development opportunities
@@ -306,7 +318,7 @@ Music is another creative outlet — a different way to express ideas and emotio
 
 <p align="center">
   <a href="https://t.me/unknownlll2829"><img src="https://img.shields.io/badge/Telegram-@unknownlll2829-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" /></a>
-  <a href="mailto:ghackerguru@gmail.com"><img src="https://img.shields.io/badge/Email-ghackerguru@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+  <a href="mailto:unknown@ayushman.live"><img src="https://img.shields.io/badge/Email-unknown@ayushman.live-EA4335?style=for-the-badge&logo=gmail&logoColor=white" /></a>
   <a href="https://github.com/Unknown-2829"><img src="https://img.shields.io/badge/GitHub-Unknown--2829-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
   <a href="https://ayushman.live"><img src="https://img.shields.io/badge/Website-ayushman.live-6e3aff?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
 </p>
