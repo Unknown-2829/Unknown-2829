@@ -34,10 +34,10 @@ Primary Domains:
 
 ---
 
-## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="30"> // GITHUB STATS
+## <img src="https://media.giphy.com/media/iY8CRBdQXODJSCERIr/giphy.gif" width="70"> // GITHUB STATS
 
 <p align="center">
-  <img width="75%" src="https://streak-stats.demolab.com?user=Unknown-2829&theme=tokyonight&hide_border=true&background=0d1117&ring=6e3aff&fire=00d9ff&currStreakLabel=6e3aff&sideLabels=a8b2d1&dates=a8b2d1&stroke=a8b2d1&date_format=j%20M%20Y&cache_seconds=1800" />
+  <img width="70%" src="https://streak-stats.demolab.com?user=Unknown-2829&theme=tokyonight&hide_border=true&background=0d1117&ring=6e3aff&fire=00d9ff&currStreakLabel=6e3aff&sideLabels=a8b2d1&dates=a8b2d1&stroke=a8b2d1&date_format=j%20M%20Y&cache_seconds=1800" />
 </p>
 
 ---
