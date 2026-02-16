@@ -133,13 +133,46 @@ def get_theme_for_streak(streak: int) -> dict:
     return THEMES[get_theme_name_for_streak(streak)]
 
 
+def fetch_streak_from_svg(username: str) -> int:
+    """
+    Fetch the current streak by parsing the streak-stats.demolab.com SVG.
+    This is the same service used to render the streak image in the README,
+    so it provides the most accurate streak data (uses GitHub's contribution
+    calendar via GraphQL, which includes all contribution types).
+    """
+    url = f"https://streak-stats.demolab.com?user={username}&hide_border=true"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        svg = resp.read().decode()
+
+    # The SVG contains a unique "currstreak" animation on the current streak number
+    match = re.search(
+        r"animation:\s*currstreak[^>]*>\s*(\d[\d,]*)\s*</text>",
+        svg,
+    )
+    if match:
+        return int(match.group(1).replace(",", ""))
+
+    raise ValueError("Could not find current streak number in SVG response")
+
+
 def fetch_streak(username: str) -> int:
     """
     Fetch the current streak count for a GitHub user.
-    Uses the streak-stats API to get streak data.
-    Falls back to GitHub API contributions if needed.
+    Primary: parses the streak-stats.demolab.com SVG (accurate, uses
+    GitHub's contribution calendar which includes all contribution types).
+    Fallback: counts consecutive days from the GitHub Events API.
     """
-    # Try fetching from GitHub API (contribution data)
+    # Primary method: parse streak from streak-stats.demolab.com SVG
+    try:
+        streak = fetch_streak_from_svg(username)
+        print(f"Streak from streak-stats.demolab.com: {streak}")
+        return streak
+    except Exception as e:
+        print(f"Warning: Could not fetch streak from SVG: {e}",
+              file=sys.stderr)
+
+    # Fallback: GitHub Events API (less reliable — only public events)
     try:
         token = os.environ.get("GITHUB_TOKEN", "")
         headers = {"Accept": "application/vnd.github.v3+json"}
@@ -151,15 +184,15 @@ def fetch_streak(username: str) -> int:
         with urllib.request.urlopen(req, timeout=15) as resp:
             events = json.loads(resp.read().decode())
 
-        # Count consecutive days with push events
         if not events:
             return 0
 
         today = datetime.now(timezone.utc).date()
         dates_with_activity = set()
         for event in events:
-            if event.get("type") in ("PushEvent", "CreateEvent", "PullRequestEvent",
-                                     "IssuesEvent", "CommitCommentEvent"):
+            if event.get("type") in ("PushEvent", "CreateEvent",
+                                     "PullRequestEvent", "IssuesEvent",
+                                     "CommitCommentEvent"):
                 event_date = datetime.strptime(
                     event["created_at"], "%Y-%m-%dT%H:%M:%SZ"
                 ).date()
@@ -168,20 +201,19 @@ def fetch_streak(username: str) -> int:
         if not dates_with_activity:
             return 0
 
-        # Count consecutive days from today backwards
         streak = 0
         check_date = today
         while check_date in dates_with_activity:
             streak += 1
             check_date -= timedelta(days=1)
 
-        # If today has no activity, check from yesterday
         if streak == 0:
             check_date = today - timedelta(days=1)
             while check_date in dates_with_activity:
                 streak += 1
                 check_date -= timedelta(days=1)
 
+        print(f"Streak from Events API fallback: {streak}")
         return streak
 
     except Exception as e:
