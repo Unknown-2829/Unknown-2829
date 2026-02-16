@@ -38,42 +38,9 @@ Primary Domains:
 
 <br>
 
-<!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/🏆_Streak_Tier-GROWING-00e676?style=for-the-badge&labelColor=0d1117" />
-  <img src="https://img.shields.io/badge/✨%20Fresh%20Start-1--3%20day%20streak-00e676?style=for-the-badge&labelColor=0d1117" />
+  <img width="70%" src="https://streak-stats.demolab.com?user=Unknown-2829&theme=tokyonight&hide_border=true&background=0d1117&ring=6e3aff&fire=00d9ff&currStreakLabel=6e3aff&sideLabels=a8b2d1&dates=a8b2d1&stroke=a8b2d1&date_format=j%20M%20Y&cache_seconds=1800" />
 </p>
-
-<!-- Themed gradient divider -->
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:0d1117,50:00e676,100:69f0ae&height=1&section=header" width="70%" />
-</p>
-
-<!-- Streak Stats - Dynamically Themed -->
-<p align="center">
-  <img width="70%" src="https://streak-stats.demolab.com?user=Unknown-2829&hide_border=true&background=0d1117&ring=00e676&fire=69f0ae&currStreakLabel=00e676&sideLabels=b9f6ca&dates=a5d6a7&stroke=1b5e20&date_format=j%20M%20Y" />
-</p>
-
-<!-- GitHub Stats & Top Languages - Side by Side -->
-<p align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=Unknown-2829&show_icons=true&hide_border=true&bg_color=0d1117&title_color=00e676&text_color=b9f6ca&icon_color=69f0ae&ring_color=00e676&include_all_commits=true&count_private=true" />
-  <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Unknown-2829&layout=compact&hide_border=true&bg_color=0d1117&title_color=00e676&text_color=b9f6ca" />
-</p>
-
-<!-- Activity Graph - Themed -->
-<p align="center">
-  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=b9f6ca&line=00e676&point=69f0ae&area_color=00e676&area=true&hide_border=true" />
-</p>
-
-<!-- Themed gradient divider -->
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:0d1117,50:00e676,100:69f0ae&height=1&section=header" width="70%" />
-</p>
-
-<p align="center">
-  <sub>🎨 Stats theme updates dynamically based on current streak | Powered by GitHub Actions</sub>
-</p>
-<!-- DYNAMIC-STATS:END -->
 
 ---
 
