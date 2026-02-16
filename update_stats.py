@@ -3,10 +3,10 @@ Dynamic GitHub Stats Updater
 Fetches GitHub streak data and updates README.md with conditional theming.
 
 Streak Tiers:
-  1-3   → Green theme  (fresh, growing)
-  4-8   → Blue theme   (steady, consistent)
-  9-30  → Red theme    (on fire, dominant)
-  30+   → Black theme  (legendary, dark elite)
+  1-3   → Green theme  (fresh, growing — soft dull glow)
+  4-8   → Blue theme   (steady, consistent — fade effect)
+  9-30  → Red theme    (on fire, dominant — dark intensity)
+  30+   → Black theme  (legendary, dark elite — special effects)
 
 Each tier has unique visual effects: glow, fade, animation styles.
 """
@@ -38,9 +38,13 @@ THEMES = {
         "gradient_mid": "00e676",
         "gradient_end": "69f0ae",
         "badge_color": "00e676",
-        "stats_title": "00e676",
-        "stats_text": "b9f6ca",
-        "stats_icon": "69f0ae",
+        # Capsule render effect
+        "capsule_type": "waving",
+        "capsule_animation": "fadeIn",
+        "capsule_height": "3",
+        # Graph area opacity via color saturation
+        "graph_area": "true",
+        "effect_desc": "soft dull glow",
     },
     "blue": {
         "label": "💎 Consistent",
@@ -58,9 +62,13 @@ THEMES = {
         "gradient_mid": "448aff",
         "gradient_end": "82b1ff",
         "badge_color": "448aff",
-        "stats_title": "448aff",
-        "stats_text": "90caf9",
-        "stats_icon": "82b1ff",
+        # Capsule render effect
+        "capsule_type": "soft",
+        "capsule_animation": "twinkling",
+        "capsule_height": "4",
+        # Graph area opacity via color saturation
+        "graph_area": "true",
+        "effect_desc": "smooth fade transition",
     },
     "red": {
         "label": "🔥 On Fire",
@@ -78,9 +86,13 @@ THEMES = {
         "gradient_mid": "ff1744",
         "gradient_end": "ff5252",
         "badge_color": "ff1744",
-        "stats_title": "ff1744",
-        "stats_text": "ff8a80",
-        "stats_icon": "ff5252",
+        # Capsule render effect
+        "capsule_type": "shark",
+        "capsule_animation": "scaleIn",
+        "capsule_height": "5",
+        # Graph area opacity via color saturation
+        "graph_area": "true",
+        "effect_desc": "dark intensity pulse",
     },
     "black": {
         "label": "👑 Legendary",
@@ -98,9 +110,13 @@ THEMES = {
         "gradient_mid": "212121",
         "gradient_end": "424242",
         "badge_color": "ffffff",
-        "stats_title": "ffffff",
-        "stats_text": "bdbdbd",
-        "stats_icon": "e0e0e0",
+        # Capsule render effect
+        "capsule_type": "cylinder",
+        "capsule_animation": "blinking",
+        "capsule_height": "6",
+        # Graph area opacity via color saturation
+        "graph_area": "true",
+        "effect_desc": "elite shadow aura",
     },
 }
 
@@ -200,36 +216,13 @@ def generate_stats_section(username: str, streak: int) -> str:
         f"&date_format=j%20M%20Y"
     )
 
-    # Build GitHub stats URL with matching theme
-    stats_url = (
-        f"https://github-readme-stats-sigma-five.vercel.app/api?username={username}"
-        f"&show_icons=true"
-        f"&hide_border=true"
-        f"&bg_color={theme['streak_bg']}"
-        f"&title_color={theme['stats_title']}"
-        f"&text_color={theme['stats_text']}"
-        f"&icon_color={theme['stats_icon']}"
-        f"&ring_color={theme['ring']}"
-        f"&include_all_commits=true"
-        f"&count_private=true"
-    )
-
-    # Build top languages URL with matching theme
-    langs_url = (
-        f"https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username={username}"
-        f"&layout=compact"
-        f"&hide_border=true"
-        f"&bg_color={theme['streak_bg']}"
-        f"&title_color={theme['stats_title']}"
-        f"&text_color={theme['stats_text']}"
-    )
-
-    # Capsule render header for stats section with themed gradient
-    capsule_url = (
-        f"https://capsule-render.vercel.app/api?type=rect"
+    # Capsule render dividers with tier-specific effects
+    capsule_divider_url = (
+        f"https://capsule-render.vercel.app/api?type={theme['capsule_type']}"
         f"&color=0:{theme['gradient_start']},50:{theme['gradient_mid']},100:{theme['gradient_end']}"
-        f"&height=1"
+        f"&height={theme['capsule_height']}"
         f"&section=header"
+        f"&animation={theme['capsule_animation']}"
     )
 
     # Activity graph with matching theme
@@ -240,19 +233,27 @@ def generate_stats_section(username: str, streak: int) -> str:
         f"&line={theme['ring']}"
         f"&point={theme['fire']}"
         f"&area_color={theme['ring']}"
-        f"&area=true"
+        f"&area={theme['graph_area']}"
         f"&hide_border=true"
+    )
+
+    # Effect badge showing current visual effect
+    effect_badge = (
+        f"https://img.shields.io/badge/✨_Effect-"
+        f"{theme['effect_desc'].replace(' ', '%20')}-"
+        f"{theme['gradient_mid']}?style=flat-square&labelColor={theme['gradient_start']}"
     )
 
     # Build the section
     section = f"""
 <p align="center">
-  <img src="https://img.shields.io/badge/🏆_Streak_Tier-{theme['tier']}-{theme['badge_color']}?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/🏆_Streak_Tier-{theme['tier'].replace(' ', '%20')}-{theme['badge_color']}?style=for-the-badge&labelColor=0d1117" />
+  <img src="{effect_badge}" />
 </p>
 
-<!-- Themed gradient divider -->
+<!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="{capsule_url}" width="70%" />
+  <img src="{capsule_divider_url}" width="70%" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -260,24 +261,18 @@ def generate_stats_section(username: str, streak: int) -> str:
   <img width="70%" src="{streak_url}" />
 </p>
 
-<!-- GitHub Stats & Top Languages - Side by Side -->
-<p align="center">
-  <img width="49%" src="{stats_url}" />
-  <img width="49%" src="{langs_url}" />
-</p>
-
 <!-- Activity Graph - Themed -->
 <p align="center">
   <img width="95%" src="{graph_url}" />
 </p>
 
-<!-- Themed gradient divider -->
+<!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="{capsule_url}" width="70%" />
+  <img src="{capsule_divider_url}" width="70%" />
 </p>
 
 <p align="center">
-  <sub>🎨 Stats theme updates dynamically based on current streak | Powered by GitHub Actions</sub>
+  <sub>🎨 Stats theme updates dynamically based on current streak • {theme['label']} — {theme['effect_desc']} | Powered by GitHub Actions</sub>
 </p>
 """
     return section.strip()
