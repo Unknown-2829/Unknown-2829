@@ -113,20 +113,6 @@ THEMES = {
 }
 
 
-def get_theme_for_streak(streak: int) -> dict:
-    """Return the theme dictionary based on current streak value."""
-    if streak <= 0:
-        return THEMES["green"]
-    elif streak <= 3:
-        return THEMES["green"]
-    elif streak <= 8:
-        return THEMES["blue"]
-    elif streak <= 30:
-        return THEMES["red"]
-    else:
-        return THEMES["black"]
-
-
 def get_theme_name_for_streak(streak: int) -> str:
     """Return the theme name based on current streak value."""
     if streak <= 3:
@@ -137,6 +123,11 @@ def get_theme_name_for_streak(streak: int) -> str:
         return "red"
     else:
         return "black"
+
+
+def get_theme_for_streak(streak: int) -> dict:
+    """Return the theme dictionary based on current streak value."""
+    return THEMES[get_theme_name_for_streak(streak)]
 
 
 def fetch_streak(username: str) -> int:
@@ -175,17 +166,15 @@ def fetch_streak(username: str) -> int:
             return 0
 
         # Count consecutive days from today backwards
+        from datetime import timedelta
         streak = 0
         check_date = today
         while check_date in dates_with_activity:
             streak += 1
-            check_date = check_date.replace(
-                day=check_date.day - 1
-            ) if check_date.day > 1 else _prev_date(check_date)
+            check_date -= timedelta(days=1)
 
         # If today has no activity, check from yesterday
         if streak == 0:
-            from datetime import timedelta
             check_date = today - timedelta(days=1)
             while check_date in dates_with_activity:
                 streak += 1
@@ -196,12 +185,6 @@ def fetch_streak(username: str) -> int:
     except Exception as e:
         print(f"Warning: Could not fetch streak data: {e}", file=sys.stderr)
         return 0
-
-
-def _prev_date(d):
-    """Get the previous date."""
-    from datetime import timedelta
-    return d - timedelta(days=1)
 
 
 def generate_stats_section(username: str, streak: int) -> str:
