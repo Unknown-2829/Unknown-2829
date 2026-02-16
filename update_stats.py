@@ -4,9 +4,9 @@ Fetches GitHub streak data and updates README.md with conditional theming.
 
 Streak Tiers:
   1-3   → Green theme  (fresh, growing — soft dull glow)
-  4-8   → Blue theme   (steady, consistent — fade effect)
-  9-30  → Red theme    (on fire, dominant — dark intensity)
-  30+   → Black theme  (legendary, dark elite — special effects)
+  4-8   → Blue theme   (steady, consistent — smooth fade transition)
+  9-30  → Red theme    (on fire, dominant — dark intensity pulse)
+  30+   → Black theme  (legendary, dark elite — elite shadow aura)
 
 Each tier has unique visual effects: glow, fade, animation styles.
 """
