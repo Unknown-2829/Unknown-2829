@@ -17,7 +17,7 @@ import sys
 import json
 import urllib.request
 import urllib.error
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 # ── Theme Definitions ──────────────────────────────────────────────────────────
@@ -25,90 +25,82 @@ THEMES = {
     "green": {
         "label": "🌱 Growing",
         "tier": "GROWING",
-        "range": "1–3 day streak",
         "streak_bg": "0d1117",
         "ring": "00e676",
         "fire": "69f0ae",
+        "curr_streak_num": "ffffff",
         "curr_streak_label": "00e676",
         "side_labels": "b9f6ca",
+        "side_nums": "ffffff",
         "dates": "a5d6a7",
         "stroke": "1b5e20",
         "gradient_start": "0d1117",
         "gradient_mid": "00e676",
         "gradient_end": "69f0ae",
         "badge_color": "00e676",
-        "glow_color": "00e676",
-        "glow_opacity": "0.3",
-        "animation": "fadeIn",
-        "effect_label": "✨ Fresh Start",
-        "card_border": "1b5e20",
-        "streak_theme": "dark",
+        "stats_title": "00e676",
+        "stats_text": "b9f6ca",
+        "stats_icon": "69f0ae",
     },
     "blue": {
         "label": "💎 Consistent",
         "tier": "CONSISTENT",
-        "range": "4–8 day streak",
         "streak_bg": "0d1117",
         "ring": "448aff",
         "fire": "82b1ff",
+        "curr_streak_num": "ffffff",
         "curr_streak_label": "448aff",
         "side_labels": "90caf9",
+        "side_nums": "ffffff",
         "dates": "bbdefb",
         "stroke": "1565c0",
         "gradient_start": "0d1117",
         "gradient_mid": "448aff",
         "gradient_end": "82b1ff",
         "badge_color": "448aff",
-        "glow_color": "448aff",
-        "glow_opacity": "0.45",
-        "animation": "fadeIn",
-        "effect_label": "🌊 Steady Flow",
-        "card_border": "1565c0",
-        "streak_theme": "tokyonight",
+        "stats_title": "448aff",
+        "stats_text": "90caf9",
+        "stats_icon": "82b1ff",
     },
     "red": {
         "label": "🔥 On Fire",
         "tier": "ON FIRE",
-        "range": "9–30 day streak",
         "streak_bg": "0d1117",
         "ring": "ff1744",
         "fire": "ff5252",
+        "curr_streak_num": "ffffff",
         "curr_streak_label": "ff1744",
         "side_labels": "ff8a80",
+        "side_nums": "ffffff",
         "dates": "ef9a9a",
         "stroke": "b71c1c",
         "gradient_start": "0d1117",
         "gradient_mid": "ff1744",
         "gradient_end": "ff5252",
         "badge_color": "ff1744",
-        "glow_color": "ff1744",
-        "glow_opacity": "0.6",
-        "animation": "fadeIn",
-        "effect_label": "🔥 Blazing",
-        "card_border": "b71c1c",
-        "streak_theme": "radical",
+        "stats_title": "ff1744",
+        "stats_text": "ff8a80",
+        "stats_icon": "ff5252",
     },
     "black": {
         "label": "👑 Legendary",
         "tier": "LEGENDARY",
-        "range": "30+ day streak",
         "streak_bg": "000000",
         "ring": "ffffff",
         "fire": "b0b0b0",
-        "curr_streak_label": "ffffff",
-        "side_labels": "9e9e9e",
+        "curr_streak_num": "ffffff",
+        "curr_streak_label": "e0e0e0",
+        "side_labels": "bdbdbd",
+        "side_nums": "ffffff",
         "dates": "757575",
         "stroke": "424242",
         "gradient_start": "000000",
         "gradient_mid": "212121",
         "gradient_end": "424242",
-        "badge_color": "000000",
-        "glow_color": "ffffff",
-        "glow_opacity": "0.8",
-        "animation": "fadeIn",
-        "effect_label": "💀 Dark Elite",
-        "card_border": "ffffff",
-        "streak_theme": "highcontrast",
+        "badge_color": "ffffff",
+        "stats_title": "ffffff",
+        "stats_text": "bdbdbd",
+        "stats_icon": "e0e0e0",
     },
 }
 
@@ -152,7 +144,7 @@ def fetch_streak(username: str) -> int:
         if not events:
             return 0
 
-        today = datetime.utcnow().date()
+        today = datetime.now(timezone.utc).date()
         dates_with_activity = set()
         for event in events:
             if event.get("type") in ("PushEvent", "CreateEvent", "PullRequestEvent",
@@ -199,7 +191,9 @@ def generate_stats_section(username: str, streak: int) -> str:
         f"&background={theme['streak_bg']}"
         f"&ring={theme['ring']}"
         f"&fire={theme['fire']}"
+        f"&currStreakNum={theme['curr_streak_num']}"
         f"&currStreakLabel={theme['curr_streak_label']}"
+        f"&sideNums={theme['side_nums']}"
         f"&sideLabels={theme['side_labels']}"
         f"&dates={theme['dates']}"
         f"&stroke={theme['stroke']}"
@@ -208,13 +202,13 @@ def generate_stats_section(username: str, streak: int) -> str:
 
     # Build GitHub stats URL with matching theme
     stats_url = (
-        f"https://github-readme-stats.vercel.app/api?username={username}"
+        f"https://github-readme-stats-sigma-five.vercel.app/api?username={username}"
         f"&show_icons=true"
         f"&hide_border=true"
         f"&bg_color={theme['streak_bg']}"
-        f"&title_color={theme['ring']}"
-        f"&text_color={theme['side_labels']}"
-        f"&icon_color={theme['fire']}"
+        f"&title_color={theme['stats_title']}"
+        f"&text_color={theme['stats_text']}"
+        f"&icon_color={theme['stats_icon']}"
         f"&ring_color={theme['ring']}"
         f"&include_all_commits=true"
         f"&count_private=true"
@@ -222,12 +216,12 @@ def generate_stats_section(username: str, streak: int) -> str:
 
     # Build top languages URL with matching theme
     langs_url = (
-        f"https://github-readme-stats.vercel.app/api/top-langs/?username={username}"
+        f"https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username={username}"
         f"&layout=compact"
         f"&hide_border=true"
         f"&bg_color={theme['streak_bg']}"
-        f"&title_color={theme['ring']}"
-        f"&text_color={theme['side_labels']}"
+        f"&title_color={theme['stats_title']}"
+        f"&text_color={theme['stats_text']}"
     )
 
     # Capsule render header for stats section with themed gradient
@@ -254,7 +248,6 @@ def generate_stats_section(username: str, streak: int) -> str:
     section = f"""
 <p align="center">
   <img src="https://img.shields.io/badge/🏆_Streak_Tier-{theme['tier']}-{theme['badge_color']}?style=for-the-badge&labelColor=0d1117" />
-  <img src="https://img.shields.io/badge/{theme['effect_label'].replace(' ', '%20')}-{theme['range'].replace(' ', '%20').replace('–', '--')}-{theme['badge_color']}?style=for-the-badge&labelColor=0d1117" />
 </p>
 
 <!-- Themed gradient divider -->
@@ -354,7 +347,7 @@ def main():
     theme_name = get_theme_name_for_streak(streak)
     theme = get_theme_for_streak(streak)
     print(f"Selected theme: {theme_name} ({theme['label']})")
-    print(f"Tier: {theme['tier']} | Range: {theme['range']}")
+    print(f"Tier: {theme['tier']}")
 
     updated = update_readme(readme_path, username, streak)
 
