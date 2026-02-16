@@ -40,27 +40,27 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/🏆_Streak_Tier-CONSISTENT-448aff?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/🏆_Streak_Tier-ON%20FIRE-ff1744?style=for-the-badge&labelColor=0d1117" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0d1117,50:448aff,100:82b1ff&height=4&section=header&animation=twinkling" width="70%" />
+  <img src="https://capsule-render.vercel.app/api?type=shark&color=0:0d1117,50:ff1744,100:ff5252&height=5&section=header&animation=scaleIn" width="70%" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
 <p align="center">
-  <img width="70%" src="https://streak-stats.demolab.com?user=Unknown-2829&hide_border=true&background=0d1117&ring=448aff&fire=82b1ff&currStreakNum=ffffff&currStreakLabel=448aff&sideNums=ffffff&sideLabels=90caf9&dates=bbdefb&stroke=1565c0&date_format=j%20M%20Y" />
+  <img width="70%" src="https://streak-stats.demolab.com?user=Unknown-2829&hide_border=true&background=0d1117&ring=ff1744&fire=ff5252&currStreakNum=ffffff&currStreakLabel=ff1744&sideNums=ffffff&sideLabels=ff8a80&dates=ef9a9a&stroke=b71c1c&date_format=j%20M%20Y" />
 </p>
 
 <!-- Activity Graph - Themed -->
 <p align="center">
-  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=90caf9&line=448aff&point=82b1ff&area_color=448aff&area=true&hide_border=true" />
+  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=ff8a80&line=ff1744&point=ff5252&area_color=ff1744&area=true&hide_border=true" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0d1117,50:448aff,100:82b1ff&height=4&section=header&animation=twinkling" width="70%" />
+  <img src="https://capsule-render.vercel.app/api?type=shark&color=0:0d1117,50:ff1744,100:ff5252&height=5&section=header&animation=scaleIn" width="70%" />
 </p>
 
 <p align="center">
