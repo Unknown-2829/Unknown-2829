@@ -373,5 +373,3 @@ The code isn't responsible for what you execute.
 <p align="center">
   <a href="https://ayushman.live">🌐 ayushman.live</a> • <a href="https://github.com/Unknown-2829">GitHub</a> • <a href="https://t.me/unknownlll2829">Telegram</a>
 </p>
-a>
-</p>
