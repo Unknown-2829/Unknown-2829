@@ -335,8 +335,8 @@ def main():
     readme_path = os.environ.get("README_PATH", "README.md")
 
     # Allow override via environment variable for testing
-    streak_override = os.environ.get("STREAK_OVERRIDE")
-    if streak_override is not None:
+    streak_override = os.environ.get("STREAK_OVERRIDE", "").strip()
+    if streak_override:
         streak = int(streak_override)
         print(f"Using streak override: {streak}")
     else:
