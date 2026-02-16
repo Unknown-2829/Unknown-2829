@@ -12,7 +12,7 @@
 ## <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> // WHO I AM
 
 **NAME:** Ayushman Mishra  
-**ALIAS:** Unknown
+**ALIAS:** Hacker guru ji, Unknown
 
 I'm Ayushman Mishra — a developer and AI engineer focused on building practical tools. From AI-powered chatbots like Dexter AI and encryption systems like Phantom Vault to identity generators and prompt engineering research, I enjoy working on projects that push boundaries and give users more control over their digital experience. Find my open-source work on [GitHub](https://github.com/Unknown-2829).
 
