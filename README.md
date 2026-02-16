@@ -233,36 +233,16 @@ ai_apis             = ["OpenAI", "Google AI", "Anthropic"]
 deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 ```
 
-Architecture Principles:
-- Privacy-first system design
-- End-to-end encryption by default
-- Minimal data collection
-- Robust authentication
-- Rate limiting & DDoS protection
-- Automated monitoring
-
-Performance:
-- Subsecond response times
-- 99%+ uptime across services
-- <30ms average API latency
-- Minimal encryption overhead (<5%)
-- 24/7 server availability
-
 ---
 
 ## 💭 // PHILOSOPHY
 
-On AI:
-> *"AI should be accessible, transparent, and genuinely useful — not locked behind corporate walls or watered down to the point of being useless."*
-
-On Privacy:
-> *"Privacy is a fundamental right. Good software should protect it by default, not as an afterthought or a premium feature."*
-
-On Open Source:
-> *"Sharing knowledge makes everyone better. Open source isn't just a license — it's a way of building things that actually matter."*
-
 On Responsibility:
 > *"Every tool can be used for good or bad. As builders, we focus on the good — but we trust users to make the right choices."*
+
+The hammer isn't responsible for what you hit.  
+The lockpick isn't responsible for what you unlock.  
+The code isn't responsible for what you execute.
 
 ---
 
@@ -350,10 +330,6 @@ Interested In:
 ALL TOOLS DEVELOPED FOR EDUCATIONAL & RESEARCH PURPOSES
 MISUSE IS SOLE RESPONSIBILITY OF END USER
 ```
-
-The hammer isn't responsible for what you hit.  
-The lockpick isn't responsible for what you unlock.  
-The code isn't responsible for what you execute.
 
 - With great power comes great responsibility
 - Use tools ethically and within the law
