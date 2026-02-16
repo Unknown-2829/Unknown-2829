@@ -3,12 +3,12 @@ Dynamic GitHub Stats Updater
 Fetches GitHub streak data and updates README.md with conditional theming.
 
 Streak Tiers:
-  1-3   → Green theme  (fresh, growing — soft dull glow)
-  4-8   → Blue theme   (steady, consistent — smooth fade transition)
-  9-30  → Red theme    (on fire, dominant — dark intensity pulse)
-  30+   → Black theme  (legendary, dark elite — elite shadow aura)
+  1-3   → Green theme  (fresh, growing)
+  4-8   → Blue theme   (steady, consistent)
+  9-30  → Red theme    (on fire, dominant)
+  30+   → Black theme  (legendary, dark elite)
 
-Each tier has unique visual effects: glow, fade, animation styles.
+Each tier has unique visual styles and colors.
 """
 
 import os
@@ -16,8 +16,7 @@ import re
 import sys
 import json
 import urllib.request
-import urllib.error
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 
 # ── Theme Definitions ──────────────────────────────────────────────────────────
@@ -44,7 +43,6 @@ THEMES = {
         "capsule_height": "3",
         # Graph area opacity via color saturation
         "graph_area": "true",
-        "effect_desc": "soft dull glow",
     },
     "blue": {
         "label": "💎 Consistent",
@@ -68,7 +66,6 @@ THEMES = {
         "capsule_height": "4",
         # Graph area opacity via color saturation
         "graph_area": "true",
-        "effect_desc": "smooth fade transition",
     },
     "red": {
         "label": "🔥 On Fire",
@@ -92,7 +89,6 @@ THEMES = {
         "capsule_height": "5",
         # Graph area opacity via color saturation
         "graph_area": "true",
-        "effect_desc": "dark intensity pulse",
     },
     "black": {
         "label": "👑 Legendary",
@@ -116,7 +112,6 @@ THEMES = {
         "capsule_height": "6",
         # Graph area opacity via color saturation
         "graph_area": "true",
-        "effect_desc": "elite shadow aura",
     },
 }
 
@@ -174,7 +169,6 @@ def fetch_streak(username: str) -> int:
             return 0
 
         # Count consecutive days from today backwards
-        from datetime import timedelta
         streak = 0
         check_date = today
         while check_date in dates_with_activity:
@@ -198,7 +192,6 @@ def fetch_streak(username: str) -> int:
 def generate_stats_section(username: str, streak: int) -> str:
     """Generate the dynamic stats section markdown."""
     theme = get_theme_for_streak(streak)
-    theme_name = get_theme_name_for_streak(streak)
 
     # Build streak stats URL with themed parameters
     streak_url = (
@@ -237,18 +230,10 @@ def generate_stats_section(username: str, streak: int) -> str:
         f"&hide_border=true"
     )
 
-    # Effect badge showing current visual effect
-    effect_badge = (
-        f"https://img.shields.io/badge/✨_Effect-"
-        f"{theme['effect_desc'].replace(' ', '%20')}-"
-        f"{theme['gradient_mid']}?style=flat-square&labelColor={theme['gradient_start']}"
-    )
-
     # Build the section
     section = f"""
 <p align="center">
   <img src="https://img.shields.io/badge/🏆_Streak_Tier-{theme['tier'].replace(' ', '%20')}-{theme['badge_color']}?style=for-the-badge&labelColor=0d1117" />
-  <img src="{effect_badge}" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -272,7 +257,7 @@ def generate_stats_section(username: str, streak: int) -> str:
 </p>
 
 <p align="center">
-  <sub>🎨 Stats theme updates dynamically based on current streak • {theme['label']} — {theme['effect_desc']} | Powered by GitHub Actions</sub>
+  <sub>🎨 Stats theme updates dynamically based on current streak | Powered by GitHub Actions</sub>
 </p>
 """
     return section.strip()

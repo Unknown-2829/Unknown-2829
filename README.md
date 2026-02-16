@@ -41,7 +41,6 @@ Primary Domains:
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
   <img src="https://img.shields.io/badge/🏆_Streak_Tier-GROWING-00e676?style=for-the-badge&labelColor=0d1117" />
-  <img src="https://img.shields.io/badge/✨_Effect-soft%20dull%20glow-00e676?style=flat-square&labelColor=0d1117" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -65,7 +64,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub>🎨 Stats theme updates dynamically based on current streak • 🌱 Growing — soft dull glow | Powered by GitHub Actions</sub>
+  <sub>🎨 Stats theme updates dynamically based on current streak | Powered by GitHub Actions</sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
