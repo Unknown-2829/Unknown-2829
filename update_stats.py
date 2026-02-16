@@ -337,7 +337,15 @@ def main():
     # Allow override via environment variable for testing
     streak_override = os.environ.get("STREAK_OVERRIDE", "").strip()
     if streak_override:
-        streak = int(streak_override)
+        try:
+            streak = int(streak_override)
+        except ValueError:
+            print(
+                f"Error: STREAK_OVERRIDE must be an integer, got "
+                f"{streak_override!r}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
         print(f"Using streak override: {streak}")
     else:
         streak = fetch_streak(username)

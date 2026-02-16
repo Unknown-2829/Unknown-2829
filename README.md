@@ -40,34 +40,34 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/🏆_Streak_Tier-GROWING-00e676?style=for-the-badge&labelColor=0d1117" />
-  <img src="https://img.shields.io/badge/✨%20Fresh%20Start-1--3%20day%20streak-00e676?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/🏆_Streak_Tier-ON FIRE-ff1744?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/🔥%20Blazing-9--30%20day%20streak-ff1744?style=for-the-badge&labelColor=0d1117" />
 </p>
 
 <!-- Themed gradient divider -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:0d1117,50:00e676,100:69f0ae&height=1&section=header" width="70%" />
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:0d1117,50:ff1744,100:ff5252&height=1&section=header" width="70%" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
 <p align="center">
-  <img width="70%" src="https://streak-stats.demolab.com?user=Unknown-2829&hide_border=true&background=0d1117&ring=00e676&fire=69f0ae&currStreakLabel=00e676&sideLabels=b9f6ca&dates=a5d6a7&stroke=1b5e20&date_format=j%20M%20Y" />
+  <img width="70%" src="https://streak-stats.demolab.com?user=Unknown-2829&hide_border=true&background=0d1117&ring=ff1744&fire=ff5252&currStreakLabel=ff1744&sideLabels=ff8a80&dates=ef9a9a&stroke=b71c1c&date_format=j%20M%20Y" />
 </p>
 
 <!-- GitHub Stats & Top Languages - Side by Side -->
 <p align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=Unknown-2829&show_icons=true&hide_border=true&bg_color=0d1117&title_color=00e676&text_color=b9f6ca&icon_color=69f0ae&ring_color=00e676&include_all_commits=true&count_private=true" />
-  <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Unknown-2829&layout=compact&hide_border=true&bg_color=0d1117&title_color=00e676&text_color=b9f6ca" />
+  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=Unknown-2829&show_icons=true&hide_border=true&bg_color=0d1117&title_color=ff1744&text_color=ff8a80&icon_color=ff5252&ring_color=ff1744&include_all_commits=true&count_private=true" />
+  <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Unknown-2829&layout=compact&hide_border=true&bg_color=0d1117&title_color=ff1744&text_color=ff8a80" />
 </p>
 
 <!-- Activity Graph - Themed -->
 <p align="center">
-  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=b9f6ca&line=00e676&point=69f0ae&area_color=00e676&area=true&hide_border=true" />
+  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=ff8a80&line=ff1744&point=ff5252&area_color=ff1744&area=true&hide_border=true" />
 </p>
 
 <!-- Themed gradient divider -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:0d1117,50:00e676,100:69f0ae&height=1&section=header" width="70%" />
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:0d1117,50:ff1744,100:ff5252&height=1&section=header" width="70%" />
 </p>
 
 <p align="center">
@@ -372,4 +372,6 @@ The code isn't responsible for what you execute.
 
 <p align="center">
   <a href="https://ayushman.live">🌐 ayushman.live</a> • <a href="https://github.com/Unknown-2829">GitHub</a> • <a href="https://t.me/unknownlll2829">Telegram</a>
+</p>
+a>
 </p>
