@@ -8,6 +8,11 @@ Streak Tiers:
   9-30  → Red theme    (on fire, dominant)
   30+   → Black theme  (legendary, dark elite)
 
+Streak Status:
+  active  → streak > 0, use tier themes above
+  broken  → streak just dropped to 0 (shows "💔 Streak Dropped" badge)
+  offline → streak has been 0 for 2+ days (rotating secret/offline messages)
+
 Each tier has unique visual styles and colors.
 """
 
@@ -15,8 +20,22 @@ import os
 import re
 import sys
 import json
+import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
+
+# Path to the file that persists streak state between runs
+STATE_FILE = os.environ.get("STREAK_STATE_PATH", ".streak_state.json")
+
+# Rotating messages shown when streak has been 0 for 2+ days.
+# Each entry is (emoji, label).
+OFFLINE_MESSAGES = [
+    ("😶\u200d🌫️", "Cooking Something Secretly"),
+    ("🤫", "Shh... Working on Something Big"),
+    ("💤", "Offline — Taking a Break"),
+    ("🔕", "Busy with Real Life"),
+    ("🌑", "Not Growing... Or Am I?"),
+]
 
 
 # ── Theme Definitions ──────────────────────────────────────────────────────────
@@ -133,6 +152,64 @@ def get_theme_for_streak(streak: int) -> dict:
     return THEMES[get_theme_name_for_streak(streak)]
 
 
+# ── Streak State Persistence ───────────────────────────────────────────────────
+
+def load_streak_state() -> dict:
+    """Load the persisted streak state from disk."""
+    if os.path.exists(STATE_FILE):
+        try:
+            with open(STATE_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, IOError):
+            pass
+    return {"last_positive_streak": None, "streak_zero_since": None}
+
+
+def save_streak_state(state: dict) -> None:
+    """Persist the streak state to disk."""
+    with open(STATE_FILE, "w", encoding="utf-8") as f:
+        json.dump(state, f, indent=2)
+        f.write("\n")
+
+
+def compute_streak_status(streak: int, state: dict) -> str:
+    """
+    Determine the display status for the current streak.
+
+    Returns one of:
+      'active'  – streak > 0, use normal tier themes
+      'broken'  – streak just became 0 (was positive before, or < 2 days at 0)
+      'offline' – streak has been 0 for 2+ days
+    """
+    if streak > 0:
+        return "active"
+
+    zero_since = state.get("streak_zero_since")
+    if zero_since:
+        try:
+            zero_date = datetime.fromisoformat(zero_since).date()
+            days_at_zero = (datetime.now(timezone.utc).date() - zero_date).days
+            if days_at_zero >= 2:
+                return "offline"
+        except ValueError:
+            pass
+
+    return "broken"
+
+
+def update_streak_state(streak: int, state: dict) -> dict:
+    """Return an updated state dict based on the current streak value."""
+    today = datetime.now(timezone.utc).date().isoformat()
+    if streak > 0:
+        state["last_positive_streak"] = streak
+        state["streak_zero_since"] = None
+    else:
+        if state.get("streak_zero_since") is None:
+            state["streak_zero_since"] = today
+        # last_positive_streak is intentionally preserved for the "broken" message
+    return state
+
+
 def fetch_streak_from_svg(username: str) -> int:
     """
     Fetch the current streak by parsing the streak-stats.demolab.com SVG.
@@ -221,9 +298,48 @@ def fetch_streak(username: str) -> int:
         return 0
 
 
-def generate_stats_section(username: str, streak: int) -> str:
+def generate_stats_section(username: str, streak: int,
+                           status: str = "active",
+                           state: dict | None = None) -> str:
     """Generate the dynamic stats section markdown."""
-    theme = get_theme_for_streak(streak)
+    if state is None:
+        state = {}
+
+    # ── Determine badge / sub-text based on status ──────────────────────────
+    if status == "broken":
+        last = state.get("last_positive_streak")
+        badge_color = "ff6d00"
+        badge_label = urllib.parse.quote("💔 Streak Dropped", safe="")
+        if last:
+            status_note = (
+                f"⚡ *{last}-day streak was broken — "
+                f"get back in the game!*"
+            )
+        else:
+            status_note = "⚡ *Streak dropped — get back in the game!*"
+        # Use the theme from the last known positive streak for visual continuity
+        theme = get_theme_for_streak(last if last else 1)
+
+    elif status == "offline":
+        # Pick a message based on the current day-of-year for variety
+        day_index = datetime.now(timezone.utc).timetuple().tm_yday
+        emoji, label = OFFLINE_MESSAGES[day_index % len(OFFLINE_MESSAGES)]
+        badge_color = "546e7a"
+        badge_label = urllib.parse.quote(f"{emoji} {label}", safe="")
+        status_note = (
+            "😶\u200d🌫️ *maybe cooking something secretly...* 🤫"
+        )
+        # Use a neutral dark theme for offline state
+        theme = THEMES["black"]
+
+    else:  # active
+        theme = get_theme_for_streak(streak)
+        badge_color = theme["badge_color"]
+        badge_label = f"🏆_Streak_Tier-{theme['tier'].replace(' ', '%20')}"
+        status_note = (
+            "🎨 Stats theme updates dynamically based on current streak"
+            " | Powered by GitHub Actions"
+        )
 
     # Build streak stats URL with themed parameters
     streak_url = (
@@ -265,7 +381,7 @@ def generate_stats_section(username: str, streak: int) -> str:
     # Build the section
     section = f"""
 <p align="center">
-  <img src="https://img.shields.io/badge/🏆_Streak_Tier-{theme['tier'].replace(' ', '%20')}-{theme['badge_color']}?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/{badge_label}-{badge_color}?style=for-the-badge&labelColor=0d1117" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -289,13 +405,14 @@ def generate_stats_section(username: str, streak: int) -> str:
 </p>
 
 <p align="center">
-  <sub>🎨 Stats theme updates dynamically based on current streak | Powered by GitHub Actions</sub>
+  <sub>{status_note}</sub>
 </p>
 """
     return section.strip()
 
 
-def update_readme(readme_path: str, username: str, streak: int) -> bool:
+def update_readme(readme_path: str, username: str, streak: int,
+                  status: str = "active", state: dict | None = None) -> bool:
     """
     Update the README.md file with the dynamic stats section.
     Looks for markers: <!-- DYNAMIC-STATS:START --> and <!-- DYNAMIC-STATS:END -->
@@ -303,7 +420,7 @@ def update_readme(readme_path: str, username: str, streak: int) -> bool:
     with open(readme_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    new_section = generate_stats_section(username, streak)
+    new_section = generate_stats_section(username, streak, status, state)
 
     start_marker = "<!-- DYNAMIC-STATS:START -->"
     end_marker = "<!-- DYNAMIC-STATS:END -->"
@@ -326,11 +443,13 @@ def update_readme(readme_path: str, username: str, streak: int) -> bool:
     if new_content != content:
         with open(readme_path, "w", encoding="utf-8") as f:
             f.write(new_content)
-        print(f"README updated with '{get_theme_name_for_streak(streak)}' "
-              f"theme (streak: {streak})")
+        print(f"README updated — status: '{status}', "
+              f"theme: '{get_theme_name_for_streak(streak)}' "
+              f"(streak: {streak})")
         return True
     else:
         print(f"No changes needed (streak: {streak}, "
+              f"status: {status}, "
               f"theme: {get_theme_name_for_streak(streak)})")
         return False
 
@@ -356,12 +475,22 @@ def main():
         streak = fetch_streak(username)
         print(f"Fetched streak for {username}: {streak}")
 
-    theme_name = get_theme_name_for_streak(streak)
-    theme = get_theme_for_streak(streak)
-    print(f"Selected theme: {theme_name} ({theme['label']})")
-    print(f"Tier: {theme['tier']}")
+    # Load persisted streak state, compute status, then update and save state
+    state = load_streak_state()
+    status = compute_streak_status(streak, state)
+    state = update_streak_state(streak, state)
+    save_streak_state(state)
+    print(f"Streak status: {status} "
+          f"(last_positive_streak={state.get('last_positive_streak')}, "
+          f"streak_zero_since={state.get('streak_zero_since')})")
 
-    updated = update_readme(readme_path, username, streak)
+    if streak > 0:
+        theme_name = get_theme_name_for_streak(streak)
+        theme = get_theme_for_streak(streak)
+        print(f"Selected theme: {theme_name} ({theme['label']})")
+        print(f"Tier: {theme['tier']}")
+
+    updated = update_readme(readme_path, username, streak, status, state)
 
     if updated:
         print("✅ README.md updated successfully")
