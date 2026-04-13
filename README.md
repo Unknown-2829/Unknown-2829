@@ -40,31 +40,31 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%F0%9F%92%94%20Streak%20Dropped-ff6d00?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/%F0%9F%94%95%20Busy%20with%20Real%20Life-546e7a?style=for-the-badge&labelColor=0d1117" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0d1117,50:448aff,100:82b1ff&height=4&section=header&animation=twinkling" width="70%" />
+  <img src="https://capsule-render.vercel.app/api?type=cylinder&color=0:000000,50:212121,100:424242&height=6&section=header&animation=blinking" width="70%" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
 <p align="center">
-  <img width="70%" src="https://streak-stats.demolab.com?user=Unknown-2829&hide_border=true&background=0d1117&ring=448aff&fire=82b1ff&currStreakNum=ffffff&currStreakLabel=448aff&sideNums=ffffff&sideLabels=90caf9&dates=bbdefb&stroke=1565c0&date_format=j%20M%20Y" />
+  <img width="70%" src="https://streak-stats.demolab.com?user=Unknown-2829&hide_border=true&background=000000&ring=ffffff&fire=b0b0b0&currStreakNum=ffffff&currStreakLabel=e0e0e0&sideNums=ffffff&sideLabels=bdbdbd&dates=757575&stroke=424242&date_format=j%20M%20Y" />
 </p>
 
 <!-- Activity Graph - Themed -->
 <p align="center">
-  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=90caf9&line=448aff&point=82b1ff&area_color=448aff&area=true&hide_border=true" />
+  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=000000&color=bdbdbd&line=ffffff&point=b0b0b0&area_color=ffffff&area=true&hide_border=true" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0d1117,50:448aff,100:82b1ff&height=4&section=header&animation=twinkling" width="70%" />
+  <img src="https://capsule-render.vercel.app/api?type=cylinder&color=0:000000,50:212121,100:424242&height=6&section=header&animation=blinking" width="70%" />
 </p>
 
 <p align="center">
-  <sub>⚡ *7-day streak was broken — get back in the game!*</sub>
+  <sub>😶‍🌫️ *maybe cooking something secretly...* 🤫</sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
