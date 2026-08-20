@@ -40,7 +40,7 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%F0%9F%A4%AB%20Shh...%20Working%20on%20Something%20Big-546e7a?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/%F0%9F%92%A4%20Offline%20%E2%80%94%20Taking%20a%20Break-546e7a?style=for-the-badge&labelColor=0d1117" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
