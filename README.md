@@ -40,7 +40,7 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/🏆_Streak_Tier-GROWING-00e676?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/%F0%9F%92%94%20Streak%20Dropped-ff6d00?style=for-the-badge&labelColor=0d1117" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -64,7 +64,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub>🎨 Stats theme updates dynamically based on current streak | Powered by GitHub Actions</sub>
+  <sub>⚡ *1-day streak was broken — get back in the game!*</sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
