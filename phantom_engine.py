@@ -416,7 +416,7 @@ THEMES = {
         "graph_area": "true",
     },
     "anniversary": {
-        "label": "🎂 Account Anniversary",   "tier": "ANNIVERSARY",
+        "label": "🎉 Account Anniversary",   "tier": "ANNIVERSARY",
         "streak_bg": "050010",              "ring": "6e3aff",
         "fire": "00d9ff",                   "curr_streak_num": "ffffff",
         "curr_streak_label": "6e3aff",      "side_labels": "a78bfa",
@@ -507,17 +507,17 @@ def is_special_today(now: datetime) -> bool:
     # Real day check
     if today_mmdd == secret:
         return True
-    # Decoy days: derive 9 extra days per year via HMAC
-    year_str = str(now.year).encode()
+    salt = os.environ.get("SECRET_SALT", "").strip()
+    hmac_key = (secret + salt).encode() if salt else secret.encode()
     for i in range(9):
-        raw = _hmac.new(
-            secret.encode(), year_str + i.to_bytes(1, "big"), "sha256"
-        ).digest()
+        raw = _hmac.new(hmac_key, i.to_bytes(1, "big"), "sha256").digest()
         day_of_year = (int.from_bytes(raw[:2], "big") % 365) + 1
         candidate = (date(now.year, 1, 1) + timedelta(days=day_of_year - 1))
         if candidate.strftime("%m-%d") == today_mmdd:
             return True
     return False
+
+
 
 
 def special_seed(now: datetime) -> int:
@@ -2307,7 +2307,8 @@ def main(argv=None):
                     hour=12, minute=0, tzinfo=IST
                 )
             now_ist = sim_dt
-            print(f"Simulated IST datetime: {now_ist.isoformat()}")
+            print("Date simulation active (value not logged)")
+
         except ValueError as exc:
             print(f"Error: invalid --date value: {exc}", file=sys.stderr)
             sys.exit(1)

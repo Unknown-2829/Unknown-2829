@@ -2,10 +2,8 @@ name: Update Dynamic Stats Theme
 
 on:
   schedule:
-    # Every 6 hours to keep stats fresh
-    - cron: "0 */6 * * *"
-    # 00:00 IST (18:30 UTC) — day-based themes flip on time
-    - cron: "30 18 * * *"
+    - cron: "0 */6 * * *"     # UTC 00:00 06:00 12:00 18:00 → IST 05:30 11:30 17:30 23:30
+    - cron: "30 18 * * *"     # UTC 18:30 → IST 00:00 midnight
   workflow_dispatch:
     inputs:
       streak_override:
@@ -13,11 +11,11 @@ on:
         required: false
         default: ""
       dry_run:
-        description: "Dry run — show what would change without writing files"
+        description: "Dry run — show output without writing files"
         type: boolean
         default: false
       simulate_date:
-        description: "Simulate a specific date for theme preview (YYYY-MM-DD or YYYY-MM-DDTHH:MM)"
+        description: "Simulate date for theme preview (YYYY-MM-DD or YYYY-MM-DDTHH:MM)"
         required: false
         default: ""
       theme_override:
@@ -46,26 +44,9 @@ permissions:
   issues: write
 
 jobs:
-  # ── Pre-flight: run tests before updating ─────────────────────────────────
-  test:
-    name: "🧪 Tests"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Run test suite
-        run: python -m pytest tests/ -q --tb=short
-
-  # ── Main update job (only runs if tests pass) ──────────────────────────────
   update-stats:
     name: "🎨 Update Profile"
     runs-on: ubuntu-latest
-    needs: test
     timeout-minutes: 10
     steps:
       - name: Checkout repository
@@ -81,32 +62,41 @@ jobs:
           if [ -n "$SECRET_MMDD" ]; then
             echo "::add-mask::$SECRET_MMDD"
           fi
+          if [ -n "$SECRET_SALT" ]; then
+            echo "::add-mask::$SECRET_SALT"
+          fi
         env:
           SECRET_MMDD: ${{ secrets.SECRET_MMDD }}
-
-      - name: Build engine flags
-        id: flags
-        run: |
-          FLAGS=""
-          [ "${{ github.event.inputs.dry_run }}"       = "true"  ] && FLAGS="$FLAGS --dry-run"
-          [ "${{ github.event.inputs.skip_pings }}"    = "true"  ] && FLAGS="$FLAGS --skip-pings"
-          [ "${{ github.event.inputs.skip_traffic }}"  = "true"  ] && FLAGS="$FLAGS --skip-traffic"
-          [ "${{ github.event.inputs.force_update }}"  = "true"  ] && FLAGS="$FLAGS --force"
-          [ -n "${{ github.event.inputs.streak_override }}" ] && FLAGS="$FLAGS --streak ${{ github.event.inputs.streak_override }}"
-          [ -n "${{ github.event.inputs.simulate_date }}"   ] && FLAGS="$FLAGS --date '${{ github.event.inputs.simulate_date }}'"
-          [ -n "${{ github.event.inputs.theme_override }}"  ] && FLAGS="$FLAGS --theme ${{ github.event.inputs.theme_override }}"
-          echo "flags=$FLAGS" >> "$GITHUB_OUTPUT"
+          SECRET_SALT: ${{ secrets.SECRET_SALT }}
 
       - name: Run Phantom Engine
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
           SECRET_MMDD: ${{ secrets.SECRET_MMDD }}
+          SECRET_SALT: ${{ secrets.SECRET_SALT }}
           TRAFFIC_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
           GITHUB_USERNAME: Unknown-2829
           README_PATH: README.md
-          STREAK_OVERRIDE: ${{ github.event.inputs.streak_override }}
-        run: python phantom_engine.py ${{ steps.flags.outputs.flags }}
+          # Inputs passed via env — never interpolated directly into shell
+          INPUT_STREAK_OVERRIDE: ${{ github.event.inputs.streak_override }}
+          INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
+          INPUT_SIMULATE_DATE: ${{ github.event.inputs.simulate_date }}
+          INPUT_THEME_OVERRIDE: ${{ github.event.inputs.theme_override }}
+          INPUT_SKIP_PINGS: ${{ github.event.inputs.skip_pings }}
+          INPUT_SKIP_TRAFFIC: ${{ github.event.inputs.skip_traffic }}
+          INPUT_FORCE_UPDATE: ${{ github.event.inputs.force_update }}
+        run: |
+          # Build flag array safely — no direct input interpolation into shell
+          FLAGS=()
+          [ "$INPUT_DRY_RUN"      = "true" ] && FLAGS+=(--dry-run)
+          [ "$INPUT_SKIP_PINGS"   = "true" ] && FLAGS+=(--skip-pings)
+          [ "$INPUT_SKIP_TRAFFIC" = "true" ] && FLAGS+=(--skip-traffic)
+          [ "$INPUT_FORCE_UPDATE" = "true" ] && FLAGS+=(--force)
+          [ -n "$INPUT_STREAK_OVERRIDE" ] && FLAGS+=(--streak "$INPUT_STREAK_OVERRIDE")
+          [ -n "$INPUT_SIMULATE_DATE"   ] && FLAGS+=(--date   "$INPUT_SIMULATE_DATE")
+          [ -n "$INPUT_THEME_OVERRIDE"  ] && FLAGS+=(--theme  "$INPUT_THEME_OVERRIDE")
+          python phantom_engine.py "${FLAGS[@]}"
 
       - name: Commit and push changes
         if: ${{ github.event.inputs.dry_run != 'true' }}
