@@ -104,20 +104,27 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add README.md assets/
-          git add -f .streak_state.json .project_status.json \
-                     .repo_meta.json .run_state.json .traffic_summary.json \
-                     || true
+          # Add each state file individually — skip any that don't exist yet
+          for f in .streak_state.json .project_status.json \
+                   .repo_meta.json .run_state.json .traffic_summary.json; do
+            [ -f "$f" ] && git add -f "$f" || true
+          done
           if git diff --quiet --cached; then
             echo "Nothing to commit."
             exit 0
           fi
           git commit -m "🎨 Auto-update stats theme based on streak"
+          # Push directly — concurrency lock means no remote divergence.
+          # Only pull+rebase if push is genuinely rejected.
           for i in 1 2 3; do
-            if git pull --rebase && git push; then
+            if git push; then
               exit 0
             fi
-            echo "Push attempt $i failed, retrying..."
+            echo "Push attempt $i failed, pulling and retrying..."
+            git fetch origin
+            git rebase origin/main || { git rebase --abort; }
             sleep $((i * 5))
           done
           echo "Push failed after 3 attempts" >&2
           exit 1
+
