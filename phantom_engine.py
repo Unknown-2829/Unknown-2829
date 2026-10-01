@@ -15,14 +15,18 @@ Streak Status:
 """
 
 import hmac as _hmac
-import html
 import os
 
 import re
 import sys
 import json
+class _RunResult:
+    SUCCESS = "SUCCESS"
+    DEGRADED = "DEGRADED"
+    FAILED = "FAILED"
+
+_README_INVALID_MARKERS = "INVALID_MARKERS"
 import time
-import shutil
 import tempfile
 import argparse
 import hashlib
@@ -345,7 +349,7 @@ THEMES = {
         "capsule_animation": "twinkling",   "capsule_height": "5",
         "graph_area": "true",
     },
-    "shivratri": {
+    "maha_shivratri": {
         "label": "🕉️ Har Har Mahadev",       "tier": "SHIVRATRI",
         "streak_bg": "000000",              "ring": "6a0dad",
         "fire": "9b59b6",                   "curr_streak_num": "ffffff",
@@ -481,11 +485,10 @@ def _mmdd_env() -> str | None:
     combinations like Feb 30).  Logs a warning on malformed values without
     revealing the secret value.
     """
-    import re as _re
     raw = os.environ.get("SECRET_MMDD", "").strip()
     if not raw:
         return None
-    if not _re.fullmatch(r"(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])", raw):
+    if not re.fullmatch(r"(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])", raw):
         print(
             "Warning: SECRET_MMDD is set but does not match MM-DD format — "
             "special-day theme disabled.",
@@ -594,12 +597,8 @@ def fetch_github_anniversary(username: str, token: str | None = None) -> str | N
     return None
 
 
-def _check_missing_festival_years() -> None:
-    """
-    On Dec 1, open a GitHub issue reminder if config/events_data.json lacks
-    next year's festival rows. Requires GITHUB_TOKEN + GITHUB_USERNAME.
-    """
-    now = _now_ist()
+def _check_missing_festival_years(now_ist=None) -> None:
+    now = now_ist if now_ist else _now_ist()
     if now.month != 12 or now.day != 1:
         return
     next_year = str(now.year + 1)
@@ -617,10 +616,27 @@ def _check_missing_festival_years() -> None:
         return
 
     title = f"[reminder] Add {next_year} festival dates to config/events_data.json"
+
+    # Idempotency: skip if an open reminder issue for this title already exists
+    try:
+        req = urllib.request.Request(
+            f"https://api.github.com/repos/{username}/{username}/issues?state=open&labels=reminder&per_page=50",
+            headers={"Authorization": f"token {token}", "User-Agent": _USER_AGENT,
+                     "Accept": "application/vnd.github.v3+json"},
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            existing_issues = json.loads(resp.read().decode())
+        if any(i.get("title") == title for i in existing_issues):
+            print(f"Reminder issue already open for {next_year} — skipping.")
+            return
+    except Exception as exc:
+        print(f"Warning: could not check existing reminder issues: {exc}", file=sys.stderr)
+        # Proceed to create if check fails (better to create a dup than miss it entirely)
+
     body = (
-        f"The following festivals are missing {next_year} dates in `config/events_data.json`:\n\n"
-        + "\n".join(f"- `{k}`" for k in missing)
-        + "\n\nPlease verify against an authoritative panchang / Islamic calendar "
+        f"The following festivals are missing {next_year} dates in `config/events_data.json`:\\n\\n"
+        + "\\n".join(f"- `{k}`" for k in missing)
+        + "\\n\\nPlease verify against an authoritative panchang / Islamic calendar "
           "and update before 31 Dec."
     )
     try:
@@ -753,7 +769,7 @@ _USER_AGENT = (
     "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 )
 
-_BACKOFF = [5, 15, 30]   # seconds between attempts
+_BACKOFF = [5, 15]   # seconds between attempts
 _TIMEOUT = 30            # seconds per request
 _MIN_SIZE = 2 * 1024     # 2 KB
 _MAX_SIZE = 500 * 1024   # 500 KB
@@ -815,6 +831,11 @@ def cache_graph(url: str, dest: str, timeout: int = _TIMEOUT) -> bool:
                 f"  cache_graph attempt {attempt + 1} failed: {exc}",
                 file=sys.stderr,
             )
+            # Don't retry permanent client errors
+            exc_str = str(exc)
+            if any(f"HTTP {code}" in exc_str for code in ("400", "401", "403", "404")):
+                print(f"  Permanent error — not retrying.", file=sys.stderr)
+                break
             if attempt < len(_BACKOFF) - 1:
                 print(f"  Retrying in {backoff} s…", file=sys.stderr)
                 time.sleep(backoff)
@@ -870,14 +891,32 @@ def load_streak_state() -> dict:
     return {"last_positive_streak": None, "streak_zero_since": None}
 
 
+def _atomic_write_json(path: str, data: dict) -> None:
+    """Write JSON atomically via temp file + os.replace."""
+    parent = os.path.dirname(path)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+    tmp_fd, tmp_path = tempfile.mkstemp(
+        dir=parent or ".", suffix=".tmp"
+    )
+    try:
+        with os.fdopen(tmp_fd, "w", encoding="utf-8") as fh:
+            json.dump(data, fh, indent=2)
+            fh.write("\n")
+        os.replace(tmp_path, path)
+    except Exception:
+        try:
+            os.unlink(tmp_path)
+        except OSError:
+            pass
+        raise
+
 def save_streak_state(state: dict) -> None:
     """Persist the streak state to disk."""
     parent = os.path.dirname(STATE_FILE)
     if parent:
         os.makedirs(parent, exist_ok=True)
-    with open(STATE_FILE, "w", encoding="utf-8") as f:
-        json.dump(state, f, indent=2)
-        f.write("\n")
+    _atomic_write_json(STATE_FILE, state)
 
 
 def _now_ist() -> datetime:
@@ -885,7 +924,7 @@ def _now_ist() -> datetime:
     return datetime.now(IST)
 
 
-def compute_streak_status(streak: int, state: dict) -> str:
+def compute_streak_status(streak: int, state: dict, now_ist=None) -> str:
     """
     Determine the display status for the current streak.
 
@@ -910,7 +949,7 @@ def compute_streak_status(streak: int, state: dict) -> str:
     return "broken"
 
 
-def update_streak_state(streak: int, state: dict) -> dict:
+def update_streak_state(streak: int, state: dict, now_ist=None) -> dict:
     """Return an updated state dict based on the current streak value."""
     today = _now_ist().date().isoformat()
     if streak > 0:
@@ -935,7 +974,7 @@ def _graphql_streak(username: str, token: str) -> int | None:
     """
     today_ist = _now_ist().date()
     # GitHub contribution calendar covers exactly 1 year — 365 days max
-    from_date = (today_ist - timedelta(days=365)).isoformat()
+    from_date = (today_ist - timedelta(days=364)).isoformat()
     to_date = today_ist.isoformat()
 
     query = """
@@ -1165,7 +1204,7 @@ def fetch_traffic(username: str, token: str) -> dict | None:
         if not items:
             return 0, 0
         for row in items:
-            if row.get("timestamp", "").startswith(today):
+            if _utc_ts_to_ist_date(row.get("timestamp", "")) == today:
                 return row.get(count_key, 0), row.get(unique_key, 0)
         # GitHub reports days in UTC midnight blocks — take latest if today not found
         if items:
@@ -1207,6 +1246,15 @@ def fetch_traffic(username: str, token: str) -> dict | None:
         "top_paths": top_paths,
     }
 
+
+def _utc_ts_to_ist_date(ts: str) -> str:
+    """Convert a GitHub UTC timestamp string to IST date string YYYY-MM-DD."""
+    try:
+        from datetime import datetime
+        dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
+        return dt.astimezone(IST).strftime("%Y-%m-%d")
+    except Exception:
+        return ts[:10]
 
 def _read_file_from_branch(
     owner: str, repo: str, path: str, branch: str, token: str
@@ -1327,7 +1375,7 @@ def _roll_old_rows(rows: list[dict]) -> list[dict]:
     If rows exceed _MAX_DAILY_ROWS, roll the oldest into monthly totals.
     Monthly summary rows have 'month': 'YYYY-MM' instead of 'date': 'YYYY-MM-DD'.
     """
-    daily = [r for r in rows if "date" in r]
+    daily = sorted([r for r in rows if "date" in r], key=lambda r: r["date"])
     monthly = [r for r in rows if "month" in r]
 
     if len(daily) <= _MAX_DAILY_ROWS:
@@ -1372,7 +1420,9 @@ def append_traffic_to_data_branch(
         return False
 
     repo = username
-    _ensure_data_branch(username, repo, token)
+    if not _ensure_data_branch(username, repo, token):
+        print("  Traffic: data branch unavailable - skipping append.", file=sys.stderr)
+        return False
 
     content_str, sha = _read_file_from_branch(
         username, repo, _TRAFFIC_HISTORY_PATH, _DATA_BRANCH, token
@@ -1430,6 +1480,10 @@ _ANALYTICS_START = "<!-- ANALYTICS:START -->"
 _ANALYTICS_END   = "<!-- ANALYTICS:END -->"
 
 
+def _md_escape(s: str) -> str:
+    """Escape Markdown table-sensitive characters."""
+    return str(s).replace("\\", "\\\\").replace("|", "\\|").replace("`", "'")
+
 def build_analytics_block(summary: dict) -> str:
     """
     Generate the collapsed analytics <details> block from the traffic summary.
@@ -1465,14 +1519,14 @@ def build_analytics_block(summary: dict) -> str:
     if refs:
         ref_rows = "\n| Referrer | Views | Unique |\n|---|---|---|\n"
         for r in refs[:5]:
-            ref_rows += f"| `{r.get('ref','?')}` | {r.get('count',0)} | {r.get('uniques',0)} |\n"
+            ref_rows += f"| `{_md_escape(r.get('ref','?'))}` | {r.get('count',0)} | {r.get('uniques',0)} |\n"
 
     # Top paths table
     path_rows = ""
     if paths:
         path_rows = "\n| Path | Views | Unique |\n|---|---|---|\n"
         for p in paths[:5]:
-            path_rows += f"| `{p.get('path','?')}` | {p.get('count',0)} | {p.get('uniques',0)} |\n"
+            path_rows += f"| `{_md_escape(p.get('path','?'))}` | {p.get('count',0)} | {p.get('uniques',0)} |\n"
 
     updated_line = f"\n<sub><i>Data from GitHub Traffic API · Last updated: {updated}</i></sub>" if updated else ""
 
@@ -1578,7 +1632,7 @@ def pick_line(state: str, now_ist: datetime, theme_name: str = "") -> str:
     elif theme_name in ("new_year", "holi", "diwali", "halloween", "christmas",
                         "independence_day", "republic_day", "valentine", "pi_day",
                         "star_wars", "teachers_day", "gandhi", "makar_sankranti",
-                        "eid", "shivratri", "raksha_bandhan", "janmashtami",
+                        "eid", "maha_shivratri", "raksha_bandhan", "janmashtami",
                         "ganesh_chaturthi", "navratri", "dussehra", "anniversary"):
         group = "festival"
     elif theme_name == "sunday":
@@ -1650,9 +1704,9 @@ def ping_url(url: str) -> tuple[str, float]:
     for attempt in range(_PING_RETRIES):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT}, method="GET")
-            t0 = time.time()
+            t0 = time.monotonic()
             with urllib.request.urlopen(req, timeout=_PING_TIMEOUT) as resp:
-                elapsed = time.time() - t0
+                elapsed = time.monotonic() - t0
                 _ = resp.read(256)   # consume a few bytes
                 if elapsed >= 5:
                     return "slow", elapsed
@@ -1769,11 +1823,6 @@ _PER_PROJECT_MAP = {
     "Phantom-terminal":      (None,            "Phantom-terminal"),
     "llm-prompt-engineering":(None,            "llm-prompt-engineering"),
 }
-
-_LIVE_NOTE = (
-    '<sup>&emsp;(🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">'
-    'auto-updated every ~6h</a>)</sup>'
-)
 
 
 def _build_per_project_block(
@@ -1894,8 +1943,7 @@ def fetch_repo_meta(owner: str, repo: str, token: str | None = None) -> dict:
         )
         with urllib.request.urlopen(req, timeout=10) as resp:
             link = resp.headers.get("Link", "")
-            import re as _re
-            m = _re.search(r'page=(\d+)>; rel="last"', link)
+            m = re.search(r'page=(\d+)>; rel="last"', link)
             if m:
                 # Paginated: last page number = total commits (per_page=1)
                 result["commits"] = int(m.group(1))
@@ -1928,8 +1976,15 @@ def get_all_repo_meta(token: str | None = None, dry_run: bool = False) -> dict:
     for repo, owner in tracked.items():
         fresh = fetch_repo_meta(owner, repo, token)
         if fresh:
-            cache[repo] = fresh
-            print(f"  repo meta {repo}: release={fresh.get('release')} commits={fresh.get('commits')}")
+            cached_entry = cache.get(repo, {})
+            cache[repo] = {**cached_entry, **fresh}
+            print(f"  repo meta {repo}: release={cache[repo].get('release')} commits={cache[repo].get('commits')}")
+
+    # Prune stale keys not in canonical tracked set
+    stale = [k for k in cache if k not in tracked]
+    for k in stale:
+        print(f"  Pruning stale repo meta key: {k!r}")
+        del cache[k]
 
     _save_repo_meta(cache)
     return cache
@@ -1937,7 +1992,7 @@ def get_all_repo_meta(token: str | None = None, dry_run: bool = False) -> dict:
 
 # ── Stage 4: Recent activity ───────────────────────────────────────────────────
 
-def fetch_recent_activity(username: str, token: str | None = None, n: int = 5) -> list[dict]:
+def fetch_recent_activity(username: str, token: str | None = None, n: int = 5, now_utc=None) -> list[dict]:
     """
     Returns last n non-bot public events from owned repos.
     Each item: {'type': str, 'repo': str, 'when': str (relative), 'detail': str}
@@ -1957,7 +2012,7 @@ def fetch_recent_activity(username: str, token: str | None = None, n: int = 5) -
         print(f"  fetch_recent_activity: {exc}", file=sys.stderr)
         return []
 
-    now = datetime.now(timezone.utc)
+    now = now_utc if now_utc else datetime.now(timezone.utc)
     results = []
     for ev in events:
         if len(results) >= n:
@@ -2146,7 +2201,7 @@ def write_job_summary(items: list[tuple[str, str]], now_ist: datetime) -> None:
     ts = now_ist.strftime("%d %b %Y, %H:%M IST")
     lines = [f"## 📊 Profile Updater — {ts}\n\n", "| Item | Result |\n", "|---|---|\n"]
     for label, value in items:
-        lines.append(f"| {label} | {value} |\n")
+        lines.append(f"| {_md_escape(label)} | {_md_escape(value)} |\n")
     try:
         with open(summary_file, "a", encoding="utf-8") as f:
             f.writelines(lines)
@@ -2159,6 +2214,7 @@ def write_job_summary(items: list[tuple[str, str]], now_ist: datetime) -> None:
 def generate_stats_section(
     username: str,
     streak: int,
+    theme_is_forced: bool = False,
     status: str = "active",
     state: dict | None = None,
     now_ist: datetime | None = None,
@@ -2214,7 +2270,6 @@ def generate_stats_section(
     else:  # active — use pick_theme for full festival/event/Sunday/special support
         picked_name, theme, event_note = pick_theme(now_ist, streak, state, username)
         badge_color = theme["badge_color"]
-        tier_display = theme["tier"].replace(" ", "%20")
         badge_label = urllib.parse.quote(f"{theme['label']}", safe="_-")
         if event_note:
             # Festival / Sunday / special: show the event label as the note
@@ -2286,8 +2341,7 @@ def generate_stats_section(
     theme_name_for_line = locals().get("picked_name", "")
     footer_line = pick_line(status, now_ist, theme_name_for_line)
 
-    live_html = build_live_blocks(project_statuses, repo_meta, activity)
-    live_block_str = f"\n{live_html}\n" if live_html else ""
+    live_block_str = ""
 
     tagline_block = ""
     if footer_line:
@@ -2471,6 +2525,12 @@ def generate_commit_message(
 
 
 
+
+import re as _re
+_TS_PATTERN = _re.compile(r'Last refresh: [\d\w :,]+IST')
+
+def _strip_volatile(text: str) -> str:
+    return _TS_PATTERN.sub("Last refresh: NORMALIZED", text)
 
 def update_readme(
     readme_path: str,
@@ -2695,6 +2755,7 @@ def main(argv=None):
             )
             # ── Failure tracking (must happen before exit) ────────────────────
             run_state = _load_run_state()
+            run_result = _RunResult.SUCCESS
             token = (
                 os.environ.get("GH_STATS_TOKEN", "").strip()
                 or os.environ.get("GITHUB_TOKEN", "").strip()
@@ -2759,21 +2820,22 @@ def main(argv=None):
         )
         os.makedirs(ASSETS_DIR, exist_ok=True)
         print("Caching activity graph…")
-        cache_graph(graph_url, os.path.join(ASSETS_DIR, "activity-graph.svg"))
+        graph_refreshed = cache_graph(graph_url, os.path.join(ASSETS_DIR, "activity-graph.svg"))
         print("Caching streak card…")
-        cache_graph(streak_url, os.path.join(ASSETS_DIR, "streak-card.svg"))
+        streak_refreshed = cache_graph(streak_url, os.path.join(ASSETS_DIR, "streak-card.svg"))
 
     # ── Stage 4: Run state (failure tracking) ────────────────────────────────
     run_state = _load_run_state()
+    run_result = _RunResult.SUCCESS
     token = (
         os.environ.get("GH_STATS_TOKEN", "").strip()
         or os.environ.get("GITHUB_TOKEN", "").strip()
     )
 
-    # ── Stage 4: Project status pings ────────────────────────────────────────
+    # Stage 4: Project status pings
     if args.skip_pings:
-        print("Skipping project status pings (--skip-pings)")
-        project_statuses = {}
+        print("Skipping project status pings (--skip-pings) — using last-known status")
+        project_statuses = {k: v.get("status", "up") for k, v in _load_project_status().items()}
     else:
         print("Checking project statuses…")
         project_statuses = get_project_statuses(dry_run=args.dry_run)
@@ -2784,6 +2846,9 @@ def main(argv=None):
 
     # ── Stage 4: Recent activity ─────────────────────────────────────────────
     print("Fetching recent activity…")
+    graph_refreshed = False
+    streak_refreshed = False
+
     if args.dry_run:
         activity = []
     else:
@@ -2794,9 +2859,7 @@ def main(argv=None):
             print(f"  [{ev['when']}] {ev['repo']}: {ev['detail']}")
 
     # ── Update state (skip in dry-run) ───────────────────────────────────────
-    if not args.dry_run:
-        state = update_streak_state(streak, state)
-        save_streak_state(state)
+    state = update_streak_state(streak, state, now_ist=now_ist)
 
     print(
         f"Streak status: {status} "
@@ -2821,11 +2884,14 @@ def main(argv=None):
 
 
     if updated:
+        graph_refreshed = False
+    streak_refreshed = False
+
+    if updated:
         if args.dry_run:
             print("✅ Dry run complete — no files modified")
         else:
             print("✅ README.md updated successfully")
-            # Stage 4: success — reset failure counter, close any open issue
             run_state = record_run_success(run_state)
             close_failure_issue(run_state, token, username)
     else:
@@ -2840,8 +2906,8 @@ def main(argv=None):
     summary_items = [
         ("Streak", f"{streak} days ({status})" if streak is not None else "fetch failed"),
         ("Theme", picked_name if streak and streak > 0 else status),
-        ("Graph cache", "✅ fresh" if os.path.exists(os.path.join(ASSETS_DIR, "activity-graph.svg")) else "⚠️ missing"),
-        ("Streak card cache", "✅ fresh" if os.path.exists(os.path.join(ASSETS_DIR, "streak-card.svg")) else "⚠️ missing"),
+        ("Graph cache", "✅ refreshed" if graph_refreshed else ("↩️ existing" if os.path.exists(os.path.join(ASSETS_DIR, "activity-graph.svg")) else "⚠️ missing")),
+        ("Streak card cache", "✅ refreshed" if streak_refreshed else ("↩️ existing" if os.path.exists(os.path.join(ASSETS_DIR, "streak-card.svg")) else "⚠️ missing")),
     ]
     for k, v in project_statuses.items():
         icon = {"up": "✅", "slow": "⚡", "down": "❌"}.get(v, "❓")
