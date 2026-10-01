@@ -1,2 +1,47 @@
+# ── Dev-only (local development — never commit to profile repo) ────────────────
+tests/
+README-DEV.md
+.github/workflows/ci-tests.yml
+
+# ── Python ─────────────────────────────────────────────────────────────────────
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+
+# ── Testing ────────────────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# ── Temp / atomic write files ──────────────────────────────────────────────────
+*.tmp
+*.bak
+*.orig
+
+# ── Local dev secrets / env ────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── OS artifacts ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor artifacts ───────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── CI-managed state files (only committed by github-actions bot via git add -f) ──
+# Developers: do NOT commit these. CI creates and updates them automatically.
+.streak_state.json
+.project_status.json
+.repo_meta.json
+.run_state.json
+.traffic_summary.json

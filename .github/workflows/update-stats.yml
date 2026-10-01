@@ -2,21 +2,71 @@ name: Update Dynamic Stats Theme
 
 on:
   schedule:
-    # Run every 6 hours to keep stats fresh
+    # Every 6 hours to keep stats fresh
     - cron: "0 */6 * * *"
+    # 00:00 IST (18:30 UTC) — day-based themes flip on time
+    - cron: "30 18 * * *"
   workflow_dispatch:
     inputs:
       streak_override:
-        description: "Override streak value for testing (leave empty for auto-detect)"
+        description: "Override streak value (leave empty for auto-detect)"
         required: false
         default: ""
+      dry_run:
+        description: "Dry run — show what would change without writing files"
+        type: boolean
+        default: false
+      simulate_date:
+        description: "Simulate a specific date for theme preview (YYYY-MM-DD or YYYY-MM-DDTHH:MM)"
+        required: false
+        default: ""
+      theme_override:
+        description: "Force a specific theme by name (e.g. diwali, blue, christmas)"
+        required: false
+        default: ""
+      skip_pings:
+        description: "Skip project status URL pings"
+        type: boolean
+        default: false
+      skip_traffic:
+        description: "Skip GitHub Traffic API fetch"
+        type: boolean
+        default: false
+      force_update:
+        description: "Force-write README even if content is unchanged"
+        type: boolean
+        default: false
+
+concurrency:
+  group: profile-update
+  cancel-in-progress: false
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
-  update-stats:
+  # ── Pre-flight: run tests before updating ─────────────────────────────────
+  test:
+    name: "🧪 Tests"
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run test suite
+        run: python -m pytest tests/ -q --tb=short
+
+  # ── Main update job (only runs if tests pass) ──────────────────────────────
+  update-stats:
+    name: "🎨 Update Profile"
+    runs-on: ubuntu-latest
+    needs: test
+    timeout-minutes: 10
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,18 +76,52 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Update stats theme
+      - name: Mask secret before any output
+        run: |
+          if [ -n "$SECRET_MMDD" ]; then
+            echo "::add-mask::$SECRET_MMDD"
+          fi
+        env:
+          SECRET_MMDD: ${{ secrets.SECRET_MMDD }}
+
+      - name: Build engine flags
+        id: flags
+        run: |
+          FLAGS=""
+          [ "${{ github.event.inputs.dry_run }}"       = "true"  ] && FLAGS="$FLAGS --dry-run"
+          [ "${{ github.event.inputs.skip_pings }}"    = "true"  ] && FLAGS="$FLAGS --skip-pings"
+          [ "${{ github.event.inputs.skip_traffic }}"  = "true"  ] && FLAGS="$FLAGS --skip-traffic"
+          [ "${{ github.event.inputs.force_update }}"  = "true"  ] && FLAGS="$FLAGS --force"
+          [ -n "${{ github.event.inputs.streak_override }}" ] && FLAGS="$FLAGS --streak ${{ github.event.inputs.streak_override }}"
+          [ -n "${{ github.event.inputs.simulate_date }}"   ] && FLAGS="$FLAGS --date '${{ github.event.inputs.simulate_date }}'"
+          [ -n "${{ github.event.inputs.theme_override }}"  ] && FLAGS="$FLAGS --theme ${{ github.event.inputs.theme_override }}"
+          echo "flags=$FLAGS" >> "$GITHUB_OUTPUT"
+
+      - name: Run Phantom Engine
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+          SECRET_MMDD: ${{ secrets.SECRET_MMDD }}
+          TRAFFIC_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
           GITHUB_USERNAME: Unknown-2829
           README_PATH: README.md
           STREAK_OVERRIDE: ${{ github.event.inputs.streak_override }}
-        run: python update_stats.py
+        run: python phantom_engine.py ${{ steps.flags.outputs.flags }}
 
       - name: Commit and push changes
+        if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add README.md .streak_state.json
-          git diff --quiet --cached || git commit -m "🎨 Auto-update stats theme based on streak"
-          git push
+          git add README.md assets/
+          git add -f .streak_state.json .project_status.json \
+                     .repo_meta.json .run_state.json .traffic_summary.json \
+                     || true
+          git diff --quiet --cached || {
+            git commit -m "🎨 Auto-update stats theme based on streak"
+            for i in 1 2 3; do
+              git pull --rebase && git push && break
+              echo "Push attempt $i failed, retrying..."
+              sleep 5
+            done
+          }

@@ -1,0 +1,128 @@
+{
+  "_sources": {
+    "hindu_festivals": "timeanddate.com + publicholidays.in lunisolar panchang calculations",
+    "eid": "Wikipedia Islamic calendar projections (moon-sighting dependent, ±1 day)",
+    "shivratri": "timeanddate.com Phalguna Krishna Chaturdashi",
+    "note": "All dates are for India (IST). Lunisolar dates can vary by 1 day by region."
+  },
+  "festivals": {
+    "holi": {
+      "label": "Happy Holi 🎨",
+      "note": "Holi — colors everywhere",
+      "dates": {
+        "2026": "03-04",
+        "2027": "03-23",
+        "2028": "03-11",
+        "2029": "03-01",
+        "2030": "03-20",
+        "2031": "03-09",
+        "2032": "02-26"
+      }
+    },
+    "maha_shivratri": {
+      "label": "Har Har Mahadev 🕉️",
+      "note": "Maha Shivratri — the great night of Shiva",
+      "dates": {
+        "2026": "02-15",
+        "2027": "03-06",
+        "2028": "02-23",
+        "2029": "02-11",
+        "2030": "03-02",
+        "2031": "02-20",
+        "2032": "03-08"
+      }
+    },
+    "raksha_bandhan": {
+      "label": "Raksha Bandhan 🪢",
+      "note": "Raksha Bandhan — bonds of love",
+      "dates": {
+        "2026": "08-28",
+        "2027": "08-17",
+        "2028": "08-05",
+        "2029": "08-23",
+        "2030": "08-13",
+        "2031": "08-02",
+        "2032": "08-21"
+      }
+    },
+    "janmashtami": {
+      "label": "Jai Shri Krishna 🦚",
+      "note": "Janmashtami — birth of Lord Krishna",
+      "dates": {
+        "2026": "09-04",
+        "2027": "08-25",
+        "2028": "08-13",
+        "2029": "09-01",
+        "2030": "08-21",
+        "2031": "08-10",
+        "2032": "08-28"
+      }
+    },
+    "ganesh_chaturthi": {
+      "label": "Ganpati Bappa Morya 🐘",
+      "note": "Ganesh Chaturthi — Bappa is here",
+      "dates": {
+        "2026": "09-14",
+        "2027": "09-04",
+        "2028": "08-23",
+        "2029": "09-11",
+        "2030": "09-01",
+        "2031": "09-20",
+        "2032": "09-08"
+      }
+    },
+    "navratri": {
+      "label": "Navratri 🪔",
+      "note": "Navratri — nine nights of the goddess",
+      "dates": {
+        "2026": "10-11",
+        "2027": "09-30",
+        "2028": "09-19",
+        "2029": "10-08",
+        "2030": "09-27",
+        "2031": "09-17",
+        "2032": "10-05"
+      }
+    },
+    "dussehra": {
+      "label": "Dussehra 🏹",
+      "note": "Dussehra — victory of good over evil",
+      "dates": {
+        "2026": "10-20",
+        "2027": "10-09",
+        "2028": "09-27",
+        "2029": "10-16",
+        "2030": "10-06",
+        "2031": "10-25",
+        "2032": "10-13"
+      }
+    },
+    "diwali": {
+      "label": "Happy Diwali 🪔✨",
+      "note": "Diwali — festival of lights",
+      "dates": {
+        "2026": "11-08",
+        "2027": "10-29",
+        "2028": "10-17",
+        "2029": "11-05",
+        "2030": "10-26",
+        "2031": "11-14",
+        "2032": "11-02"
+      }
+    },
+    "eid": {
+      "label": "Eid Mubarak 🌙",
+      "note": "Eid al-Fitr — end of Ramadan",
+      "dates": {
+        "2026": "03-20",
+        "2027": "03-10",
+        "2028": "02-27",
+        "2029": "02-15",
+        "2030": "02-05",
+        "2031": "01-25",
+        "2032": "01-14"
+      }
+    }
+  },
+  "_reminder_issued_year": null
+}

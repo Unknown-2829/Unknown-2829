@@ -3,7 +3,7 @@
 <p align="center">
   <a href="https://ayushman.live/"><img src="https://img.shields.io/badge/Portfolio-ayushman.live-6e3aff?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
   <a href="https://t.me/unknownlll2829"><img src="https://img.shields.io/badge/Telegram-@unknownlll2829-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" /></a>
-  <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg"><img src="https://img.shields.io/badge/Spotify-Artist-1DB954?style=for-the-badge&logo=spotify&logoColor=white" /></a>
+  <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6"><img src="https://img.shields.io/badge/Spotify-Artist-1DB954?style=for-the-badge&logo=spotify&logoColor=white" /></a>
   <img src="https://img.shields.io/badge/Status-ACTIVE-00ff00?style=for-the-badge" />
 </p>
 
@@ -40,7 +40,7 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%F0%9F%8C%91%20Not%20Growing...%20Or%20Am%20I%3F-546e7a?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/%F0%9F%94%95%20Busy%20with%20Real%20Life-546e7a?style=for-the-badge&labelColor=0d1117" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -50,12 +50,12 @@ Primary Domains:
 
 <!-- Streak Stats - Dynamically Themed -->
 <p align="center">
-  <img width="70%" src="https://streak-stats.demolab.com?user=Unknown-2829&hide_border=true&background=000000&ring=ffffff&fire=b0b0b0&currStreakNum=ffffff&currStreakLabel=e0e0e0&sideNums=ffffff&sideLabels=bdbdbd&dates=757575&stroke=424242&date_format=j%20M%20Y" />
+  <img width="70%" src="https://raw.githubusercontent.com/Unknown-2829/Unknown-2829/main/assets/streak-card.svg" alt="GitHub streak stats" />
 </p>
 
 <!-- Activity Graph - Themed -->
 <p align="center">
-  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=000000&color=bdbdbd&line=ffffff&point=b0b0b0&area_color=ffffff&area=true&hide_border=true" />
+  <img width="95%" src="https://raw.githubusercontent.com/Unknown-2829/Unknown-2829/main/assets/activity-graph.svg" alt="GitHub activity graph" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -64,9 +64,12 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub>😶‍🌫️ *maybe cooking something secretly...* 🤫</sub>
+  <sub>😶‍🌫️ <i>maybe cooking something secretly...</i> 🤫</sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
+
+<!-- ANALYTICS:START -->
+<!-- ANALYTICS:END -->
 
 ---
 
@@ -122,8 +125,10 @@ Features:
 - Hardware-locked licensing for added security
 
 How to Get Access:
-- Download the app from the release link
+- Download the app from the link below
 - To get an activation key, contact me directly or join the Telegram channel
+
+[📥 Download Phantom Vault →](https://unk-extention.unknowns.app/) | [📡 Get Activation Key →](https://t.me/+JMGc_8bWeWQ4ZmU1)
 
 </details>
 
@@ -131,7 +136,7 @@ How to Get Access:
 <summary><b>🆔 PHANTOM ID — Test Identity Generator</b></summary>
 <br>
 
-> Generate realistic test identities for 25+ countries. Useful for testing, development, and data generation purposes.
+> Generate realistic test identities for 25+ countries. Useful for testing, development, and data generation purposes. **Available on ChatGPT.**
 
 ```
 🧑 Personal Details   → Name, DOB, Physical Traits
@@ -143,6 +148,8 @@ How to Get Access:
 
 **Supported Regions:**  
 🇺🇸 🇬🇧 🇩🇪 🇫🇷 🇮🇹 🇪🇸 🇨🇦 🇦🇺 🇯🇵 🇰🇷 🇨🇳 🇮🇳 🇧🇷 🇲🇽 🇷🇺 🇮🇩 🇵🇰 🇳🇬 🇧🇩 🇵🇭 🇻🇳 🇹🇷 🇮🇷 🇹🇭 🇪🇬 [+more]
+
+[🤖 Telegram Bot →](https://t.me/phantom_id_bot) | [🌐 Web App →](https://phantom-id.onrender.com) | [🤖 Try on ChatGPT →](https://chatgpt.com/g/g-69c92c29e934819182d9c495d76e29cd-phantom-id-fake-identity-generator)
 
 > ⚠️ **NOTE:** Generated data is for testing and research purposes only.
 
@@ -162,7 +169,14 @@ Research Areas:
 - Adversarial prompt research
 - Ethical AI limitations analysis
 
-Repository: Public on GitHub — 56 commits of documented research.  
+Models Tested:
+```
+ChatGPT-5 / GPT-4o / o1
+Gemini 3 / Gemini 3 Thinking / Gemini 3 Pro
+Gemini 2.5 Flash & Pro
+```
+
+Repository: Public on GitHub — 62 commits of documented research.  
 Purpose: Understanding AI capabilities and limitations to build better systems.
 
 [View on GitHub →](https://github.com/Unknown-2829/llm-prompt-engineering)
@@ -173,7 +187,7 @@ Purpose: Understanding AI capabilities and limitations to build better systems.
 <summary><b>🎬 PHANTOM TERMINAL — Cinematic Shell Startup</b></summary>
 <br>
 
-> A cinematic startup animation for Windows Terminal & PowerShell. Features multi-color matrix rain, dual themes, glitch effects, and a custom dashboard — all with a one-line install.
+> A cinematic startup animation for your terminal — cross-platform across **Windows, Linux, macOS, and Termux (Android)**. Features multi-color matrix rain, dual themes, glitch effects, and a custom dashboard — all with a one-line install. Current version: **v3.6.1**
 
 Features:
 - 🎬 Multi-stage cinematic startup animation
@@ -183,26 +197,40 @@ Features:
 - 📊 Dashboard with user info, uptime & random quotes
 - 🔄 Auto-update with silent downloads
 - ⚙️ Persistent config — settings preserved on reinstall
+- 📱 Mobile optimized — Termux-specific performance tweaks
+- 🥚 Easter eggs — hidden commands with achievement tracking
 
 Quick Install:
 ```powershell
 irm https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/install.ps1 | iex
 ```
+```bash
+curl -fsSL https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/install.sh | bash
+```
+
+[View on GitHub →](https://github.com/Unknown-2829/Phanton-terminal)
 
 </details>
 
 <details>
-<summary><b>📧 TEMP MAIL SERVICE — Disposable Email</b></summary>
+<summary><b>📧 PHANTOM MAIL — Disposable & Permanent Email</b></summary>
 <br>
 
-> A temporary email service built on Cloudflare Pages with Email Workers. Generate instant disposable email addresses with 1-hour expiration — no signup, fully private.
+> A disposable email service built on Cloudflare Pages with Email Workers. Generate instant throwaway addresses — no signup, fully private. **Available on ChatGPT.**
 
-Features:
+Free Plan:
 - ✨ Instant email generation — no signup needed
 - 📬 Real-time inbox with auto-refresh every 5 seconds
 - 📋 One-click copy to clipboard
 - ⏱️ 1-hour auto-expiration
-- 🔒 Private & secure — powered by Cloudflare KV
+- 🔒 Private & secure — no logs, no trackers
+
+Premium Plan ($3/mo or $20/yr):
+- 💾 8 permanent addresses — never expire
+- 🎯 Custom usernames — choose your own handle
+- 📅 30-day email retention
+- 📨 Email forwarding to your real inbox
+- 🔌 Developer API — 10,000 requests/day
 
 Architecture:
 ```
@@ -210,6 +238,8 @@ User Browser → Cloudflare Pages (Frontend + API)
              → Cloudflare KV (Storage)
              → Cloudflare Email Worker (Receives emails)
 ```
+
+[🌐 Try Phantom Mail →](https://mail.unknowns.app) | [View on GitHub →](https://github.com/Unknown-2829/Phantom-mail) | [🤖 Try on ChatGPT →](https://chatgpt.com/g/g-69c8f9437d088191b67ec75c1f67f2e4-phantom-mail-gpt)
 
 </details>
 
@@ -285,7 +315,7 @@ Recent Activity:
 
 Community: Small but dedicated. Quality over quantity.
 
-Channel: [Shadow Vault](https://t.me/unknownlll2829) | Discussion: [Group](https://t.me/unknownlll2829)
+Channel: [Shadow Vault](https://t.me/+JMGc_8bWeWQ4ZmU1) | Discussion: [Group](https://t.me/unknownlll2829)
 
 ---
 
@@ -294,7 +324,7 @@ Channel: [Shadow Vault](https://t.me/unknownlll2829) | Discussion: [Group](https
 Music is another creative outlet — a different way to express ideas and emotions.
 
 <p align="center">
-  <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6?si=XbIDtnMuT6uNvg6xLqh7Zg">
+  <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6">
     <img src="https://img.shields.io/badge/Listen%20on-Spotify-1DB954?style=for-the-badge&logo=spotify&logoColor=white" />
   </a>
 </p>
