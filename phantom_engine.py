@@ -1803,8 +1803,8 @@ _PER_PROJECT_MAP = {
 }
 
 _LIVE_NOTE = (
-    '<sub>🔴 <i>Live — auto-updated every ~6h via '
-    '<a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>'
+    '<sup>&emsp;(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">'
+    'auto-updated every ~6h</a>)</sup>'
 )
 
 
@@ -1813,7 +1813,9 @@ def _build_per_project_block(
     project_statuses: dict,
     repo_meta: dict,
 ) -> str:
-    """Build the badge HTML for a single LIVE-PROJECT marker."""
+    """Build the badge HTML for a single LIVE-PROJECT marker.
+    Format: badge(s) then note in parentheses on same line after a gap.
+    """
     svc_key, repo_key = _PER_PROJECT_MAP.get(key, (None, None))
     parts = []
 
@@ -1838,7 +1840,8 @@ def _build_per_project_block(
 
     if not parts:
         return ""
-    return " &nbsp; ".join(parts) + "\n\n" + _LIVE_NOTE
+    # Badges then note inline
+    return " &nbsp; ".join(parts) + " " + _LIVE_NOTE
 
 
 def inject_per_project_live(
@@ -2316,11 +2319,7 @@ def generate_stats_section(
 
     section = f"""
 <p align="center">
-  <sub><b>// CURRENT STATUS</b></sub>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/{badge_label}-{badge_color}?style=for-the-badge&labelColor=0d1117" alt="Profile Status Badge" />
+  <sub><b>// CURRENT STATUS</b></sub> &ensp; <img src="https://img.shields.io/badge/{badge_label}-{badge_color}?style=for-the-badge&labelColor=0d1117" alt="Profile Status Badge" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->

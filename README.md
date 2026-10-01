@@ -40,7 +40,7 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=0d1117" alt="Profile Status Badge" />
+  <sub><b>// CURRENT STATUS</b></sub> &ensp; <img src="https://img.shields.io/badge/%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=0d1117" alt="Profile Status Badge" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -92,23 +92,20 @@ Primary Domains:
 <summary><b>🤖 DEXTER AI — Multi-Model AI Chatbot</b></summary>
 <br>
 
-> A multi-model AI chatbot with dual personality modes, real-time conversation memory, and no restrictive content filters. Built for users who want straightforward, unfiltered AI responses.
+> A multi-model AI chatbot with dual personality modes, real-time conversation memory, and no restrictive content filters — built for users who want straightforward, unfiltered AI responses.
 
-Technical Specifications:
-- Multi-model LLM orchestration
-- Dual-mode personality engine
-- Advanced prompt control system
-- Real-time conversation memory
-- Zero-logging architecture
-- 99%+ uptime over last 30 days
+**Specifications:**
+- Multi-model LLM orchestration with dual-mode personality engine
+- Advanced prompt control · Real-time conversation memory
+- Zero-logging architecture · 99%+ uptime
 
 | Metric | Value |
 |--------|-------|
 | Uptime | 99%+ |
-| Memory | 66MB |
-| Daily Conversations | 1000s |
+| Memory | 66 MB |
+| Daily Conversations | 1,000s |
 
-[Try Dexter AI →](https://t.me/Dexter_Unsensored_AI_bot)
+**Links:** [Try Dexter AI →](https://t.me/Dexter_Unsensored_AI_bot)
 
 > ⚠️ **NOTE:** Use responsibly. Built for research and open conversation.
 
@@ -118,36 +115,30 @@ Technical Specifications:
 <summary><b>🔐 PHANTOM VAULT — Custom Encryption System (.unk)</b></summary>
 <br>
 
-> A custom file encryption system using the proprietary **.unk** file format. Phantom Vault lets you encrypt and decrypt files into an unrecognizable format that can only be opened with the app and a valid activation key.
+<!-- LIVE-PROJECT:phantom_vault:START -->
+<sup>🔴 <i>Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a></i></sup>
+
+<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Phantom Vault service: up" />
+<!-- LIVE-PROJECT:phantom_vault:END -->
+
+---
+
+> A custom file encryption system using the proprietary **.unk** format — files become unrecognizable binary data, invisible to standard tools.
 
 **The Problem:** Standard file formats can be easily read and intercepted.  
-**The Solution:** A custom encrypted format that's invisible to standard tools.
+**The Solution:** A custom encrypted format that's completely invisible to standard tools.
 
 ```
-🔒 AES-256-CBC Encryption
-🔒 PBKDF2 100K Iterations
-🔒 Hardware-Locked Licensing
-🔒 Zero-Knowledge Architecture
+🔒 AES-256-CBC Encryption     🔒 PBKDF2 100K Iterations
+🔒 Hardware-Locked Licensing  🔒 Zero-Knowledge Architecture
 ```
 
-Features:
-- Encrypts any file into the .unk format
-- Files appear as random binary data without the vault
-- No file signature or magic bytes — undetectable
-- Requires an activation key to use
-- Hardware-locked licensing for added security
+**Features:**
+- Encrypts any file into the .unk format — appears as random binary data
+- No file signature or magic bytes — completely undetectable
+- Hardware-locked licensing · Activation key required
 
-How to Get Access:
-- Download the app from the link below
-- To get an activation key, contact me directly or join the Telegram channel
-
-[📥 Download Phantom Vault →](https://unk-extention.unknowns.app/) | [📡 Get Activation Key →](https://t.me/+JMGc_8bWeWQ4ZmU1)
-
-<!-- LIVE-PROJECT:phantom_vault:START -->
-<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Phantom Vault service: up" />
-
-<sub>🔴 <i>Live status — auto-updated every ~6h via <a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>
-<!-- LIVE-PROJECT:phantom_vault:END -->
+**Links:** [📥 Download Phantom Vault →](https://unk-extention.unknowns.app/) | [📡 Get Activation Key →](https://t.me/+JMGc_8bWeWQ4ZmU1)
 
 </details>
 
@@ -155,7 +146,15 @@ How to Get Access:
 <summary><b>🆔 PHANTOM ID — Test Identity Generator</b></summary>
 <br>
 
-> Generate realistic test identities for 25+ countries. Useful for testing, development, and data generation purposes. **Available on ChatGPT.**
+<!-- LIVE-PROJECT:phantom_id:START -->
+<sup>🔴 <i>Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a></i></sup>
+
+<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Phantom ID service: up" />
+<!-- LIVE-PROJECT:phantom_id:END -->
+
+---
+
+> Generate realistic test identities for 25+ countries — useful for testing, development, and data generation. **Available on ChatGPT.**
 
 ```
 🧑 Personal Details   → Name, DOB, Physical Traits
@@ -168,15 +167,9 @@ How to Get Access:
 **Supported Regions:**  
 🇺🇸 🇬🇧 🇩🇪 🇫🇷 🇮🇹 🇪🇸 🇨🇦 🇦🇺 🇯🇵 🇰🇷 🇨🇳 🇮🇳 🇧🇷 🇲🇽 🇷🇺 🇮🇩 🇵🇰 🇳🇬 🇧🇩 🇵🇭 🇻🇳 🇹🇷 🇮🇷 🇹🇭 🇪🇬 [+more]
 
-[🤖 Telegram Bot →](https://t.me/phantom_id_bot) | [🌐 Web App →](https://phantom-id.onrender.com) | [🤖 Try on ChatGPT →](https://chatgpt.com/g/g-69c92c29e934819182d9c495d76e29cd-phantom-id-fake-identity-generator)
+**Links:** [🤖 Telegram Bot →](https://t.me/phantom_id_bot) | [🌐 Web App →](https://phantom-id.onrender.com) | [🤖 ChatGPT →](https://chatgpt.com/g/g-69c92c29e934819182d9c495d76e29cd-phantom-id-fake-identity-generator)
 
 > ⚠️ **NOTE:** Generated data is for testing and research purposes only.
-
-<!-- LIVE-PROJECT:phantom_id:START -->
-<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Phantom ID service: up" />
-
-<sub>🔴 <i>Live status — auto-updated every ~6h via <a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>
-<!-- LIVE-PROJECT:phantom_id:END -->
 
 </details>
 
@@ -184,33 +177,28 @@ How to Get Access:
 <summary><b>📚 LLM PROMPT ENGINEERING RESEARCH</b></summary>
 <br>
 
+<!-- LIVE-PROJECT:llm-prompt-engineering:START -->
+<sup>🔴 <i>Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a></i></sup>
+
+<img src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="62 commits" />
+<!-- LIVE-PROJECT:llm-prompt-engineering:END -->
+
+---
+
 > Systematic research into prompt engineering techniques, LLM capabilities, and AI safety testing. Open-source and publicly available.
 
-Research Areas:
+**Research Areas:**
 - Prompt engineering techniques & best practices
-- LLM capability probing & benchmarking
-- AI safety testing methodologies
-- Multi-model comparison studies
-- Adversarial prompt research
-- Ethical AI limitations analysis
+- LLM capability probing & benchmarking · AI safety testing
+- Multi-model comparison · Adversarial prompt research
 
-Models Tested:
+**Models Tested:**
 ```
-ChatGPT-5 / GPT-4o / o1
-Gemini 3 / Gemini 3 Thinking / Gemini 3 Pro
+ChatGPT-5 / GPT-4o / o1          Gemini 3 / Gemini 3 Thinking / Gemini 3 Pro
 Gemini 2.5 Flash & Pro
 ```
 
-Repository: Public on GitHub — 62 commits of documented research.  
-Purpose: Understanding AI capabilities and limitations to build better systems.
-
-[View on GitHub →](https://github.com/Unknown-2829/llm-prompt-engineering)
-
-<!-- LIVE-PROJECT:llm-prompt-engineering:START -->
-<img src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="62 commits" />
-
-<sub>🔴 <i>Live commit count — auto-updated every ~6h via <a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>
-<!-- LIVE-PROJECT:llm-prompt-engineering:END -->
+**Links:** [View on GitHub →](https://github.com/Unknown-2829/llm-prompt-engineering)
 
 </details>
 
@@ -218,20 +206,24 @@ Purpose: Understanding AI capabilities and limitations to build better systems.
 <summary><b>🎬 PHANTOM TERMINAL — Cinematic Shell Startup</b></summary>
 <br>
 
-> A cinematic startup animation for your terminal — cross-platform across **Windows, Linux, macOS, and Termux (Android)**. Features multi-color matrix rain, dual themes, glitch effects, and a custom dashboard — all with a one-line install. Current version: **v3.6.1**
+<!-- LIVE-PROJECT:Phanton-terminal:START -->
+<sup>🔴 <i>Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a></i></sup>
 
-Features:
+<img src="https://img.shields.io/badge/v3.6.1-79%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="v3.6.1 · 79 commits" />
+<!-- LIVE-PROJECT:Phanton-terminal:END -->
+
+---
+
+> A cinematic startup animation for your terminal — cross-platform across **Windows, Linux, macOS, and Termux**. Matrix rain, dual themes, glitch effects, custom dashboard — one-line install.
+
+**Features:**
 - 🎬 Multi-stage cinematic startup animation
-- 🌧️ Matrix rain — Letters or Binary mode with theme colors
+- 🌧️ Matrix rain — Letters or Binary mode
 - 🎨 Two themes — Phantom (purple/cyan) & Unknown (green/blue)
-- 💀 Glitch reveal logo animation
-- 📊 Dashboard with user info, uptime & random quotes
-- 🔄 Auto-update with silent downloads
-- ⚙️ Persistent config — settings preserved on reinstall
-- 📱 Mobile optimized — Termux-specific performance tweaks
-- 🥚 Easter eggs — hidden commands with achievement tracking
+- 💀 Glitch reveal logo · 📊 Dashboard with uptime & quotes
+- 🔄 Auto-update · ⚙️ Persistent config · 🥚 Easter eggs
 
-Quick Install:
+**Quick Install:**
 ```powershell
 irm https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/install.ps1 | iex
 ```
@@ -239,13 +231,7 @@ irm https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/install
 curl -fsSL https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/install.sh | bash
 ```
 
-[View on GitHub →](https://github.com/Unknown-2829/Phanton-terminal)
-
-<!-- LIVE-PROJECT:Phanton-terminal:START -->
-<img src="https://img.shields.io/badge/v3.6.1-79%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="v3.6.1 · 79 commits" />
-
-<sub>🔴 <i>Live version & commits — auto-updated every ~6h via <a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>
-<!-- LIVE-PROJECT:Phanton-terminal:END -->
+**Links:** [View on GitHub →](https://github.com/Unknown-2829/Phanton-terminal)
 
 </details>
 
@@ -253,36 +239,32 @@ curl -fsSL https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/
 <summary><b>📧 PHANTOM MAIL — Disposable & Permanent Email</b></summary>
 <br>
 
-> A disposable email service built on Cloudflare Pages with Email Workers. Generate instant throwaway addresses — no signup, fully private. **Available on ChatGPT.**
+<!-- LIVE-PROJECT:phantom_mail:START -->
+<sup>🔴 <i>Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a></i></sup>
 
-Free Plan:
-- ✨ Instant email generation — no signup needed
-- 📬 Real-time inbox with auto-refresh every 5 seconds
-- 📋 One-click copy to clipboard
-- ⏱️ 1-hour auto-expiration
-- 🔒 Private & secure — no logs, no trackers
+<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; <img src="https://img.shields.io/badge/v1.1.0-277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="v1.1.0 · 277 commits" />
+<!-- LIVE-PROJECT:phantom_mail:END -->
 
-Premium Plan ($3/mo or $20/yr):
-- 💾 8 permanent addresses — never expire
-- 🎯 Custom usernames — choose your own handle
-- 📅 30-day email retention
-- 📨 Email forwarding to your real inbox
-- 🔌 Developer API — 10,000 requests/day
+---
 
-Architecture:
+> A disposable email service on Cloudflare Pages + Email Workers. Instant throwaway addresses — no signup, fully private. **Available on ChatGPT.**
+
+**Free Plan:**
+- ✨ Instant generation — no signup · 📬 Real-time inbox (5s refresh)
+- 📋 One-click copy · ⏱️ 1-hour expiry · 🔒 No logs, no trackers
+
+**Premium Plan** `$3/mo · $20/yr`
+- 💾 8 permanent addresses · 🎯 Custom usernames · 📅 30-day retention
+- 📨 Email forwarding · 🔌 Developer API — 10,000 req/day
+
+**Architecture:**
 ```
 User Browser → Cloudflare Pages (Frontend + API)
              → Cloudflare KV (Storage)
              → Cloudflare Email Worker (Receives emails)
 ```
 
-[🌐 Try Phantom Mail →](https://mail.unknowns.app) | [View on GitHub →](https://github.com/Unknown-2829/Phantom-mail) | [🤖 Try on ChatGPT →](https://chatgpt.com/g/g-69c8f9437d088191b67ec75c1f67f2e4-phantom-mail-gpt)
-
-<!-- LIVE-PROJECT:phantom_mail:START -->
-<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Phantom Mail service: up" /> &nbsp; <img src="https://img.shields.io/badge/v1.1.0-277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="v1.1.0 · 277 commits" />
-
-<sub>🔴 <i>Live status & version — auto-updated every ~6h via <a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>
-<!-- LIVE-PROJECT:phantom_mail:END -->
+**Links:** [🌐 Try Phantom Mail →](https://mail.unknowns.app) | [GitHub →](https://github.com/Unknown-2829/Phantom-mail) | [🤖 ChatGPT →](https://chatgpt.com/g/g-69c8f9437d088191b67ec75c1f67f2e4-phantom-mail-gpt)
 
 </details>
 
