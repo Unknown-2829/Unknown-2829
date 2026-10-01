@@ -509,13 +509,15 @@ def is_special_today(now: datetime) -> bool:
         return True
     salt = os.environ.get("SECRET_SALT", "").strip()
     hmac_key = (secret + salt).encode() if salt else secret.encode()
+    _ref_year = 2001  # non-leap: decoy MM-DD stays stable across leap years
     for i in range(9):
         raw = _hmac.new(hmac_key, i.to_bytes(1, "big"), "sha256").digest()
         day_of_year = (int.from_bytes(raw[:2], "big") % 365) + 1
-        candidate = (date(now.year, 1, 1) + timedelta(days=day_of_year - 1))
+        candidate = (date(_ref_year, 1, 1) + timedelta(days=day_of_year - 1))
         if candidate.strftime("%m-%d") == today_mmdd:
             return True
     return False
+
 
 
 
@@ -2441,16 +2443,18 @@ def main(argv=None):
 
     # ── Theme selection ───────────────────────────────────────────────────────
     if args.theme:
-        # --theme flag: use named theme directly, bypassing pick_theme logic
         picked_name = args.theme
         picked_theme = THEMES[args.theme]
         picked_note = f"Theme forced via --theme {args.theme}"
         print(f"Forced theme: {picked_name} ({picked_theme['label']})")
-    elif streak > 0:
+    else:
+        # pick_theme runs at every streak level — festivals/events/Sunday
+        # apply even when streak is 0; tier fallback handles offline/broken
         picked_name, picked_theme, picked_note = pick_theme(now_ist, streak, state, username)
         print(f"Selected theme: {picked_name} ({picked_theme['label']})")
         if picked_note:
             print(f"Event note: {picked_note}")
+
 
     updated = update_readme(
         readme_path, username, streak, status, state,
