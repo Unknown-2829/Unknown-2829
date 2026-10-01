@@ -40,12 +40,11 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=0d1117" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-ffd54f?style=for-the-badge&labelColor=0d1117" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23-TAGLINE-6e3aff?style=flat-square&labelColor=0d1117" alt="Tagline" /><br>
-  <b>&ldquo;&nbsp;I build therefore I am.&nbsp;&rdquo;</b>
+  <img src="https://img.shields.io/badge/%23-TAGLINE-ff8da1?style=flat-square&labelColor=0d1117" alt="Tagline" /> &ensp; <b>&ldquo;&nbsp;I build therefore I am.&nbsp;&rdquo;</b>
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
