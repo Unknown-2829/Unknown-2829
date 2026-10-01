@@ -41,7 +41,7 @@ if hasattr(sys.stderr, "reconfigure"):
 IST = ZoneInfo("Asia/Kolkata")
 
 # Path to the file that persists streak state between runs
-STATE_FILE = os.environ.get("STREAK_STATE_PATH", ".streak_state.json")
+STATE_FILE = os.environ.get("STREAK_STATE_PATH", os.path.join("data", "streak_state.json"))
 
 # Directory for cached SVG assets
 ASSETS_DIR = os.environ.get("ASSETS_DIR", "assets")
@@ -535,15 +535,27 @@ def special_seed(now: datetime) -> int:
 
 # ── Festival / Event data ──────────────────────────────────────────────────────
 
-_EVENTS_FILE = os.path.join(
-    os.path.dirname(__file__) if "__file__" in dir() else ".", "events_data.json"
+_EVENTS_FILE = os.environ.get(
+    "EVENTS_DATA_PATH",
+    os.path.join(
+        os.path.dirname(__file__) if "__file__" in dir() else ".",
+        "config",
+        "events_data.json",
+    ),
 )
 
 
 def _load_events() -> dict:
-    """Load events_data.json; return empty dict on failure."""
+    """Load config/events_data.json; return empty dict on failure."""
+    target_path = _EVENTS_FILE
+    if not os.path.exists(target_path):
+        legacy = os.path.join(
+            os.path.dirname(__file__) if "__file__" in dir() else ".", "events_data.json"
+        )
+        if os.path.exists(legacy):
+            target_path = legacy
     try:
-        with open(_EVENTS_FILE, "r", encoding="utf-8") as f:
+        with open(target_path, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {}
@@ -552,7 +564,7 @@ def _load_events() -> dict:
 def _lookup_festival(now: datetime) -> str | None:
     """
     Return the theme key for a lunisolar festival today, or None.
-    Priority within festivals follows declaration order in events_data.json.
+    Priority within festivals follows declaration order in config/events_data.json.
     """
     data = _load_events()
     festivals = data.get("festivals", {})
@@ -591,7 +603,7 @@ def fetch_github_anniversary(username: str, token: str | None = None) -> str | N
 
 def _check_missing_festival_years() -> None:
     """
-    On Dec 1, open a GitHub issue reminder if events_data.json lacks
+    On Dec 1, open a GitHub issue reminder if config/events_data.json lacks
     next year's festival rows. Requires GITHUB_TOKEN + GITHUB_USERNAME.
     """
     now = _now_ist()
@@ -607,13 +619,13 @@ def _check_missing_festival_years() -> None:
     token = os.environ.get("GITHUB_TOKEN", "").strip()
     username = os.environ.get("GITHUB_USERNAME", "Unknown-2829")
     if not token:
-        print(f"Warning: events_data.json missing {next_year} rows for: {missing}",
+        print(f"Warning: config/events_data.json missing {next_year} rows for: {missing}",
               file=sys.stderr)
         return
 
-    title = f"[reminder] Add {next_year} festival dates to events_data.json"
+    title = f"[reminder] Add {next_year} festival dates to config/events_data.json"
     body = (
-        f"The following festivals are missing {next_year} dates in `events_data.json`:\n\n"
+        f"The following festivals are missing {next_year} dates in `config/events_data.json`:\n\n"
         + "\n".join(f"- `{k}`" for k in missing)
         + "\n\nPlease verify against an authoritative panchang / Islamic calendar "
           "and update before 31 Dec."
@@ -685,7 +697,7 @@ def pick_theme(
 
       1. special / decoy day  (SECRET_MMDD — section 6)
       2. fixed-date event     (New Year, Republic Day, etc.)
-      3. lunisolar festival   (events_data.json)
+      3. lunisolar festival   (config/events_data.json)
       4. GitHub anniversary
       5. Programmer's Day     (day 256 of the year)
       6. Sunday
@@ -856,9 +868,12 @@ def cache_graph(url: str, dest: str, timeout: int = _TIMEOUT) -> bool:
 
 def load_streak_state() -> dict:
     """Load the persisted streak state from disk."""
-    if os.path.exists(STATE_FILE):
+    target_path = STATE_FILE
+    if not os.path.exists(target_path) and os.path.exists(".streak_state.json"):
+        target_path = ".streak_state.json"
+    if os.path.exists(target_path):
         try:
-            with open(STATE_FILE, "r", encoding="utf-8") as f:
+            with open(target_path, "r", encoding="utf-8") as f:
                 return json.load(f)
         except (json.JSONDecodeError, IOError):
             pass
@@ -867,6 +882,9 @@ def load_streak_state() -> dict:
 
 def save_streak_state(state: dict) -> None:
     """Persist the streak state to disk."""
+    parent = os.path.dirname(STATE_FILE)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
     with open(STATE_FILE, "w", encoding="utf-8") as f:
         json.dump(state, f, indent=2)
         f.write("\n")
@@ -1085,7 +1103,9 @@ def _offline_note(now_ist: datetime | None = None) -> str:
 
 # ── Stage 5: Traffic & Analytics ──────────────────────────────────────────────
 
-_TRAFFIC_SUMMARY_FILE = os.environ.get("TRAFFIC_SUMMARY_PATH", ".traffic_summary.json")
+_TRAFFIC_SUMMARY_FILE = os.environ.get(
+    "TRAFFIC_SUMMARY_PATH", os.path.join("data", "traffic_summary.json")
+)
 _DATA_BRANCH          = "data"
 _TRAFFIC_HISTORY_PATH = "data/traffic-history.json"
 _MAX_DAILY_ROWS       = 400   # roll into monthly totals beyond this
@@ -1093,8 +1113,11 @@ _MAX_DAILY_ROWS       = 400   # roll into monthly totals beyond this
 
 def _load_traffic_summary() -> dict:
     """Load local traffic summary cache (on main branch). Returns {} on miss."""
+    target_path = _TRAFFIC_SUMMARY_FILE
+    if not os.path.exists(target_path) and os.path.exists(".traffic_summary.json"):
+        target_path = ".traffic_summary.json"
     try:
-        with open(_TRAFFIC_SUMMARY_FILE, "r", encoding="utf-8") as f:
+        with open(target_path, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {}
@@ -1102,6 +1125,9 @@ def _load_traffic_summary() -> dict:
 
 def _save_traffic_summary(data: dict) -> None:
     try:
+        parent = os.path.dirname(_TRAFFIC_SUMMARY_FILE)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
         with open(_TRAFFIC_SUMMARY_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
     except IOError as exc:
@@ -1539,15 +1565,27 @@ def update_analytics(
 # ── Stage 4: Lines pool ────────────────────────────────────────────────────────
 
 
-_LINES_FILE = os.path.join(
-    os.path.dirname(__file__) if "__file__" in dir() else ".", "lines.json"
+_LINES_FILE = os.environ.get(
+    "LINES_FILE_PATH",
+    os.path.join(
+        os.path.dirname(__file__) if "__file__" in dir() else ".",
+        "config",
+        "lines.json",
+    ),
 )
 
 
 def _load_lines() -> dict:
-    """Load lines.json; return empty dict on failure."""
+    """Load config/lines.json; return empty dict on failure."""
+    target_path = _LINES_FILE
+    if not os.path.exists(target_path):
+        legacy = os.path.join(
+            os.path.dirname(__file__) if "__file__" in dir() else ".", "lines.json"
+        )
+        if os.path.exists(legacy):
+            target_path = legacy
     try:
-        with open(_LINES_FILE, "r", encoding="utf-8") as f:
+        with open(target_path, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {}
@@ -1558,7 +1596,7 @@ def pick_line(state: str, now_ist: datetime, theme_name: str = "") -> str:
     Return a deterministic rotating line for the footer.
     Selection: hash(date, state) mod len(pool).
     Never repeats on consecutive days (the hash shifts daily).
-    Falls back gracefully if lines.json is missing.
+    Falls back gracefully if config/lines.json is missing.
     """
     data = _load_lines()
 
@@ -1607,12 +1645,17 @@ _PROJECT_URLS = {
 }
 
 # State file for project status (consecutive failure tracking)
-_STATUS_FILE = os.environ.get("STATUS_STATE_PATH", ".project_status.json")
+_STATUS_FILE = os.environ.get(
+    "STATUS_STATE_PATH", os.path.join("data", "project_status.json")
+)
 
 
 def _load_project_status() -> dict:
+    target_path = _STATUS_FILE
+    if not os.path.exists(target_path) and os.path.exists(".project_status.json"):
+        target_path = ".project_status.json"
     try:
-        with open(_STATUS_FILE, "r", encoding="utf-8") as f:
+        with open(target_path, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {}
@@ -1620,6 +1663,9 @@ def _load_project_status() -> dict:
 
 def _save_project_status(data: dict) -> None:
     try:
+        parent = os.path.dirname(_STATUS_FILE)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
         with open(_STATUS_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
     except IOError as exc:
@@ -1819,12 +1865,17 @@ def inject_per_project_live(
 
 # ── Stage 4: Repo meta (latest release + commit count) ────────────────────────
 
-_REPO_META_FILE = os.environ.get("REPO_META_PATH", ".repo_meta.json")
+_REPO_META_FILE = os.environ.get(
+    "REPO_META_PATH", os.path.join("data", "repo_meta.json")
+)
 
 
 def _load_repo_meta() -> dict:
+    target_path = _REPO_META_FILE
+    if not os.path.exists(target_path) and os.path.exists(".repo_meta.json"):
+        target_path = ".repo_meta.json"
     try:
-        with open(_REPO_META_FILE, "r", encoding="utf-8") as f:
+        with open(target_path, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {}
@@ -1832,6 +1883,9 @@ def _load_repo_meta() -> dict:
 
 def _save_repo_meta(data: dict) -> None:
     try:
+        parent = os.path.dirname(_REPO_META_FILE)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
         with open(_REPO_META_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
     except IOError as exc:
@@ -1989,12 +2043,17 @@ def fetch_recent_activity(username: str, token: str | None = None, n: int = 5) -
 
 # ── Stage 4: Failure tracking + issue ─────────────────────────────────────────
 
-_RUN_STATE_FILE = os.environ.get("RUN_STATE_PATH", ".run_state.json")
+_RUN_STATE_FILE = os.environ.get(
+    "RUN_STATE_PATH", os.path.join("data", "run_state.json")
+)
 
 
 def _load_run_state() -> dict:
+    target_path = _RUN_STATE_FILE
+    if not os.path.exists(target_path) and os.path.exists(".run_state.json"):
+        target_path = ".run_state.json"
     try:
-        with open(_RUN_STATE_FILE, "r", encoding="utf-8") as f:
+        with open(target_path, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {"consecutive_failures": 0, "failure_issue_number": None}
@@ -2002,6 +2061,9 @@ def _load_run_state() -> dict:
 
 def _save_run_state(data: dict) -> None:
     try:
+        parent = os.path.dirname(_RUN_STATE_FILE)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
         with open(_RUN_STATE_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
     except IOError as exc:
@@ -2254,7 +2316,7 @@ def generate_stats_section(
     else:
         last_updated = now_ist.strftime("%-d %b %Y, %H:%M IST").lstrip("0")
 
-    # Cinematic footer line from lines.json
+    # Cinematic footer line from config/lines.json
     theme_name_for_line = locals().get("picked_name", "")
     footer_line = pick_line(status, now_ist, theme_name_for_line)
 

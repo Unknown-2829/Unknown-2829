@@ -103,10 +103,9 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add README.md assets/
-          # Add each state file individually — skip any that don't exist yet
-          for f in .streak_state.json .project_status.json \
-                   .repo_meta.json .run_state.json .traffic_summary.json; do
+          git add README.md assets/ config/
+          # Add state files in data/ — skip any that don't exist yet
+          for f in data/*.json; do
             [ -f "$f" ] && git add -f "$f" || true
           done
           if git diff --quiet --cached; then

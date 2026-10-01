@@ -336,9 +336,11 @@ Specializations:
 
 The central hub for all project updates, releases, and community activity.
 
-<a href="https://t.me/+JMGc_8bWeWQ4ZmU1" target="_blank">
-  <img align="right" hspace="15" src="assets/shadow-vault-channel.png" width="220" alt="Shadow Vault — 216 subscribers" />
-</a>
+<p align="center">
+  <a href="https://t.me/+JMGc_8bWeWQ4ZmU1" target="_blank">
+    <img src="assets/shadow-vault-channel.png" width="280" alt="Shadow Vault — 216 subscribers" />
+  </a>
+</p>
 
 **What Happens Here:**
 - Product launches & system updates
@@ -352,8 +354,6 @@ The central hub for all project updates, releases, and community activity.
 - DEXTER AI: 99%+ uptime, 66MB memory footprint
 - Phantom Vault: Windows release live, activation keys distributed
 - Phantom ID: V2.0 launched, 25+ countries live
-
-<br clear="both" />
 
 Community: Small but dedicated. Quality over quantity.
 
