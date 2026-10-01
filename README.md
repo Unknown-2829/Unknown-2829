@@ -40,11 +40,11 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-ffd54f?style=for-the-badge&labelColor=0d1117" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=ffd54f" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23-TAGLINE-ff8da1?style=flat-square&labelColor=0d1117" alt="Tagline" /> &ensp; <b>&ldquo;&nbsp;I build therefore I am.&nbsp;&rdquo;</b>
+  <img align="middle" src="https://img.shields.io/badge/%23%20TAGLINE-ffd54f?style=flat-square" alt="Tagline" /> &ensp; <b>&ldquo;&nbsp;I build therefore I am.&nbsp;&rdquo;</b>
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -108,11 +108,10 @@ Primary Domains:
 
 <details>
 <summary><b>🔐 PHANTOM VAULT — Custom Encryption System (.unk)</b></summary>
-<br>
 
 <!-- LIVE-PROJECT:phantom_vault:START -->
 <p>
-  <img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &emsp; <sub>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</sub>
+  <img align="middle" src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; <small>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</small>
 </p>
 <!-- LIVE-PROJECT:phantom_vault:END -->
 
@@ -139,11 +138,10 @@ Primary Domains:
 
 <details>
 <summary><b>🆔 PHANTOM ID — Test Identity Generator</b></summary>
-<br>
 
 <!-- LIVE-PROJECT:phantom_id:START -->
 <p>
-  <img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &emsp; <sub>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</sub>
+  <img align="middle" src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; <small>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</small>
 </p>
 <!-- LIVE-PROJECT:phantom_id:END -->
 
@@ -170,11 +168,10 @@ Primary Domains:
 
 <details>
 <summary><b>📚 LLM PROMPT ENGINEERING RESEARCH</b></summary>
-<br>
 
 <!-- LIVE-PROJECT:llm-prompt-engineering:START -->
 <p>
-  <img src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Research: 62 commits" /> &emsp; <sub>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</sub>
+  <img align="middle" src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Research: 62 commits" /> &nbsp; <small>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</small>
 </p>
 <!-- LIVE-PROJECT:llm-prompt-engineering:END -->
 
@@ -199,11 +196,10 @@ Gemini 2.5 Flash & Pro
 
 <details>
 <summary><b>🎬 PHANTOM TERMINAL — Cinematic Shell Startup</b></summary>
-<br>
 
 <!-- LIVE-PROJECT:Phanton-terminal:START -->
 <p>
-  <img src="https://img.shields.io/badge/Terminal-v3.6.1%20%C2%B7%2079%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Terminal: v3.6.1 · 79 commits" /> &emsp; <sub>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</sub>
+  <img align="middle" src="https://img.shields.io/badge/Terminal-v3.6.1%20%C2%B7%2079%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Terminal: v3.6.1 · 79 commits" /> &nbsp; <small>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</small>
 </p>
 <!-- LIVE-PROJECT:Phanton-terminal:END -->
 
@@ -232,11 +228,10 @@ curl -fsSL https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/
 
 <details>
 <summary><b>📧 PHANTOM MAIL — Disposable & Permanent Email</b></summary>
-<br>
 
 <!-- LIVE-PROJECT:phantom_mail:START -->
 <p>
-  <img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; <img src="https://img.shields.io/badge/Mail-v1.1.0%20%C2%B7%20277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Mail: v1.1.0 · 277 commits" /> &emsp; <sub>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</sub>
+  <img align="middle" src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; <img align="middle" src="https://img.shields.io/badge/Mail-v1.1.0%20%C2%B7%20277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Mail: v1.1.0 · 277 commits" /> &nbsp; <small>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</small>
 </p>
 <!-- LIVE-PROJECT:phantom_mail:END -->
 
@@ -337,7 +332,7 @@ Specializations:
 The central hub for all project updates, releases, and community activity.
 
 <a href="https://t.me/+JMGc_8bWeWQ4ZmU1" target="_blank">
-  <img align="right" src="assets/shadow-vault-channel.png" width="220" alt="Shadow Vault — 216 subscribers" />
+  <img align="right" hspace="15" src="assets/shadow-vault-channel.png" width="220" alt="Shadow Vault — 216 subscribers" />
 </a>
 
 **What Happens Here:**
