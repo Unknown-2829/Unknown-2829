@@ -86,21 +86,6 @@ Primary Domains:
 ## <img src="https://media.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif" width="25"> // PROJECTS
 
 <!-- PROJECT-STATUS:START -->
-<p align="center">
-  <sub><b>// LIVE SERVICE STATUS</b></sub>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Mail-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Mail status: up" /> <img src="https://img.shields.io/badge/ID-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="ID status: up" /> <img src="https://img.shields.io/badge/Vault-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Vault status: up" /> <img src="https://img.shields.io/badge/Portfolio-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Portfolio status: up" />
-</p>
-
-<p align="center">
-  <sub><b>// REPO VERSIONS</b></sub>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Terminal-v3.6.1%20%C2%B7%2079%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Terminal: v3.6.1 · 79 commits" /> <img src="https://img.shields.io/badge/Mail-v1.1.0%20%C2%B7%20277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Mail: v1.1.0 · 277 commits" /> <img src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Research: 62 commits" />
-</p>
 <!-- PROJECT-STATUS:END -->
 
 <details>
@@ -158,6 +143,12 @@ How to Get Access:
 
 [📥 Download Phantom Vault →](https://unk-extention.unknowns.app/) | [📡 Get Activation Key →](https://t.me/+JMGc_8bWeWQ4ZmU1)
 
+<!-- LIVE-PROJECT:phantom_vault:START -->
+<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Phantom Vault service: up" />
+
+<sub>🔴 <i>Live status — auto-updated every ~6h via <a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>
+<!-- LIVE-PROJECT:phantom_vault:END -->
+
 </details>
 
 <details>
@@ -180,6 +171,12 @@ How to Get Access:
 [🤖 Telegram Bot →](https://t.me/phantom_id_bot) | [🌐 Web App →](https://phantom-id.onrender.com) | [🤖 Try on ChatGPT →](https://chatgpt.com/g/g-69c92c29e934819182d9c495d76e29cd-phantom-id-fake-identity-generator)
 
 > ⚠️ **NOTE:** Generated data is for testing and research purposes only.
+
+<!-- LIVE-PROJECT:phantom_id:START -->
+<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Phantom ID service: up" />
+
+<sub>🔴 <i>Live status — auto-updated every ~6h via <a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>
+<!-- LIVE-PROJECT:phantom_id:END -->
 
 </details>
 
@@ -209,6 +206,12 @@ Purpose: Understanding AI capabilities and limitations to build better systems.
 
 [View on GitHub →](https://github.com/Unknown-2829/llm-prompt-engineering)
 
+<!-- LIVE-PROJECT:llm-prompt-engineering:START -->
+<img src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="62 commits" />
+
+<sub>🔴 <i>Live commit count — auto-updated every ~6h via <a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>
+<!-- LIVE-PROJECT:llm-prompt-engineering:END -->
+
 </details>
 
 <details>
@@ -237,6 +240,12 @@ curl -fsSL https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/
 ```
 
 [View on GitHub →](https://github.com/Unknown-2829/Phanton-terminal)
+
+<!-- LIVE-PROJECT:Phanton-terminal:START -->
+<img src="https://img.shields.io/badge/v3.6.1-79%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="v3.6.1 · 79 commits" />
+
+<sub>🔴 <i>Live version & commits — auto-updated every ~6h via <a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>
+<!-- LIVE-PROJECT:Phanton-terminal:END -->
 
 </details>
 
@@ -268,6 +277,12 @@ User Browser → Cloudflare Pages (Frontend + API)
 ```
 
 [🌐 Try Phantom Mail →](https://mail.unknowns.app) | [View on GitHub →](https://github.com/Unknown-2829/Phantom-mail) | [🤖 Try on ChatGPT →](https://chatgpt.com/g/g-69c8f9437d088191b67ec75c1f67f2e4-phantom-mail-gpt)
+
+<!-- LIVE-PROJECT:phantom_mail:START -->
+<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Phantom Mail service: up" /> &nbsp; <img src="https://img.shields.io/badge/v1.1.0-277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="v1.1.0 · 277 commits" />
+
+<sub>🔴 <i>Live status & version — auto-updated every ~6h via <a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>
+<!-- LIVE-PROJECT:phantom_mail:END -->
 
 </details>
 
@@ -340,10 +355,13 @@ The central hub for all project updates, releases, and community activity.
 - Community challenges & rewards
 - 24/7 support operations
 
-**Recent Activity:**
+**Channel Updates:**
+- DEXTER AI: 99%+ uptime, 66MB memory footprint
+- Phantom Vault: Windows release live, activation keys distributed
+- Phantom ID: V2.0 launched, 25+ countries live
 
+**GitHub Activity:**
 <!-- RECENT-ACTIVITY:START -->
-- _No recent activity yet — will update on next CI run_
 <!-- RECENT-ACTIVITY:END -->
 
 Community: Small but dedicated. Quality over quantity.
@@ -351,7 +369,7 @@ Community: Small but dedicated. Quality over quantity.
 Channel: [Shadow Vault](https://t.me/+JMGc_8bWeWQ4ZmU1) | Discussion: [Group](https://t.me/unknownlll2829)
 
 </td>
-<td valign="top" align="center" width="35%">
+<td valign="top" align="center" width="35%" style="padding-top: 70px">
 
 <a href="https://t.me/+JMGc_8bWeWQ4ZmU1" target="_blank">
   <img src="assets/shadow-vault-channel.png" width="200" alt="Shadow Vault — 216 subscribers" />

@@ -1775,13 +1775,13 @@ def build_project_status_block(
 
 
 def build_recent_activity_block(activity: list | None) -> str:
-    """Build a markdown list for RECENT-ACTIVITY marker.
+    """Build a markdown list for RECENT-ACTIVITY marker (GitHub public events only).
 
-    Each entry is a bullet: `repo` — detail (when).
-    Returns a placeholder string if no activity.
+    Each entry: `repo` — detail (when).
+    Returns empty string if no activity so the section stays clean.
     """
     if not activity:
-        return "_No recent public activity found._"
+        return ""
 
     lines = []
     for ev in activity[:5]:
@@ -1791,6 +1791,73 @@ def build_recent_activity_block(activity: list | None) -> str:
         when_str = f" ({when})" if when else ""
         lines.append(f"- `{repo}` — {detail}{when_str}")
     return "\n".join(lines)
+
+
+# Mapping: marker key → (service_key or None, repo_name or None)
+_PER_PROJECT_MAP = {
+    "phantom_mail":          ("phantom_mail",  "Phantom-mail"),
+    "phantom_vault":         ("phantom_vault", None),
+    "phantom_id":            ("phantom_id",    None),
+    "Phanton-terminal":      (None,            "Phanton-terminal"),
+    "llm-prompt-engineering":(None,            "llm-prompt-engineering"),
+}
+
+_LIVE_NOTE = (
+    '<sub>🔴 <i>Live — auto-updated every ~6h via '
+    '<a href="https://github.com/Unknown-2829/Unknown-2829/actions">GitHub Actions</a></i></sub>'
+)
+
+
+def _build_per_project_block(
+    key: str,
+    project_statuses: dict,
+    repo_meta: dict,
+) -> str:
+    """Build the badge HTML for a single LIVE-PROJECT marker."""
+    svc_key, repo_key = _PER_PROJECT_MAP.get(key, (None, None))
+    parts = []
+
+    if svc_key and svc_key in project_statuses:
+        status = project_statuses[svc_key]
+        parts.append(f'<img src="{_status_badge("Service", status)}" alt="Service: {status}" />')
+
+    if repo_key and repo_key in repo_meta:
+        meta = repo_meta[repo_key]
+        if meta:
+            label = _REPO_LABELS.get(repo_key, repo_key)
+            rel = str(meta.get("release") or "").strip()
+            commits = meta.get("commits")
+            msg = " · ".join(x for x in (rel, f"{commits} commits" if commits else "") if x)
+            if msg:
+                url = (
+                    f"https://img.shields.io/badge/{urllib.parse.quote(label, safe='')}-"
+                    f"{urllib.parse.quote(msg, safe='')}-6e3aff"
+                    f"?style=flat-square&labelColor=0d1117"
+                )
+                parts.append(f'<img src="{url}" alt="{label}: {msg}" />')
+
+    if not parts:
+        return ""
+    return " &nbsp; ".join(parts) + "\n\n" + _LIVE_NOTE
+
+
+def inject_per_project_live(
+    content: str,
+    project_statuses: dict,
+    repo_meta: dict,
+) -> str:
+    """Inject per-project live badge blocks into all LIVE-PROJECT:{key}:START/END markers."""
+    for key in _PER_PROJECT_MAP:
+        start = f"<!-- LIVE-PROJECT:{key}:START -->"
+        end   = f"<!-- LIVE-PROJECT:{key}:END -->"
+        pat   = re.compile(re.escape(start) + r".*?" + re.escape(end), re.DOTALL)
+        if not pat.search(content):
+            continue
+        block = _build_per_project_block(key, project_statuses, repo_meta)
+        replacement = f"{start}\n{block}\n{end}" if block else f"{start}\n{end}"
+        content = pat.sub(replacement, content)
+    return content
+
 
 
 
@@ -2498,11 +2565,14 @@ def update_readme(
     ra_pat   = re.compile(re.escape(ra_start) + r".*?" + re.escape(ra_end), re.DOTALL)
     if ra_pat.search(new_content):
         new_content = ra_pat.sub(
-            f"{ra_start}\n{ra_block}\n{ra_end}",
+            f"{ra_start}\n{ra_block}\n{ra_end}" if ra_block else f"{ra_start}\n{ra_end}",
             new_content,
         )
     else:
         print("Info: RECENT-ACTIVITY markers not found — skipping", file=sys.stderr)
+
+    # ── Inject per-project live badges ────────────────────────────────────────
+    new_content = inject_per_project_live(new_content, project_statuses or {}, repo_meta or {})
 
     if new_content != content:
         if dry_run:
