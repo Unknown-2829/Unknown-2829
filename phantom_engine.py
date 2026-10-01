@@ -15,7 +15,9 @@ Streak Status:
 """
 
 import hmac as _hmac
+import html
 import os
+
 import re
 import sys
 import json
@@ -1692,6 +1694,60 @@ def _status_badge(label: str, status: str) -> str:
     )
 
 
+_PROJECT_LABELS = {
+    "portfolio": "Portfolio",
+    "phantom_mail": "Mail",
+    "phantom_id": "ID",
+    "phantom_vault": "Vault",
+}
+
+_REPO_LABELS = {
+    "Phanton-terminal": "Terminal",
+    "Phantom-mail": "Mail",
+    "llm-prompt-engineering": "Research",
+}
+
+
+def build_live_blocks(
+    project_statuses: dict | None = None,
+    repo_meta: dict | None = None,
+    activity: list | None = None,
+) -> str:
+    """Extra README HTML: systems row, release/commit badges, recent activity.
+    Every part is optional and simply omitted when its data is missing."""
+    parts: list[str] = []
+    if project_statuses:
+        imgs = " ".join(
+            f'<img src="{_status_badge(_PROJECT_LABELS.get(k, k), v)}" alt="{_PROJECT_LABELS.get(k, k)} status: {v}" />'
+            for k, v in project_statuses.items()
+        )
+        parts.append(f'<p align="center">\n  {imgs}\n</p>')
+    if repo_meta:
+        badges = []
+        for repo, meta in repo_meta.items():
+            if not meta:
+                continue
+            label = _REPO_LABELS.get(repo, repo)
+            msg = " · ".join(x for x in (
+                str(meta.get("release") or "").strip(),
+                f"{meta['commits']} commits" if meta.get("commits") else "") if x)
+            if not msg:
+                continue
+            url = (f"https://img.shields.io/badge/{urllib.parse.quote(label, safe='')}-"
+                   f"{urllib.parse.quote(msg, safe='')}-6e3aff?style=flat-square&labelColor=0d1117")
+            badges.append(f'<img src="{url}" alt="{label}: {msg}" />')
+        if badges:
+            parts.append('<p align="center">\n  ' + " ".join(badges) + "\n</p>")
+    if activity:
+        lines = "<br>\n  ".join(
+            f"{html.escape(ev.get('repo', ''))} — {html.escape(ev.get('detail', ''))}"
+            + (f" ({html.escape(ev['when'])})" if ev.get("when") else "")
+            for ev in activity[:5])
+        parts.append(f'<p align="center">\n  <sub>{lines}</sub>\n</p>')
+    return "\n\n".join(parts)
+
+
+
 # ── Stage 4: Repo meta (latest release + commit count) ────────────────────────
 
 _REPO_META_FILE = os.environ.get("REPO_META_PATH", ".repo_meta.json")
@@ -2009,15 +2065,31 @@ def generate_stats_section(
     status: str = "active",
     state: dict | None = None,
     now_ist: datetime | None = None,
+    project_statuses: dict | None = None,
+    repo_meta: dict | None = None,
+    activity: list | None = None,
+    theme_name: str | None = None,
+    live: dict | None = None,
 ) -> str:
     """Generate the dynamic stats section markdown."""
     if state is None:
         state = {}
     if now_ist is None:
         now_ist = _now_ist()
+    if live:
+        project_statuses = live.get("statuses", project_statuses)
+        repo_meta = live.get("meta", repo_meta)
+        activity = live.get("activity", activity)
 
     # ── Determine badge / sub-text based on status ──────────────────────────
-    if status == "broken":
+    if theme_name and theme_name in THEMES:
+        picked_name = theme_name
+        theme = THEMES[theme_name]
+        event_note = f"Forced Theme: {theme['label']}"
+        badge_color = theme["badge_color"]
+        badge_label = urllib.parse.quote(f"{theme['label']}", safe="_-")
+        status_note = f"🎨 <i>{theme['label']} | Powered by GitHub Actions</i>"
+    elif status == "broken":
         last = state.get("last_positive_streak")
         badge_color = "ff6d00"
         badge_label = urllib.parse.quote("💔 Streak Dropped", safe="")
@@ -2030,6 +2102,7 @@ def generate_stats_section(
             status_note = "⚡ <i>Streak dropped — get back in the game!</i>"
         # Use the theme from the last known positive streak for visual continuity
         theme = get_theme_for_streak(last if last else 1)
+        picked_name = get_theme_name_for_streak(last if last else 1)
 
     elif status == "offline":
         day_index = now_ist.timetuple().tm_yday
@@ -2039,7 +2112,7 @@ def generate_stats_section(
         status_note = _offline_note(now_ist)
         # Use a neutral dark theme for offline state
         theme = THEMES["black"]
-
+        picked_name = "black"
 
     else:  # active — use pick_theme for full festival/event/Sunday/special support
         picked_name, theme, event_note = pick_theme(now_ist, streak, state, username)
@@ -2115,16 +2188,26 @@ def generate_stats_section(
     # Cinematic footer line from lines.json
     theme_name_for_line = locals().get("picked_name", "")
     footer_line = pick_line(status, now_ist, theme_name_for_line)
-    footer_line_html = f"<br><i>{footer_line}</i>" if footer_line else ""
+
+    live_html = build_live_blocks(project_statuses, repo_meta, activity)
+    live_block_str = f"\n{live_html}\n" if live_html else ""
+
+    tagline_block = ""
+    if footer_line:
+        tagline_block = f"""
+<p align="center">
+  <b>&ldquo;&nbsp;{footer_line}&nbsp;&rdquo;</b>
+</p>
+"""
 
     section = f"""
 <p align="center">
-  <img src="https://img.shields.io/badge/{badge_label}-{badge_color}?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/{badge_label}-{badge_color}?style=for-the-badge&labelColor=0d1117" alt="Profile Status Badge" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="{capsule_divider_url}" width="70%" />
+  <img src="{capsule_divider_url}" width="70%" alt="" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -2136,20 +2219,125 @@ def generate_stats_section(
 <p align="center">
   <img width="95%" src="{graph_img_url}" alt="GitHub activity graph" />
 </p>
-
+{live_block_str}
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="{capsule_divider_url}" width="70%" />
+  <img src="{capsule_divider_url}" width="70%" alt="" />
+</p>
+{tagline_block}
+<p align="center">
+  <sub>{status_note}</sub>
 </p>
 
 <p align="center">
-  <sub>{status_note}{footer_line_html}</sub>
-</p>
-
-<p align="center">
-  <sub><i>Last refresh: {last_updated}</i></sub>
+  <sub><code>Last refresh: {last_updated}</code></sub>
 </p>"""
     return section.strip()
+
+
+_STATUS_LOOK = {
+    "active":  ("ACTIVE", "00ff00", "🟢 OPEN TO OPPORTUNITIES"),
+    "broken":  ("BUSY", "ff6d00", "🟠 BUSY · OPEN TO OPPORTUNITIES"),
+    "offline": ("AWAY", "546e7a", "🌑 QUIET MODE · OPEN TO OPPORTUNITIES"),
+}
+
+
+def _replace_marked(content: str, name: str, inner: str) -> str:
+    pat = re.compile(
+        r"(<!-- " + re.escape(name) + r":START -->).*?(<!-- " + re.escape(name) + r":END -->)",
+        re.DOTALL)
+    return pat.sub(lambda m: f"{m.group(1)}{inner}{m.group(2)}", content)
+
+
+def apply_status_badges(content: str, status: str) -> str:
+    """One computed status drives both the top badge and the Contact badge."""
+    top, color, contact = _STATUS_LOOK.get(status, _STATUS_LOOK["active"])
+    def badge(text, alt):
+        return (f'<img src="https://img.shields.io/badge/Status-'
+                f'{urllib.parse.quote(text, safe="")}-{color}?style=for-the-badge" alt="{alt}" />')
+    content = _replace_marked(content, "STATUS-TOP", badge(top, f"Status: {top}"))
+    content = _replace_marked(content, "STATUS-CONTACT", badge(contact, f"Status: {contact}"))
+    return content
+
+
+def generate_commit_message(
+    status: str,
+    streak: int | None,
+    prev_streak: int | None = None,
+    theme_name: str = "",
+    theme: dict | None = None,
+    event_note: str | None = None,
+    is_special: bool = False,
+    project_statuses: dict | None = None,
+    repo_meta: dict | None = None,
+    quote_line: str = "",
+    now_ist: datetime | None = None,
+) -> str:
+    """Generate a dynamic, detailed git commit message with subject & multi-line description."""
+    theme = theme or {}
+    label = theme.get("label", theme_name)
+    streak_val = streak if streak is not None else 0
+    streak_changed = (prev_streak is not None and streak_val != prev_streak and streak_val > 0)
+
+    # 1. Concise subject line
+    if status == "broken":
+        subject = "💔 Update profile · Streak dropped (busy mode activated)"
+    elif status == "offline":
+        subject = "🌙 Update profile · Offline mode (quiet hours)"
+    elif is_special:
+        streak_str = f" · {streak_val}d streak" if streak_val > 0 else ""
+        subject = f"✨ Update profile · Special day theme applied!{streak_str}"
+    elif event_note:
+        streak_str = f" · {streak_val}d streak" if streak_val > 0 else ""
+        subject = f"🎨 Update profile · {label} theme applied!{streak_str}"
+    elif theme_name == "sunday":
+        streak_str = f" · {streak_val}d streak" if streak_val > 0 else ""
+        subject = f"🔋 Update profile · Sunday recharge theme applied{streak_str}"
+    elif streak_changed:
+        subject = f"⚡ Update profile · Streak updated to {streak_val} days ({label})"
+    elif streak_val > 0:
+        subject = f"⚡ Update profile · {label} theme · {streak_val}d streak synced"
+    else:
+        subject = "⚡ Update profile · Stats, health & status synced in README"
+
+    # 2. Detailed operational breakdown description
+    desc = [subject, ""]
+    desc.append(f"• Theme: {label} ({theme_name})")
+    if event_note:
+        desc.append(f"• Event: {event_note}")
+    if streak_changed and prev_streak:
+        desc.append(f"• Streak: {streak_val} days (status: {status}) — updated from {prev_streak}")
+    else:
+        desc.append(f"• Streak: {streak_val} days (status: {status})")
+
+    if project_statuses:
+        p_str = " · ".join(f"{_PROJECT_LABELS.get(k, k)}: {v.upper()}" for k, v in project_statuses.items())
+        desc.append(f"• Systems: {p_str}")
+
+    if repo_meta:
+        r_parts = []
+        for repo, meta in repo_meta.items():
+            if not meta:
+                continue
+            r_label = _REPO_LABELS.get(repo, repo)
+            rel = meta.get("release")
+            commits = meta.get("commits")
+            detail = f"{rel} · {commits} commits" if rel and commits else (rel or f"{commits} commits" if commits else "")
+            if detail:
+                r_parts.append(f"{r_label} ({detail})")
+        if r_parts:
+            desc.append(f"• Repositories: {' · '.join(r_parts)}")
+
+    if quote_line:
+        desc.append(f"• Tagline: \"{quote_line}\"")
+
+    if now_ist:
+        time_str = now_ist.strftime("%d %b %Y, %H:%M IST")
+        desc.append(f"• Refresh Time: {time_str}")
+
+    return "\n".join(desc)
+
+
 
 
 
@@ -2162,16 +2350,29 @@ def update_readme(
     now_ist: datetime | None = None,
     dry_run: bool = False,
     force: bool = False,
+    project_statuses: dict | None = None,
+    repo_meta: dict | None = None,
+    activity: list | None = None,
+    theme_name: str | None = None,
 ) -> bool:
-
     """
-    Update the README.md file with the dynamic stats section.
+    Update the README.md file with the dynamic stats section and status badges.
     Looks for markers: <!-- DYNAMIC-STATS:START --> and <!-- DYNAMIC-STATS:END -->
     """
     with open(readme_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    new_section = generate_stats_section(username, streak, status, state, now_ist)
+    new_section = generate_stats_section(
+        username,
+        streak,
+        status,
+        state,
+        now_ist,
+        project_statuses=project_statuses,
+        repo_meta=repo_meta,
+        activity=activity,
+        theme_name=theme_name,
+    )
 
     start_marker = "<!-- DYNAMIC-STATS:START -->"
     end_marker = "<!-- DYNAMIC-STATS:END -->"
@@ -2190,6 +2391,8 @@ def update_readme(
         print("Error: Could not find DYNAMIC-STATS markers in README.md",
               file=sys.stderr)
         return False
+
+    new_content = apply_status_badges(new_content, status)
 
     if new_content != content:
         if dry_run:
@@ -2216,6 +2419,7 @@ def update_readme(
               f"status: {status}, "
               f"theme: {get_theme_name_for_streak(streak)})")
         return False
+
 
 
 
@@ -2360,11 +2564,27 @@ def main(argv=None):
 
     # ── Load state, compute status ───────────────────────────────────────────
     state = load_streak_state()
+    prev_streak = state.get("last_positive_streak")
     status = compute_streak_status(streak, state)
+
+
+    # ── Theme selection ───────────────────────────────────────────────────────
+    if args.theme:
+        picked_name = args.theme
+        picked_theme = THEMES[args.theme]
+        picked_note = f"Theme forced via --theme {args.theme}"
+        print(f"Forced theme: {picked_name} ({picked_theme['label']})")
+    else:
+        # pick_theme runs at every streak level — festivals/events/Sunday
+        # apply even when streak is 0; tier fallback handles offline/broken
+        picked_name, picked_theme, picked_note = pick_theme(now_ist, streak, state, username)
+        print(f"Selected theme: {picked_name} ({picked_theme['label']})")
+        if picked_note:
+            print(f"Event note: {picked_note}")
 
     # ── Cache SVG assets (skip in dry-run or when overriding streak) ─────────
     if not args.dry_run and args.streak is None and not streak_override_env:
-        theme = get_theme_for_streak(streak) if streak > 0 else THEMES["black"]
+        theme = picked_theme
 
         graph_url = (
             f"https://github-readme-activity-graph.vercel.app/graph?username={username}"
@@ -2441,26 +2661,16 @@ def main(argv=None):
     if not args.dry_run:
         _check_missing_festival_years()
 
-    # ── Theme selection ───────────────────────────────────────────────────────
-    if args.theme:
-        picked_name = args.theme
-        picked_theme = THEMES[args.theme]
-        picked_note = f"Theme forced via --theme {args.theme}"
-        print(f"Forced theme: {picked_name} ({picked_theme['label']})")
-    else:
-        # pick_theme runs at every streak level — festivals/events/Sunday
-        # apply even when streak is 0; tier fallback handles offline/broken
-        picked_name, picked_theme, picked_note = pick_theme(now_ist, streak, state, username)
-        print(f"Selected theme: {picked_name} ({picked_theme['label']})")
-        if picked_note:
-            print(f"Event note: {picked_note}")
-
-
     updated = update_readme(
         readme_path, username, streak, status, state,
         now_ist=now_ist, dry_run=args.dry_run,
         force=args.force,
+        project_statuses=project_statuses,
+        repo_meta=repo_meta,
+        activity=activity,
+        theme_name=picked_name,
     )
+
 
 
     if updated:
@@ -2499,8 +2709,8 @@ def main(argv=None):
     traffic_token = (
         os.environ.get("TRAFFIC_TOKEN", "").strip()
         or os.environ.get("GH_STATS_TOKEN", "").strip()
-        or token
     )
+
 
     if args.skip_traffic:
         print("Skipping traffic fetch (--skip-traffic)")
@@ -2539,7 +2749,33 @@ def main(argv=None):
         if analytics_updated and not args.dry_run:
             print("✅ Analytics block updated in README")
 
+    # Write dynamic commit message for CI runner
+    if not args.dry_run:
+        quote_line = pick_line(status, now_ist, picked_name)
+        msg = generate_commit_message(
+            status=status,
+            streak=streak,
+            prev_streak=prev_streak,
+            theme_name=picked_name,
+            theme=picked_theme,
+            event_note=picked_note if "picked_note" in locals() else None,
+            is_special=is_special_today(now_ist),
+            project_statuses=project_statuses,
+            repo_meta=repo_meta,
+            quote_line=quote_line,
+            now_ist=now_ist,
+        )
+        try:
+            with open(".commit_msg", "w", encoding="utf-8") as f:
+                f.write(msg)
+        except IOError:
+            pass
+
+
+
     write_job_summary(summary_items, now_ist)
+
+
 
 
 if __name__ == "__main__":

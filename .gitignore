@@ -20,6 +20,8 @@ htmlcov/
 *.tmp
 *.bak
 *.orig
+.commit_msg
+
 
 # ── Local dev secrets / env ────────────────────────────────────────────────────
 .env

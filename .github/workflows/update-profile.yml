@@ -1,4 +1,4 @@
-name: Update Dynamic Stats Theme
+name: Dynamic Profile Updater
 
 on:
   schedule:
@@ -44,8 +44,8 @@ permissions:
   issues: write
 
 jobs:
-  update-stats:
-    name: "🎨 Update Profile"
+  update-profile:
+    name: "⚡ Update Profile & Status"
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -113,7 +113,14 @@ jobs:
             echo "Nothing to commit."
             exit 0
           fi
-          git commit -m "🎨 Auto-update stats theme based on streak"
+          # Read dynamic contextual commit message from engine, else fallback
+          if [ -f .commit_msg ]; then
+            git commit -F .commit_msg
+            rm -f .commit_msg
+          else
+            git commit -m "⚡ Update profile stats, themes & status"
+          fi
+
           # Push directly — concurrency lock means no remote divergence.
           # Only pull+rebase if push is genuinely rejected.
           for i in 1 2 3; do
@@ -127,4 +134,5 @@ jobs:
           done
           echo "Push failed after 3 attempts" >&2
           exit 1
+
 

@@ -4,7 +4,7 @@
   <a href="https://ayushman.live/"><img src="https://img.shields.io/badge/Portfolio-ayushman.live-6e3aff?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
   <a href="https://t.me/unknownlll2829"><img src="https://img.shields.io/badge/Telegram-@unknownlll2829-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" /></a>
   <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6"><img src="https://img.shields.io/badge/Spotify-Artist-1DB954?style=for-the-badge&logo=spotify&logoColor=white" /></a>
-  <img src="https://img.shields.io/badge/Status-ACTIVE-00ff00?style=for-the-badge" />
+  <!-- STATUS-TOP:START --><img src="https://img.shields.io/badge/Status-ACTIVE-00ff00?style=for-the-badge" alt="Status: ACTIVE" /><!-- STATUS-TOP:END -->
 </p>
 
 ---
@@ -40,12 +40,12 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=0d1117" alt="Profile Status Badge" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -58,17 +58,37 @@ Primary Domains:
   <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=b9f6ca&line=00e676&point=69f0ae&area_color=00e676&area=true&hide_border=true" alt="GitHub activity graph" />
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Mail-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Mail status: up" /> <img src="https://img.shields.io/badge/ID-%E2%9A%A1%20SLOW-ff9500?style=flat-square&labelColor=0d1117" alt="ID status: slow" /> <img src="https://img.shields.io/badge/Vault-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Vault status: up" /> <img src="https://img.shields.io/badge/Portfolio-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Portfolio status: up" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Terminal-v3.6.1%20%C2%B7%2079%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Terminal: v3.6.1 · 79 commits" /> <img src="https://img.shields.io/badge/Mail-v1.1.0%20%C2%B7%20277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Mail: v1.1.0 · 277 commits" /> <img src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Research: 62 commits" />
+</p>
+
+<p align="center">
+  <sub>Unknown-2829 — pushed (4h ago)<br>
+  Unknown-2829 — released v2.1 (4h ago)<br>
+  Unknown-2829 — pushed (4h ago)<br>
+  Unknown-2829 — delete (1d ago)<br>
+  Unknown-2829 — delete (1d ago)</sub>
+</p>
+
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <p align="center">
-  <sub>🎨 <i>Stats theme updates dynamically based on current streak | Powered by GitHub Actions</i><br><i>I build therefore I am.</i></sub>
+  <b>&ldquo;&nbsp;I build therefore I am.&nbsp;&rdquo;</b>
 </p>
 
 <p align="center">
-  <sub><i>Last refresh: 1 Oct 2026, 14:22 IST</i></sub>
+  <sub>🎨 <i>🌱 Growing | Powered by GitHub Actions</i></sub>
+</p>
+
+<p align="center">
+  <sub><code>Last refresh: 1 Oct 2026, 18:16 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -328,17 +348,24 @@ Channel: [Shadow Vault](https://t.me/+JMGc_8bWeWQ4ZmU1) | Discussion: [Group](ht
 Music is another creative outlet — a different way to express ideas and emotions.
 
 <p align="center">
-  <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6">
-    <img src="https://img.shields.io/badge/Listen%20on-Spotify-1DB954?style=for-the-badge&logo=spotify&logoColor=white" />
+  <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6" target="_blank">
+    <img src="assets/spotify-widget.png" width="90%" alt="Ayushman Mishra Spotify Artist Music Player" />
   </a>
 </p>
+
+<p align="center">
+  <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6" target="_blank">
+    <img src="https://img.shields.io/badge/Listen%20on-Spotify-1DB954?style=for-the-badge&logo=spotify&logoColor=white" alt="Listen on Spotify" />
+  </a>
+</p>
+
 
 ---
 
 ## 📬 // CONTACT
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Status-🟢%20OPEN%20TO%20OPPORTUNITIES-00ff00?style=for-the-badge" />
+  <!-- STATUS-CONTACT:START --><img src="https://img.shields.io/badge/Status-%F0%9F%9F%A2%20OPEN%20TO%20OPPORTUNITIES-00ff00?style=for-the-badge" alt="Status: 🟢 OPEN TO OPPORTUNITIES" /><!-- STATUS-CONTACT:END -->
 </p>
 
 Interested In:
