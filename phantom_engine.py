@@ -1722,56 +1722,8 @@ def build_project_status_block(
     project_statuses: dict | None = None,
     repo_meta: dict | None = None,
 ) -> str:
-    """Build the HTML block for PROJECT-STATUS marker.
-
-    Row 1: Live service health pills (Mail, ID, Vault, Portfolio).
-    Row 2: Repo version + commit count badges (Terminal, Mail, Research).
-    """
-    parts: list[str] = []
-
-    if project_statuses:
-        imgs = " ".join(
-            f'<img src="{_status_badge(_PROJECT_LABELS.get(k, k), v)}"'
-            f' alt="{_PROJECT_LABELS.get(k, k)} status: {v}" />'
-            for k, v in project_statuses.items()
-        )
-        parts.append(
-            f'<p align="center">\n'
-            f'  <sub><b>// LIVE SERVICE STATUS</b></sub>\n'
-            f'</p>\n\n'
-            f'<p align="center">\n  {imgs}\n</p>'
-        )
-
-    if repo_meta:
-        badges = []
-        for repo, meta in repo_meta.items():
-            if not meta:
-                continue
-            label = _REPO_LABELS.get(repo, repo)
-            msg = " · ".join(
-                x for x in (
-                    str(meta.get("release") or "").strip(),
-                    f"{meta['commits']} commits" if meta.get("commits") else "",
-                )
-                if x
-            )
-            if not msg:
-                continue
-            url = (
-                f"https://img.shields.io/badge/{urllib.parse.quote(label, safe='')}-"
-                f"{urllib.parse.quote(msg, safe='')}-6e3aff"
-                f"?style=flat-square&labelColor=0d1117"
-            )
-            badges.append(f'<img src="{url}" alt="{label}: {msg}" />')
-        if badges:
-            parts.append(
-                f'<p align="center">\n'
-                f'  <sub><b>// REPO VERSIONS</b></sub>\n'
-                f'</p>\n\n'
-                f'<p align="center">\n  ' + " ".join(badges) + "\n</p>"
-            )
-
-    return "\n\n".join(parts)
+    """DEPRECATED — live status and versions now live inside each project details block."""
+    return ""
 
 
 def build_recent_activity_block(activity: list | None) -> str:
@@ -1814,7 +1766,7 @@ def _build_per_project_block(
     repo_meta: dict,
 ) -> str:
     """Build the badge HTML for a single LIVE-PROJECT marker.
-    Format: badge(s) then note in parentheses on same line after a gap.
+    Format: badge(s) then some gap then in brackets on same line: (🔴 Live · auto-updated every ~6h)
     """
     svc_key, repo_key = _PER_PROJECT_MAP.get(key, (None, None))
     parts = []
@@ -1840,8 +1792,8 @@ def _build_per_project_block(
 
     if not parts:
         return ""
-    # Badges then note inline
-    return " &nbsp; ".join(parts) + " " + _LIVE_NOTE
+    note = '<sub>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</sub>'
+    return f'<p>\n  {" &nbsp; ".join(parts)} &emsp; {note}\n</p>'
 
 
 def inject_per_project_live(
@@ -2319,9 +2271,9 @@ def generate_stats_section(
 
     section = f"""
 <p align="center">
-  <sub><b>// CURRENT STATUS</b></sub> &ensp; <img src="https://img.shields.io/badge/{badge_label}-{badge_color}?style=for-the-badge&labelColor=0d1117" alt="Profile Status Badge" />
+  <img src="https://img.shields.io/badge/%2F%2F%20CURRENT%20STATUS-{badge_label}-{badge_color}?style=for-the-badge&labelColor=0d1117" alt="Current Status" />
 </p>
-
+{tagline_block}
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
   <img src="{capsule_divider_url}" width="70%" alt="" />
@@ -2341,7 +2293,7 @@ def generate_stats_section(
 <p align="center">
   <img src="{capsule_divider_url}" width="70%" alt="" />
 </p>
-{tagline_block}
+
 <p align="center">
   <sub>{status_note}</sub>
 </p>
@@ -2543,19 +2495,6 @@ def update_readme(
         return False
 
     new_content = apply_status_badges(new_content, status)
-
-    # ── Inject PROJECT-STATUS block ───────────────────────────────────────────
-    ps_block = build_project_status_block(project_statuses, repo_meta)
-    ps_start = "<!-- PROJECT-STATUS:START -->"
-    ps_end   = "<!-- PROJECT-STATUS:END -->"
-    ps_pat   = re.compile(re.escape(ps_start) + r".*?" + re.escape(ps_end), re.DOTALL)
-    if ps_pat.search(new_content):
-        new_content = ps_pat.sub(
-            f"{ps_start}\n{ps_block}\n{ps_end}" if ps_block else f"{ps_start}\n{ps_end}",
-            new_content,
-        )
-    else:
-        print("Info: PROJECT-STATUS markers not found — skipping", file=sys.stderr)
 
     # ── Inject RECENT-ACTIVITY block ──────────────────────────────────────────
     ra_block = build_recent_activity_block(activity)
