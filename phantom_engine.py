@@ -1713,38 +1713,85 @@ def build_live_blocks(
     repo_meta: dict | None = None,
     activity: list | None = None,
 ) -> str:
-    """Extra README HTML: systems row, release/commit badges, recent activity.
-    Every part is optional and simply omitted when its data is missing."""
+    """DEPRECATED internal use — now returns empty string.
+    Status/repo/activity are injected into PROJECT-STATUS and RECENT-ACTIVITY markers instead."""
+    return ""
+
+
+def build_project_status_block(
+    project_statuses: dict | None = None,
+    repo_meta: dict | None = None,
+) -> str:
+    """Build the HTML block for PROJECT-STATUS marker.
+
+    Row 1: Live service health pills (Mail, ID, Vault, Portfolio).
+    Row 2: Repo version + commit count badges (Terminal, Mail, Research).
+    """
     parts: list[str] = []
+
     if project_statuses:
         imgs = " ".join(
-            f'<img src="{_status_badge(_PROJECT_LABELS.get(k, k), v)}" alt="{_PROJECT_LABELS.get(k, k)} status: {v}" />'
+            f'<img src="{_status_badge(_PROJECT_LABELS.get(k, k), v)}"'
+            f' alt="{_PROJECT_LABELS.get(k, k)} status: {v}" />'
             for k, v in project_statuses.items()
         )
-        parts.append(f'<p align="center">\n  {imgs}\n</p>')
+        parts.append(
+            f'<p align="center">\n'
+            f'  <sub><b>// LIVE SERVICE STATUS</b></sub>\n'
+            f'</p>\n\n'
+            f'<p align="center">\n  {imgs}\n</p>'
+        )
+
     if repo_meta:
         badges = []
         for repo, meta in repo_meta.items():
             if not meta:
                 continue
             label = _REPO_LABELS.get(repo, repo)
-            msg = " · ".join(x for x in (
-                str(meta.get("release") or "").strip(),
-                f"{meta['commits']} commits" if meta.get("commits") else "") if x)
+            msg = " · ".join(
+                x for x in (
+                    str(meta.get("release") or "").strip(),
+                    f"{meta['commits']} commits" if meta.get("commits") else "",
+                )
+                if x
+            )
             if not msg:
                 continue
-            url = (f"https://img.shields.io/badge/{urllib.parse.quote(label, safe='')}-"
-                   f"{urllib.parse.quote(msg, safe='')}-6e3aff?style=flat-square&labelColor=0d1117")
+            url = (
+                f"https://img.shields.io/badge/{urllib.parse.quote(label, safe='')}-"
+                f"{urllib.parse.quote(msg, safe='')}-6e3aff"
+                f"?style=flat-square&labelColor=0d1117"
+            )
             badges.append(f'<img src="{url}" alt="{label}: {msg}" />')
         if badges:
-            parts.append('<p align="center">\n  ' + " ".join(badges) + "\n</p>")
-    if activity:
-        lines = "<br>\n  ".join(
-            f"{html.escape(ev.get('repo', ''))} — {html.escape(ev.get('detail', ''))}"
-            + (f" ({html.escape(ev['when'])})" if ev.get("when") else "")
-            for ev in activity[:5])
-        parts.append(f'<p align="center">\n  <sub>{lines}</sub>\n</p>')
+            parts.append(
+                f'<p align="center">\n'
+                f'  <sub><b>// REPO VERSIONS</b></sub>\n'
+                f'</p>\n\n'
+                f'<p align="center">\n  ' + " ".join(badges) + "\n</p>"
+            )
+
     return "\n\n".join(parts)
+
+
+def build_recent_activity_block(activity: list | None) -> str:
+    """Build a markdown list for RECENT-ACTIVITY marker.
+
+    Each entry is a bullet: `repo` — detail (when).
+    Returns a placeholder string if no activity.
+    """
+    if not activity:
+        return "_No recent public activity found._"
+
+    lines = []
+    for ev in activity[:5]:
+        repo = ev.get("repo", "")
+        detail = ev.get("detail", "")
+        when = ev.get("when", "")
+        when_str = f" ({when})" if when else ""
+        lines.append(f"- `{repo}` — {detail}{when_str}")
+    return "\n".join(lines)
+
 
 
 
@@ -2202,6 +2249,10 @@ def generate_stats_section(
 
     section = f"""
 <p align="center">
+  <sub><b>// CURRENT STATUS</b></sub>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/{badge_label}-{badge_color}?style=for-the-badge&labelColor=0d1117" alt="Profile Status Badge" />
 </p>
 
@@ -2279,61 +2330,94 @@ def generate_commit_message(
     streak_val = streak if streak is not None else 0
     streak_changed = (prev_streak is not None and streak_val != prev_streak and streak_val > 0)
 
-    # 1. Concise subject line
+    # ── Streak milestone detection ────────────────────────────────────────────
+    milestones = {7: "🎯 1-week", 14: "🔥 2-week", 30: "💎 1-month",
+                  50: "🚀 50-day", 100: "👑 100-day", 365: "⚡ 1-year"}
+    milestone_str = milestones.get(streak_val, "")
+
+    # ── Subject line ──────────────────────────────────────────────────────────
     if status == "broken":
-        subject = "💔 Update profile · Streak dropped (busy mode activated)"
+        subject = f"💔 profile: streak dropped → busy mode | {label} theme"
     elif status == "offline":
-        subject = "🌙 Update profile · Offline mode (quiet hours)"
+        subject = f"🌙 profile: quiet mode active | offline theme"
     elif is_special:
-        streak_str = f" · {streak_val}d streak" if streak_val > 0 else ""
-        subject = f"✨ Update profile · Special day theme applied!{streak_str}"
+        streak_str = f" · {streak_val}d" if streak_val > 0 else ""
+        subject = f"✨ profile: special day theme active{streak_str} | {label}"
     elif event_note:
-        streak_str = f" · {streak_val}d streak" if streak_val > 0 else ""
-        subject = f"🎨 Update profile · {label} theme applied!{streak_str}"
-    elif theme_name == "sunday":
-        streak_str = f" · {streak_val}d streak" if streak_val > 0 else ""
-        subject = f"🔋 Update profile · Sunday recharge theme applied{streak_str}"
-    elif streak_changed:
-        subject = f"⚡ Update profile · Streak updated to {streak_val} days ({label})"
+        streak_str = f" · {streak_val}d" if streak_val > 0 else ""
+        subject = f"🎨 profile: {label} theme applied{streak_str}"
+    elif milestone_str:
+        subject = f"⚡ profile: {milestone_str} streak milestone! | {label} theme"
+    elif streak_changed and prev_streak is not None:
+        delta = streak_val - prev_streak
+        arrow = f"+{delta}" if delta > 0 else str(delta)
+        subject = f"⚡ profile: streak {prev_streak}d → {streak_val}d ({arrow}) | {label}"
     elif streak_val > 0:
-        subject = f"⚡ Update profile · {label} theme · {streak_val}d streak synced"
+        subject = f"⚡ profile: {streak_val}d streak synced | {label} theme"
     else:
-        subject = "⚡ Update profile · Stats, health & status synced in README"
+        subject = "⚡ profile: data, health & status refreshed in README"
 
-    # 2. Detailed operational breakdown description
+    # ── Detailed operational breakdown ────────────────────────────────────────
     desc = [subject, ""]
-    desc.append(f"• Theme: {label} ({theme_name})")
+
+    # Theme
+    desc.append(f"🎨 Theme      : {label} ({theme_name})")
+
+    # Event / special day
     if event_note:
-        desc.append(f"• Event: {event_note}")
-    if streak_changed and prev_streak:
-        desc.append(f"• Streak: {streak_val} days (status: {status}) — updated from {prev_streak}")
+        desc.append(f"📅 Event      : {event_note}")
+    if is_special:
+        desc.append(f"🌟 Special day: theme override applied")
+
+    # Streak
+    if milestone_str:
+        desc.append(f"🔥 Streak     : {streak_val} days — {milestone_str} milestone reached!")
+    elif streak_changed and prev_streak is not None:
+        delta = streak_val - prev_streak
+        arrow = f"+{delta}" if delta > 0 else str(delta)
+        desc.append(f"🔥 Streak     : {streak_val} days (was {prev_streak}d, Δ{arrow})")
     else:
-        desc.append(f"• Streak: {streak_val} days (status: {status})")
+        desc.append(f"🔥 Streak     : {streak_val} days (status: {status})")
 
+    # Project health — flag anything not 'up'
     if project_statuses:
-        p_str = " · ".join(f"{_PROJECT_LABELS.get(k, k)}: {v.upper()}" for k, v in project_statuses.items())
-        desc.append(f"• Systems: {p_str}")
+        health_parts = []
+        issues = []
+        for k, v in project_statuses.items():
+            lbl = _PROJECT_LABELS.get(k, k)
+            icon = {"up": "✅", "slow": "⚡", "down": "❌"}.get(v, "❓")
+            health_parts.append(f"{icon} {lbl}")
+            if v != "up":
+                issues.append(f"{lbl}:{v}")
+        health_str = "  ".join(health_parts)
+        if issues:
+            desc.append(f"🩺 Services   : {health_str}  ⚠️ degraded: {', '.join(issues)}")
+        else:
+            desc.append(f"🩺 Services   : {health_str}  (all operational)")
 
+    # Repo versions
     if repo_meta:
         r_parts = []
         for repo, meta in repo_meta.items():
             if not meta:
                 continue
             r_label = _REPO_LABELS.get(repo, repo)
-            rel = meta.get("release")
+            rel = meta.get("release", "")
             commits = meta.get("commits")
-            detail = f"{rel} · {commits} commits" if rel and commits else (rel or f"{commits} commits" if commits else "")
+            detail = " · ".join(x for x in (rel, f"{commits}c" if commits else "") if x)
             if detail:
-                r_parts.append(f"{r_label} ({detail})")
+                r_parts.append(f"{r_label}({detail})")
         if r_parts:
-            desc.append(f"• Repositories: {' · '.join(r_parts)}")
+            desc.append(f"📦 Repos      : {' · '.join(r_parts)}")
 
+    # Tagline
     if quote_line:
-        desc.append(f"• Tagline: \"{quote_line}\"")
+        desc.append(f'💬 Tagline    : "{quote_line}"')
 
+    # Timestamp
     if now_ist:
         time_str = now_ist.strftime("%d %b %Y, %H:%M IST")
-        desc.append(f"• Refresh Time: {time_str}")
+        desc.append(f"🕐 Refreshed  : {time_str}")
 
     return "\n".join(desc)
 
@@ -2393,6 +2477,32 @@ def update_readme(
         return False
 
     new_content = apply_status_badges(new_content, status)
+
+    # ── Inject PROJECT-STATUS block ───────────────────────────────────────────
+    ps_block = build_project_status_block(project_statuses, repo_meta)
+    ps_start = "<!-- PROJECT-STATUS:START -->"
+    ps_end   = "<!-- PROJECT-STATUS:END -->"
+    ps_pat   = re.compile(re.escape(ps_start) + r".*?" + re.escape(ps_end), re.DOTALL)
+    if ps_pat.search(new_content):
+        new_content = ps_pat.sub(
+            f"{ps_start}\n{ps_block}\n{ps_end}" if ps_block else f"{ps_start}\n{ps_end}",
+            new_content,
+        )
+    else:
+        print("Info: PROJECT-STATUS markers not found — skipping", file=sys.stderr)
+
+    # ── Inject RECENT-ACTIVITY block ──────────────────────────────────────────
+    ra_block = build_recent_activity_block(activity)
+    ra_start = "<!-- RECENT-ACTIVITY:START -->"
+    ra_end   = "<!-- RECENT-ACTIVITY:END -->"
+    ra_pat   = re.compile(re.escape(ra_start) + r".*?" + re.escape(ra_end), re.DOTALL)
+    if ra_pat.search(new_content):
+        new_content = ra_pat.sub(
+            f"{ra_start}\n{ra_block}\n{ra_end}",
+            new_content,
+        )
+    else:
+        print("Info: RECENT-ACTIVITY markers not found — skipping", file=sys.stderr)
 
     if new_content != content:
         if dry_run:
