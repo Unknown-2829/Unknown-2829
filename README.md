@@ -40,12 +40,12 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%F0%9F%94%95%20Busy%20with%20Real%20Life-546e7a?style=for-the-badge&labelColor=0d1117" />
+  <img src="https://img.shields.io/badge/%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=0d1117" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=cylinder&color=0:000000,50:212121,100:424242&height=6&section=header&animation=blinking" width="70%" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -55,16 +55,20 @@ Primary Domains:
 
 <!-- Activity Graph - Themed -->
 <p align="center">
-  <img width="95%" src="https://raw.githubusercontent.com/Unknown-2829/Unknown-2829/main/assets/activity-graph.svg" alt="GitHub activity graph" />
+  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=b9f6ca&line=00e676&point=69f0ae&area_color=00e676&area=true&hide_border=true" alt="GitHub activity graph" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=cylinder&color=0:000000,50:212121,100:424242&height=6&section=header&animation=blinking" width="70%" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" />
 </p>
 
 <p align="center">
-  <sub>😶‍🌫️ <i>maybe cooking something secretly...</i> 🤫</sub>
+  <sub>🎨 <i>Stats theme updates dynamically based on current streak | Powered by GitHub Actions</i><br><i>I build therefore I am.</i></sub>
+</p>
+
+<p align="center">
+  <sub><i>Last refresh: 1 Oct 2026, 14:22 IST</i></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
