@@ -2265,13 +2265,14 @@ def generate_stats_section(
     if footer_line:
         tagline_block = f"""
 <p align="center">
+  <img src="https://img.shields.io/badge/%23-TAGLINE-6e3aff?style=flat-square&labelColor=0d1117" alt="Tagline" /><br>
   <b>&ldquo;&nbsp;{footer_line}&nbsp;&rdquo;</b>
 </p>
 """
 
     section = f"""
 <p align="center">
-  <img src="https://img.shields.io/badge/%2F%2F%20CURRENT%20STATUS-{badge_label}-{badge_color}?style=for-the-badge&labelColor=0d1117" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-{badge_label}-{badge_color}?style=for-the-badge&labelColor=0d1117" alt="Current Status" />
 </p>
 {tagline_block}
 <!-- Themed gradient divider with tier-specific effect -->

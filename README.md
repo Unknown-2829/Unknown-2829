@@ -40,10 +40,11 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%2F%2F%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=0d1117" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=0d1117" alt="Current Status" />
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/%23-TAGLINE-6e3aff?style=flat-square&labelColor=0d1117" alt="Tagline" /><br>
   <b>&ldquo;&nbsp;I build therefore I am.&nbsp;&rdquo;</b>
 </p>
 
@@ -283,7 +284,11 @@ ai_apis             = ["OpenAI", "Google AI", "Anthropic"]
 deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 ```
 
-### 📜 // RECENT LOGS
+<details>
+<summary><b>📜 // RECENT LOGS (Live GitHub Event Stream)</b></summary>
+<br>
+
+> 🔴 **Live GitHub Event Stream:** _Real-time public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
 - `Unknown-2829` — pushed (just now)
@@ -292,6 +297,8 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 - `Unknown-2829` — released v2.1 (6h ago)
 - `Unknown-2829` — pushed (6h ago)
 <!-- RECENT-ACTIVITY:END -->
+
+</details>
 
 ---
 
