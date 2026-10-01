@@ -58,8 +58,6 @@ Primary Domains:
   <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=b9f6ca&line=00e676&point=69f0ae&area_color=00e676&area=true&hide_border=true" alt="GitHub activity graph" />
 </p>
 
-
-
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
@@ -74,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 1 Oct 2026, 18:28 IST</code></sub>
+  <sub><code>Last refresh: 1 Oct 2026, 19:56 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -86,6 +84,21 @@ Primary Domains:
 ## <img src="https://media.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif" width="25"> // PROJECTS
 
 <!-- PROJECT-STATUS:START -->
+<p align="center">
+  <sub><b>// LIVE SERVICE STATUS</b></sub>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Mail-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Mail status: up" /> <img src="https://img.shields.io/badge/ID-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="ID status: up" /> <img src="https://img.shields.io/badge/Vault-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Vault status: up" /> <img src="https://img.shields.io/badge/Portfolio-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Portfolio status: up" />
+</p>
+
+<p align="center">
+  <sub><b>// REPO VERSIONS</b></sub>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Terminal-v3.6.1%20%C2%B7%2079%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Terminal: v3.6.1 · 79 commits" /> <img src="https://img.shields.io/badge/Mail-v1.1.0%20%C2%B7%20277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Mail: v1.1.0 · 277 commits" /> <img src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Research: 62 commits" />
+</p>
 <!-- PROJECT-STATUS:END -->
 
 <details>
@@ -116,9 +129,7 @@ Primary Domains:
 <br>
 
 <!-- LIVE-PROJECT:phantom_vault:START -->
-<sup>🔴 <i>Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a></i></sup>
-
-<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Phantom Vault service: up" />
+<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> <sup>&emsp;(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</sup>
 <!-- LIVE-PROJECT:phantom_vault:END -->
 
 ---
@@ -147,9 +158,7 @@ Primary Domains:
 <br>
 
 <!-- LIVE-PROJECT:phantom_id:START -->
-<sup>🔴 <i>Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a></i></sup>
-
-<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Phantom ID service: up" />
+<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> <sup>&emsp;(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</sup>
 <!-- LIVE-PROJECT:phantom_id:END -->
 
 ---
@@ -178,9 +187,7 @@ Primary Domains:
 <br>
 
 <!-- LIVE-PROJECT:llm-prompt-engineering:START -->
-<sup>🔴 <i>Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a></i></sup>
-
-<img src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="62 commits" />
+<img src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Research: 62 commits" /> <sup>&emsp;(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</sup>
 <!-- LIVE-PROJECT:llm-prompt-engineering:END -->
 
 ---
@@ -207,9 +214,7 @@ Gemini 2.5 Flash & Pro
 <br>
 
 <!-- LIVE-PROJECT:Phanton-terminal:START -->
-<sup>🔴 <i>Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a></i></sup>
-
-<img src="https://img.shields.io/badge/v3.6.1-79%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="v3.6.1 · 79 commits" />
+<img src="https://img.shields.io/badge/Terminal-v3.6.1%20%C2%B7%2079%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Terminal: v3.6.1 · 79 commits" /> <sup>&emsp;(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</sup>
 <!-- LIVE-PROJECT:Phanton-terminal:END -->
 
 ---
@@ -240,9 +245,7 @@ curl -fsSL https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/
 <br>
 
 <!-- LIVE-PROJECT:phantom_mail:START -->
-<sup>🔴 <i>Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a></i></sup>
-
-<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; <img src="https://img.shields.io/badge/v1.1.0-277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="v1.1.0 · 277 commits" />
+<img src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; <img src="https://img.shields.io/badge/Mail-v1.1.0%20%C2%B7%20277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Mail: v1.1.0 · 277 commits" /> <sup>&emsp;(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</sup>
 <!-- LIVE-PROJECT:phantom_mail:END -->
 
 ---
@@ -344,6 +347,11 @@ The central hub for all project updates, releases, and community activity.
 
 **GitHub Activity:**
 <!-- RECENT-ACTIVITY:START -->
+- `Unknown-2829` — pushed (just now)
+- `Unknown-2829` — pushed (1h ago)
+- `Unknown-2829` — pushed (5h ago)
+- `Unknown-2829` — released v2.1 (6h ago)
+- `Unknown-2829` — pushed (6h ago)
 <!-- RECENT-ACTIVITY:END -->
 
 Community: Small but dedicated. Quality over quantity.
