@@ -112,7 +112,7 @@ Primary Domains:
 
 <!-- LIVE-PROJECT:phantom_vault:START -->
 <p>
-  <img align="absmiddle" src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; (🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
+  <img align="absmiddle" src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; (🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
 </p>
 <!-- LIVE-PROJECT:phantom_vault:END -->
 
@@ -143,7 +143,7 @@ Primary Domains:
 
 <!-- LIVE-PROJECT:phantom_id:START -->
 <p>
-  <img align="absmiddle" src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; (🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
+  <img align="absmiddle" src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; (🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
 </p>
 <!-- LIVE-PROJECT:phantom_id:END -->
 
@@ -174,7 +174,7 @@ Primary Domains:
 
 <!-- LIVE-PROJECT:llm-prompt-engineering:START -->
 <p>
-  <img align="absmiddle" src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Research: 62 commits" /> &nbsp; (🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
+  <img align="absmiddle" src="https://img.shields.io/badge/Research-62%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Research: 62 commits" /> &nbsp; (🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
 </p>
 <!-- LIVE-PROJECT:llm-prompt-engineering:END -->
 
@@ -201,11 +201,11 @@ Gemini 2.5 Flash & Pro
 <summary><b>🎬 PHANTOM TERMINAL — Cinematic Shell Startup</b></summary>
 <br>
 
-<!-- LIVE-PROJECT:Phanton-terminal:START -->
+<!-- LIVE-PROJECT:Phantom-terminal:START -->
 <p>
-  <img align="absmiddle" src="https://img.shields.io/badge/Terminal-v3.6.1%20%C2%B7%2079%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Terminal: v3.6.1 · 79 commits" /> &nbsp; (🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
+  <img align="absmiddle" src="https://img.shields.io/badge/Terminal-v3.6.1%20%C2%B7%2079%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Terminal: v3.6.1 · 79 commits" /> &nbsp; (🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
 </p>
-<!-- LIVE-PROJECT:Phanton-terminal:END -->
+<!-- LIVE-PROJECT:Phantom-terminal:END -->
 
 ---
 
@@ -220,13 +220,13 @@ Gemini 2.5 Flash & Pro
 
 **Quick Install:**
 ```powershell
-irm https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/Unknown-2829/Phantom-terminal/main/install.ps1 | iex
 ```
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Unknown-2829/Phantom-terminal/main/install.sh | bash
 ```
 
-**Links:** [View on GitHub →](https://github.com/Unknown-2829/Phanton-terminal)
+**Links:** [View on GitHub →](https://github.com/Unknown-2829/Phantom-terminal)
 
 </details>
 
@@ -236,7 +236,7 @@ curl -fsSL https://raw.githubusercontent.com/Unknown-2829/Phanton-terminal/main/
 
 <!-- LIVE-PROJECT:phantom_mail:START -->
 <p>
-  <img align="absmiddle" src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; <img align="absmiddle" src="https://img.shields.io/badge/Mail-v1.1.0%20%C2%B7%20277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Mail: v1.1.0 · 277 commits" /> &nbsp; (🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
+  <img align="absmiddle" src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; <img align="absmiddle" src="https://img.shields.io/badge/Mail-v1.1.0%20%C2%B7%20277%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Mail: v1.1.0 · 277 commits" /> &nbsp; (🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
 </p>
 <!-- LIVE-PROJECT:phantom_mail:END -->
 
@@ -284,10 +284,10 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 ```
 
 <details>
-<summary><b>📜 // RECENT LOGS (Live GitHub Event Stream)</b></summary>
+<summary><b>📜 // RECENT LOGS (GitHub Activity — Synced every ~6h)</b></summary>
 <br>
 
-> 🔴 **Live GitHub Event Stream:** _Real-time public events from GitHub, auto-synced every ~6h via GitHub Actions._
+> 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
 - `Unknown-2829` — pushed (1h ago)

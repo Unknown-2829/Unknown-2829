@@ -42,7 +42,8 @@ desktop.ini
 
 # ── CI-managed state files (only committed by github-actions bot via git add -f) ──
 # Developers: do NOT commit these. CI creates and updates them automatically.
-data/*.json
+# data/*.json are tracked intentionally — CI stages them explicitly via git add -f.
+# The legacy root dot-files below are kept as guards in case of accidental regeneration.
 .streak_state.json
 .project_status.json
 .repo_meta.json

@@ -547,15 +547,8 @@ _EVENTS_FILE = os.environ.get(
 
 def _load_events() -> dict:
     """Load config/events_data.json; return empty dict on failure."""
-    target_path = _EVENTS_FILE
-    if not os.path.exists(target_path):
-        legacy = os.path.join(
-            os.path.dirname(__file__) if "__file__" in dir() else ".", "events_data.json"
-        )
-        if os.path.exists(legacy):
-            target_path = legacy
     try:
-        with open(target_path, "r", encoding="utf-8") as f:
+        with open(_EVENTS_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {}
@@ -867,13 +860,10 @@ def cache_graph(url: str, dest: str, timeout: int = _TIMEOUT) -> bool:
 # ── Streak State Persistence ───────────────────────────────────────────────────
 
 def load_streak_state() -> dict:
-    """Load the persisted streak state from disk."""
-    target_path = STATE_FILE
-    if not os.path.exists(target_path) and os.path.exists(".streak_state.json"):
-        target_path = ".streak_state.json"
-    if os.path.exists(target_path):
+    """Load the persisted streak state from disk (data/streak_state.json)."""
+    if os.path.exists(STATE_FILE):
         try:
-            with open(target_path, "r", encoding="utf-8") as f:
+            with open(STATE_FILE, "r", encoding="utf-8") as f:
                 return json.load(f)
         except (json.JSONDecodeError, IOError):
             pass
@@ -944,8 +934,8 @@ def _graphql_streak(username: str, token: str) -> int | None:
     Returns the streak count (0 is valid) or None on error.
     """
     today_ist = _now_ist().date()
-    # Scan back 400 days — more than enough for any real streak
-    from_date = (today_ist - timedelta(days=400)).isoformat()
+    # GitHub contribution calendar covers exactly 1 year — 365 days max
+    from_date = (today_ist - timedelta(days=365)).isoformat()
     to_date = today_ist.isoformat()
 
     query = """
@@ -1112,12 +1102,9 @@ _MAX_DAILY_ROWS       = 400   # roll into monthly totals beyond this
 
 
 def _load_traffic_summary() -> dict:
-    """Load local traffic summary cache (on main branch). Returns {} on miss."""
-    target_path = _TRAFFIC_SUMMARY_FILE
-    if not os.path.exists(target_path) and os.path.exists(".traffic_summary.json"):
-        target_path = ".traffic_summary.json"
+    """Load local traffic summary cache (data/traffic_summary.json). Returns {} on miss."""
     try:
-        with open(target_path, "r", encoding="utf-8") as f:
+        with open(_TRAFFIC_SUMMARY_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {}
@@ -1424,17 +1411,12 @@ def append_traffic_to_data_branch(
 def _compute_rolling_totals(traffic: dict) -> dict:
     """
     Build a summary suitable for the analytics block.
-    We have: views_14d, unique_visitors_14d from the API.
-    Approximate 7d = half of 14d (API doesn't give 7d directly).
+    GitHub API returns views_14d and unique_visitors_14d only.
+    No approximation of 7d — only real data is stored.
     """
     v14  = traffic.get("views_14d", 0)
     uv14 = traffic.get("unique_visitors_14d", 0)
-    # Rough 7d approximation (GitHub only returns 14d window)
-    v7   = round(v14 / 2)
-    uv7  = round(uv14 / 2)
     return {
-        "views_7d":             v7,
-        "unique_visitors_7d":   uv7,
         "views_14d":            v14,
         "unique_visitors_14d":  uv14,
         "clones_14d":           traffic.get("clones_14d", 0),
@@ -1457,8 +1439,6 @@ def build_analytics_block(summary: dict) -> str:
     if not summary:
         return ""
 
-    v7   = summary.get("views_7d", 0)
-    uv7  = summary.get("unique_visitors_7d", 0)
     v14  = summary.get("views_14d", 0)
     uv14 = summary.get("unique_visitors_14d", 0)
     c14  = summary.get("clones_14d", 0)
@@ -1475,7 +1455,6 @@ def build_analytics_block(summary: dict) -> str:
         )
 
     badges = (
-        f"{badge('Views · 7d', v7, '1a1a2e')} "
         f"{badge('Views · 14d', v14, '1a1a2e')} "
         f"{badge('Unique · 14d', uv14, '6e3aff')} "
         f"{badge('Clones · 14d', c14, '0d1117')}"
@@ -1577,15 +1556,8 @@ _LINES_FILE = os.environ.get(
 
 def _load_lines() -> dict:
     """Load config/lines.json; return empty dict on failure."""
-    target_path = _LINES_FILE
-    if not os.path.exists(target_path):
-        legacy = os.path.join(
-            os.path.dirname(__file__) if "__file__" in dir() else ".", "lines.json"
-        )
-        if os.path.exists(legacy):
-            target_path = legacy
     try:
-        with open(target_path, "r", encoding="utf-8") as f:
+        with open(_LINES_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {}
@@ -1651,11 +1623,9 @@ _STATUS_FILE = os.environ.get(
 
 
 def _load_project_status() -> dict:
-    target_path = _STATUS_FILE
-    if not os.path.exists(target_path) and os.path.exists(".project_status.json"):
-        target_path = ".project_status.json"
+    """Load project ping status from data/project_status.json."""
     try:
-        with open(target_path, "r", encoding="utf-8") as f:
+        with open(_STATUS_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {}
@@ -1748,7 +1718,7 @@ _PROJECT_LABELS = {
 }
 
 _REPO_LABELS = {
-    "Phanton-terminal": "Terminal",
+    "Phantom-terminal": "Terminal",
     "Phantom-mail": "Mail",
     "llm-prompt-engineering": "Research",
 }
@@ -1796,12 +1766,12 @@ _PER_PROJECT_MAP = {
     "phantom_mail":          ("phantom_mail",  "Phantom-mail"),
     "phantom_vault":         ("phantom_vault", None),
     "phantom_id":            ("phantom_id",    None),
-    "Phanton-terminal":      (None,            "Phanton-terminal"),
+    "Phantom-terminal":      (None,            "Phantom-terminal"),
     "llm-prompt-engineering":(None,            "llm-prompt-engineering"),
 }
 
 _LIVE_NOTE = (
-    '<sup>&emsp;(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">'
+    '<sup>&emsp;(🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">'
     'auto-updated every ~6h</a>)</sup>'
 )
 
@@ -1812,7 +1782,7 @@ def _build_per_project_block(
     repo_meta: dict,
 ) -> str:
     """Build the badge HTML for a single LIVE-PROJECT marker.
-    Format: badge(s) then some gap then in brackets on same line: (🔴 Live · auto-updated every ~6h)
+    Format: badge(s) then some gap then in brackets on same line: (🔄 Synced · auto-updated every ~6h)
     """
     svc_key, repo_key = _PER_PROJECT_MAP.get(key, (None, None))
     parts = []
@@ -1838,7 +1808,7 @@ def _build_per_project_block(
 
     if not parts:
         return ""
-    note = '(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)'
+    note = '(🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)'
     return f'<p>\n  {" &nbsp; ".join(parts)} &nbsp; {note}\n</p>'
 
 
@@ -1871,11 +1841,9 @@ _REPO_META_FILE = os.environ.get(
 
 
 def _load_repo_meta() -> dict:
-    target_path = _REPO_META_FILE
-    if not os.path.exists(target_path) and os.path.exists(".repo_meta.json"):
-        target_path = ".repo_meta.json"
+    """Load repo meta cache from data/repo_meta.json."""
     try:
-        with open(target_path, "r", encoding="utf-8") as f:
+        with open(_REPO_META_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {}
@@ -1948,7 +1916,7 @@ def get_all_repo_meta(token: str | None = None, dry_run: bool = False) -> dict:
     Cache key: repo name. Only re-fetches if pushed_at changed or cache empty.
     """
     tracked = {
-        "Phanton-terminal": "Unknown-2829",
+        "Phantom-terminal": "Unknown-2829",
         "Phantom-mail":     "Unknown-2829",
         "llm-prompt-engineering": "Unknown-2829",
     }
@@ -2049,11 +2017,9 @@ _RUN_STATE_FILE = os.environ.get(
 
 
 def _load_run_state() -> dict:
-    target_path = _RUN_STATE_FILE
-    if not os.path.exists(target_path) and os.path.exists(".run_state.json"):
-        target_path = ".run_state.json"
+    """Load run state (failure tracking) from data/run_state.json."""
     try:
-        with open(target_path, "r", encoding="utf-8") as f:
+        with open(_RUN_STATE_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except (IOError, json.JSONDecodeError):
         return {"consecutive_failures": 0, "failure_issue_number": None}

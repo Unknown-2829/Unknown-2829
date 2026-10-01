@@ -11,5 +11,10 @@
   },
   "llm-prompt-engineering": {
     "commits": 62
+  },
+  "Phantom-terminal": {
+    "release": "v3.6.1",
+    "pushed_at": "2026-04-03T07:07:12Z",
+    "commits": 79
   }
 }
