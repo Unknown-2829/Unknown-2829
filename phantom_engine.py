@@ -1773,7 +1773,7 @@ def _build_per_project_block(
 
     if svc_key and svc_key in project_statuses:
         status = project_statuses[svc_key]
-        parts.append(f'<img align="middle" src="{_status_badge("Service", status)}" alt="Service: {status}" />')
+        parts.append(f'<img align="absmiddle" src="{_status_badge("Service", status)}" alt="Service: {status}" />')
 
     if repo_key and repo_key in repo_meta:
         meta = repo_meta[repo_key]
@@ -1788,12 +1788,12 @@ def _build_per_project_block(
                     f"{urllib.parse.quote(msg, safe='')}-6e3aff"
                     f"?style=flat-square&labelColor=0d1117"
                 )
-                parts.append(f'<img align="middle" src="{url}" alt="{label}: {msg}" />')
+                parts.append(f'<img align="absmiddle" src="{url}" alt="{label}: {msg}" />')
 
     if not parts:
         return ""
-    note = '<small>(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)</small>'
-    return f'<p>\n  {" &nbsp; ".join(parts)} &nbsp;&nbsp; {note}\n</p>'
+    note = '(🔴 Live · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)'
+    return f'<p>\n  {" &nbsp; ".join(parts)} &nbsp; {note}\n</p>'
 
 
 def inject_per_project_live(
@@ -2263,15 +2263,16 @@ def generate_stats_section(
 
     tagline_block = ""
     if footer_line:
+        clean_quote = urllib.parse.quote(f"“ {footer_line} ”", safe="")
         tagline_block = f"""
 <p align="center">
-  <img align="middle" src="https://img.shields.io/badge/%23%20TAGLINE-ffd54f?style=flat-square" alt="Tagline" /> &ensp; <b>&ldquo;&nbsp;{footer_line}&nbsp;&rdquo;</b>
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-{clean_quote}-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: {footer_line}" />
 </p>
 """
 
     section = f"""
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-{badge_label}-{badge_color}?style=for-the-badge&labelColor=ffd54f" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-{badge_label}-{badge_color}?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 {tagline_block}
 <!-- Themed gradient divider with tier-specific effect -->
