@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 3 Oct 2026, 03:07 IST</code></sub>
+  <sub><code>Last refresh: 3 Oct 2026, 03:56 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
