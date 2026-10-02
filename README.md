@@ -40,16 +40,16 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%E2%98%AE%EF%B8%8F%20Gandhi%20Jayanti-87ceeb?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20One%20commit%20for%20every%20cracker%20lit.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: One commit for every cracker lit." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Stars%20and%20stack%20traces.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Stars and stack traces." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:00001a,50:87ceeb,100:b0e0e6&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -59,20 +59,20 @@ Primary Domains:
 
 <!-- Activity Graph - Themed -->
 <p align="center">
-  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=00001a&color=e0f0ff&line=87ceeb&point=b0e0e6&area_color=87ceeb&area=true&hide_border=true" alt="GitHub activity graph" />
+  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=b9f6ca&line=00e676&point=69f0ae&area_color=00e676&area=true&hide_border=true" alt="GitHub activity graph" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:00001a,50:87ceeb,100:b0e0e6&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <p align="center">
-  <sub>🎨 <i>☮️ Gandhi Jayanti | Powered by GitHub Actions</i></sub>
+  <sub>🎨 <i>🌱 Growing | Powered by GitHub Actions</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 2 Oct 2026, 22:36 IST</code></sub>
+  <sub><code>Last refresh: 3 Oct 2026, 03:07 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -290,10 +290,10 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
+- `Unknown-2829` — delete (1d ago)
 - `Unknown-2829` — pushed (1d ago)
 - `Unknown-2829` — pushed (1d ago)
 - `Unknown-2829` — pushed (1d ago)
-- `Unknown-2829` — pushed (23h ago)
 - `Unknown-2829` — pushed (1d ago)
 <!-- RECENT-ACTIVITY:END -->
 
