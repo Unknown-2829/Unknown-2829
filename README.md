@@ -4,7 +4,7 @@
   <a href="https://ayushman.live/"><img src="https://img.shields.io/badge/Portfolio-ayushman.live-6e3aff?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
   <a href="https://t.me/unknownlll2829"><img src="https://img.shields.io/badge/Telegram-@unknownlll2829-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" /></a>
   <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6"><img src="https://img.shields.io/badge/Spotify-Artist-1DB954?style=for-the-badge&logo=spotify&logoColor=white" /></a>
-  <!-- STATUS-TOP:START --><img src="https://img.shields.io/badge/Status-ACTIVE-00ff00?style=for-the-badge" alt="Status: ACTIVE" /><!-- STATUS-TOP:END -->
+  <!-- STATUS-TOP:START --><img src="https://img.shields.io/badge/Status-BUSY-ff6d00?style=for-the-badge" alt="Status: BUSY" /><!-- STATUS-TOP:END -->
 </p>
 
 ---
@@ -40,16 +40,16 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%E2%98%81%EF%B8%8F%20Recharging-7c83fd?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20The%20stack%20traces%20lead%20to%20wisdom.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: The stack traces lead to wisdom." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Rest%20is%20part%20of%20the%20build.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Rest is part of the build." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0a0a1a,50:7c83fd,100:00d2c8&height=4&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -59,20 +59,20 @@ Primary Domains:
 
 <!-- Activity Graph - Themed -->
 <p align="center">
-  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=b9f6ca&line=00e676&point=69f0ae&area_color=00e676&area=true&hide_border=true" alt="GitHub activity graph" />
+  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0a0a1a&color=a8b2ff&line=7c83fd&point=00d2c8&area_color=7c83fd&area=true&hide_border=true" alt="GitHub activity graph" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0a0a1a,50:7c83fd,100:00d2c8&height=4&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <p align="center">
-  <sub>🎨 <i>🌱 Growing | Powered by GitHub Actions</i></sub>
+  <sub>🎨 <i>☁️ Recharging | Powered by GitHub Actions</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 3 Oct 2026, 20:57 IST</code></sub>
+  <sub><code>Last refresh: 4 Oct 2026, 01:52 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -290,8 +290,8 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
-- `Unknown-2829` — pushed (1d ago)
-- `Unknown-2829` — pushed (1d ago)
+- `Unknown-2829` — pushed (2d ago)
+- `Unknown-2829` — pushed (2d ago)
 - `Unknown-2829` — pushed (2d ago)
 - `Unknown-2829` — pushed (2d ago)
 - `Unknown-2829` — delete (2d ago)
@@ -383,7 +383,7 @@ Music is another creative outlet — a different way to express ideas and emotio
 ## 📬 // CONTACT
 
 <p align="center">
-  <!-- STATUS-CONTACT:START --><img src="https://img.shields.io/badge/Status-%F0%9F%9F%A2%20OPEN%20TO%20OPPORTUNITIES-00ff00?style=for-the-badge" alt="Status: 🟢 OPEN TO OPPORTUNITIES" /><!-- STATUS-CONTACT:END -->
+  <!-- STATUS-CONTACT:START --><img src="https://img.shields.io/badge/Status-%F0%9F%9F%A0%20BUSY%20%C2%B7%20OPEN%20TO%20OPPORTUNITIES-ff6d00?style=for-the-badge" alt="Status: 🟠 BUSY · OPEN TO OPPORTUNITIES" /><!-- STATUS-CONTACT:END -->
 </p>
 
 Interested In:
