@@ -14,29 +14,32 @@ Streak Status:
   offline → streak has been 0 for 2+ days (rotating secret/offline messages)
 """
 
+import argparse
+import base64
+import hashlib
 import hmac as _hmac
+import json
 import os
-
 import re
 import sys
-import json
-class _RunResult:
-    SUCCESS = "SUCCESS"
-    DEGRADED = "DEGRADED"
-    FAILED = "FAILED"
-
-_README_INVALID_MARKERS = "INVALID_MARKERS"
-_ANALYTICS_WRITE_ERROR = "WRITE_ERROR"
-import time
 import tempfile
-import argparse
-import hashlib
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, date, timedelta, timezone
 from zoneinfo import ZoneInfo
+
+
+class _RunResult:
+    SUCCESS = "SUCCESS"
+    DEGRADED = "DEGRADED"
+    FAILED = "FAILED"
+
+
+_README_INVALID_MARKERS = "INVALID_MARKERS"
+_ANALYTICS_WRITE_ERROR = "WRITE_ERROR"
 
 # Ensure emoji and Unicode print correctly on all platforms (incl. Windows CI)
 if hasattr(sys.stdout, "reconfigure"):
@@ -610,7 +613,7 @@ def fetch_github_anniversary(username: str, token: str | None = None) -> str | N
 
 def _check_missing_festival_years(now_ist=None) -> None:
     now = now_ist if now_ist else _now_ist()
-    if now.month != 12 or now.day != 1:
+    if now.month != 12 or now.day not in (1, 2, 3):
         return
     next_year = str(now.year + 1)
     data = _load_events()
@@ -637,7 +640,9 @@ def _check_missing_festival_years(now_ist=None) -> None:
         )
         with urllib.request.urlopen(req, timeout=10) as resp:
             existing_issues = json.loads(resp.read().decode())
-        if any(i.get("title") == title for i in existing_issues):
+        if not isinstance(existing_issues, list):
+            raise ValueError("issues response is not a list")
+        if any(isinstance(i, dict) and i.get("title") == title for i in existing_issues):
             print(f"Reminder issue already open for {next_year} — skipping.")
             return
     except Exception as exc:
@@ -788,15 +793,9 @@ _MAX_SIZE = 500 * 1024   # 500 KB
 
 def _validate_svg(data: bytes) -> bool:
     """Return True if data is a valid SVG free of scripts, foreignObject, and active handlers."""
-    text = data.decode("utf-8", errors="replace")
-    # Strip optional XML prolog
-    stripped = text.lstrip()
-    if stripped.startswith("<?xml"):
-        stripped = stripped[stripped.find("?>") + 2:].lstrip()
-    if not stripped.startswith("<svg"):
-        return False
     if not (_MIN_SIZE <= len(data) <= _MAX_SIZE):
         return False
+    text = data.decode("utf-8", errors="replace").lstrip("\ufeff")
     try:
         root = ET.fromstring(text)
     except ET.ParseError:
@@ -1063,25 +1062,33 @@ def _graphql_streak(username: str, token: str, now_ist: datetime | None = None) 
     with urllib.request.urlopen(req, timeout=20) as resp:
         result = json.loads(resp.read().decode())
 
+    if not isinstance(result, dict):
+        raise ValueError("GraphQL response is not a JSON object")
     if "errors" in result:
         raise ValueError(f"GraphQL errors: {result['errors']}")
 
-    weeks = (
-        result["data"]["user"]["contributionsCollection"]
-        ["contributionCalendar"]["weeks"]
-    )
+    data = result.get("data")
+    user = data.get("user") if isinstance(data, dict) else None
+    if not isinstance(user, dict):
+        raise ValueError(f"GraphQL user data missing or invalid for {username!r}")
+    contrib = user.get("contributionsCollection")
+    calendar = contrib.get("contributionCalendar") if isinstance(contrib, dict) else None
+    weeks = calendar.get("weeks") if isinstance(calendar, dict) else None
+    if not isinstance(weeks, list):
+        raise ValueError("GraphQL contributionCalendar weeks missing or invalid")
 
     # Flatten days in chronological order
     days: list[dict] = []
     for week in weeks:
-        days.extend(week["contributionDays"])
+        if isinstance(week, dict) and isinstance(week.get("contributionDays"), list):
+            days.extend(d for d in week["contributionDays"] if isinstance(d, dict) and "date" in d)
     days.sort(key=lambda d: d["date"])
 
     # Build a set of dates with contributions
     active_dates: set[date] = {
         date.fromisoformat(d["date"])
         for d in days
-        if d["contributionCount"] > 0
+        if (d.get("contributionCount") or 0) > 0
     }
 
     # Walk back from today counting consecutive days
@@ -1260,6 +1267,15 @@ def fetch_traffic(username: str, token: str, now_ist: datetime | None = None) ->
     referrers = _get("traffic/popular/referrers")
     paths     = _get("traffic/popular/paths")
 
+    if not isinstance(views, dict):
+        views = None
+    if not isinstance(clones, dict):
+        clones = None
+    if not isinstance(referrers, list):
+        referrers = None
+    if not isinstance(paths, list):
+        paths = None
+
     if views is None and clones is None:
         return None
 
@@ -1267,14 +1283,16 @@ def fetch_traffic(username: str, token: str, now_ist: datetime | None = None) ->
         now_ist = _now_ist()
     today   = now_ist.strftime("%Y-%m-%d")
 
-    # Extract today's row from the daily breakdown (do not mislabel yesterday's row as today)
-    def _today(items: list | None, count_key: str, unique_key: str) -> tuple[int, int]:
-        if not items:
-            return 0, 0
+    # Extract today's row from the daily breakdown:
+    # - returns (count, uniques) if today's IST row is present (including 0)
+    # - returns (None, None) if the API did not provide a row for today yet
+    def _today(items: list | None, count_key: str, unique_key: str) -> tuple[int | None, int | None]:
+        if not isinstance(items, list) or not items:
+            return None, None
         for row in items:
-            if _utc_ts_to_ist_date(row.get("timestamp", "")) == today:
+            if isinstance(row, dict) and _utc_ts_to_ist_date(row.get("timestamp", "")) == today:
                 return row.get(count_key, 0), row.get(unique_key, 0)
-        return 0, 0
+        return None, None
 
     existing = _load_traffic_summary()
 
@@ -1283,21 +1301,22 @@ def fetch_traffic(username: str, token: str, now_ist: datetime | None = None) ->
         v14 = views.get("count", 0)
         uv14 = views.get("uniques", 0)
     else:
-        v_day, uv_day = 0, 0
-        v14 = existing.get("views_14d", 0)
-        uv14 = existing.get("unique_visitors_14d", 0)
+        v_day, uv_day = None, None
+        v14 = existing.get("views_14d")
+        uv14 = existing.get("unique_visitors_14d")
 
     if clones is not None:
         c_day, uc_day = _today(clones.get("clones", []), "count", "uniques")
         c14 = clones.get("count", 0)
     else:
-        c_day, uc_day = 0, 0
-        c14 = existing.get("clones_14d", 0)
+        c_day, uc_day = None, None
+        c14 = existing.get("clones_14d")
 
     if referrers is not None:
         top_refs = [
             {"ref": r.get("referrer"), "count": r.get("count", 0), "uniques": r.get("uniques", 0)}
             for r in referrers[:5]
+            if isinstance(r, dict)
         ]
     else:
         top_refs = existing.get("top_referrers", [])
@@ -1306,6 +1325,7 @@ def fetch_traffic(username: str, token: str, now_ist: datetime | None = None) ->
         top_paths = [
             {"path": p.get("path"), "count": p.get("count", 0), "uniques": p.get("uniques", 0)}
             for p in paths[:5]
+            if isinstance(p, dict)
         ]
     else:
         top_paths = existing.get("top_paths", [])
@@ -1313,7 +1333,9 @@ def fetch_traffic(username: str, token: str, now_ist: datetime | None = None) ->
     return {
         "date": today,
         "views_available": views is not None,
+        "views_today_available": v_day is not None,
         "clones_available": clones is not None,
+        "clones_today_available": c_day is not None,
         "referrers_available": referrers is not None,
         "paths_available": paths is not None,
         "views_today": v_day,
@@ -1333,7 +1355,6 @@ def _utc_ts_to_ist_date(ts: str) -> str:
     if not ts:
         return ""
     try:
-        from datetime import datetime
         dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
         return dt.astimezone(IST).strftime("%Y-%m-%d")
     except Exception:
@@ -1359,7 +1380,6 @@ def _read_file_from_branch(
         )
         with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read().decode())
-            import base64
             content = base64.b64decode(data["content"]).decode("utf-8")
             return content, data["sha"]
     except Exception as exc:
@@ -1377,7 +1397,6 @@ def _write_file_to_branch(
     Create or update a file on a branch via GitHub Contents API.
     Returns True on success.
     """
-    import base64
     headers = {
         "Authorization": f"token {token}",
         "Content-Type": "application/json",
@@ -1558,9 +1577,9 @@ def _compute_rolling_totals(traffic: dict) -> dict:
     Preserves last-known values if specific API components failed.
     """
     existing = _load_traffic_summary()
-    v14 = traffic.get("views_14d", 0)
-    uv14 = traffic.get("unique_visitors_14d", 0)
-    c14 = traffic.get("clones_14d", 0)
+    v14 = traffic.get("views_14d")
+    uv14 = traffic.get("unique_visitors_14d")
+    c14 = traffic.get("clones_14d")
     refs = traffic.get("top_referrers", [])
     paths = traffic.get("top_paths", [])
 
@@ -1601,14 +1620,17 @@ def build_analytics_block(summary: dict) -> str:
     """
     Generate the collapsed analytics <details> block from the traffic summary.
     Uses shields.io badges — no new design language, same style as existing badges.
-    Degrades gracefully: missing data shows last-known or is hidden.
+    Degrades gracefully: missing data shows last-known or 'unavailable'.
     """
     if not summary:
         return ""
 
-    v14  = summary.get("views_14d", 0)
-    uv14 = summary.get("unique_visitors_14d", 0)
-    c14  = summary.get("clones_14d", 0)
+    v14  = summary.get("views_14d")
+    uv14 = summary.get("unique_visitors_14d")
+    c14  = summary.get("clones_14d")
+    v14_str  = str(v14) if v14 is not None else "unavailable"
+    uv14_str = str(uv14) if uv14 is not None else "unavailable"
+    c14_str  = str(c14) if c14 is not None else "unavailable"
     updated = summary.get("updated", "")
     refs    = summary.get("top_referrers", [])
     paths   = summary.get("top_paths", [])
@@ -1622,9 +1644,9 @@ def build_analytics_block(summary: dict) -> str:
         )
 
     badges = (
-        f"{badge('Views · 14d', v14, '1a1a2e')} "
-        f"{badge('Unique · 14d', uv14, '6e3aff')} "
-        f"{badge('Clones · 14d', c14, '0d1117')}"
+        f"{badge('Views · 14d', v14_str, '1a1a2e')} "
+        f"{badge('Unique · 14d', uv14_str, '6e3aff')} "
+        f"{badge('Clones · 14d', c14_str, '0d1117')}"
     )
 
     # Top referrers table
@@ -1840,8 +1862,8 @@ def ping_url(url: str) -> tuple[str, float]:
             req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT}, method="GET")
             t0 = time.monotonic()
             with urllib.request.urlopen(req, timeout=_PING_TIMEOUT) as resp:
-                elapsed = time.monotonic() - t0
                 _ = resp.read(256)   # consume a few bytes
+                elapsed = time.monotonic() - t0
                 if elapsed >= 5:
                     return "slow", elapsed
                 return "up", elapsed
@@ -2159,35 +2181,47 @@ def fetch_recent_activity(username: str, token: str | None = None, n: int = 5, n
         print(f"  fetch_recent_activity: {exc}", file=sys.stderr)
         return []
 
+    if not isinstance(events, list):
+        return []
+
     now = now_utc if now_utc else datetime.now(timezone.utc)
     results = []
     for ev in events:
         if len(results) >= n:
             break
-        actor = ev.get("actor", {}).get("login", "")
+        if not isinstance(ev, dict):
+            continue
+        actor_obj = ev.get("actor") if isinstance(ev.get("actor"), dict) else {}
+        actor = str(actor_obj.get("login") or "")
         if actor.endswith("[bot]"):
             continue
         # Only own repos
-        repo_full = ev.get("repo", {}).get("name", "")
+        repo_obj = ev.get("repo") if isinstance(ev.get("repo"), dict) else {}
+        repo_full = str(repo_obj.get("name") or "")
         if not repo_full.startswith(f"{username}/"):
             continue
         repo = repo_full.split("/", 1)[1]
-        etype = ev.get("type", "")
-        payload = ev.get("payload", {})
+        etype = str(ev.get("type") or "")
+        payload = ev.get("payload") if isinstance(ev.get("payload"), dict) else {}
 
         detail = ""
         if etype == "PushEvent":
-            commits = payload.get("commits", [])
-            msg = commits[-1].get("message", "").split("\n")[0][:50] if commits else ""
+            commits = payload.get("commits")
+            msg = ""
+            if isinstance(commits, list) and commits and isinstance(commits[-1], dict):
+                msg = str(commits[-1].get("message") or "").split("\n")[0][:50]
             detail = f"pushed: {msg}" if msg else "pushed"
         elif etype == "CreateEvent":
-            detail = f"created {payload.get('ref_type', '')} {payload.get('ref', '')}"
+            detail = f"created {payload.get('ref_type') or ''} {payload.get('ref') or ''}".strip()
         elif etype == "ReleaseEvent":
-            detail = f"released {payload.get('release', {}).get('tag_name', '')}"
+            rel_obj = payload.get("release") if isinstance(payload.get("release"), dict) else {}
+            detail = f"released {rel_obj.get('tag_name') or ''}".strip()
         elif etype == "IssuesEvent":
-            detail = f"{payload.get('action', '')} issue #{payload.get('issue', {}).get('number', '')}"
+            iss_obj = payload.get("issue") if isinstance(payload.get("issue"), dict) else {}
+            detail = f"{payload.get('action') or ''} issue #{iss_obj.get('number') or ''}".strip()
         elif etype == "PullRequestEvent":
-            detail = f"{payload.get('action', '')} PR #{payload.get('pull_request', {}).get('number', '')}"
+            pr_obj = payload.get("pull_request") if isinstance(payload.get("pull_request"), dict) else {}
+            detail = f"{payload.get('action') or ''} PR #{pr_obj.get('number') or ''}".strip()
         else:
             detail = etype.replace("Event", "").lower()
 
@@ -2346,6 +2380,10 @@ def close_failure_issue(run_state: dict, token: str, username: str) -> None:
         with urllib.request.urlopen(req, timeout=10):
             run_state["failure_issue_number"] = None
             print(f"Closed failure issue #{existing}")
+    except urllib.error.HTTPError as exc:
+        if exc.code in (404, 410):
+            run_state["failure_issue_number"] = None
+        print(f"Warning: could not close failure issue: {exc}", file=sys.stderr)
     except Exception as exc:
         print(f"Warning: could not close failure issue: {exc}", file=sys.stderr)
 
@@ -3157,10 +3195,15 @@ def main(argv=None):
     if traffic:
         if not traffic.get("views_available", True) or not traffic.get("clones_available", True):
             run_result = _RunResult.DEGRADED
-        print(
-            f"  Views today: {traffic['views_today']} "
-            f"(unique: {traffic['unique_visitors_today']})"
-        )
+        if not traffic.get("views_available", True):
+            print("  Views today: unavailable (views API request failed)")
+        elif traffic.get("views_today") is None:
+            print("  Views today: unavailable (today's row not provided by API)")
+        else:
+            print(
+                f"  Views today: {traffic['views_today']} "
+                f"(unique: {traffic['unique_visitors_today']})"
+            )
         # Save summary to main branch for analytics block
         summary = _compute_rolling_totals(traffic)
         if not args.dry_run and not args.date:
@@ -3170,9 +3213,12 @@ def main(argv=None):
             data_branch_ok = append_traffic_to_data_branch(traffic, username, traffic_token)
             if traffic_token and data_branch_ok is False:
                 run_result = _RunResult.DEGRADED
+        v14_disp = summary.get("views_14d")
+        uv14_disp = summary.get("unique_visitors_14d")
         summary_items.append((
             "Traffic (14d)",
-            f"{traffic['views_14d']} views · {traffic['unique_visitors_14d']} unique"
+            f"{v14_disp if v14_disp is not None else 'unavailable'} views · "
+            f"{uv14_disp if uv14_disp is not None else 'unavailable'} unique"
         ))
     else:
         # Use last-known summary if fetch failed / no token

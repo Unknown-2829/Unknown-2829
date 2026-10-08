@@ -115,6 +115,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          COMMIT_STATUS="no_changes"
           stage_and_commit() {
             git add README.md assets/ config/
             for f in data/*.json; do
@@ -122,7 +123,8 @@ jobs:
             done
             if git diff --quiet --cached; then
               echo "Nothing to commit."
-              exit 0
+              COMMIT_STATUS="no_changes"
+              return 0
             fi
             if [ -f .commit_msg ]; then
               git commit -F .commit_msg
@@ -130,28 +132,46 @@ jobs:
             else
               git commit -m "⚡ Update profile stats, themes & status"
             fi
+            COMMIT_STATUS="committed"
+            return 0
           }
-          stage_and_commit
 
-          # Push directly — if remote advanced, reset to origin/main and regenerate cleanly
+          BASE_REMOTE=$(git rev-parse origin/main)
+          stage_and_commit
+          if [ "$COMMIT_STATUS" = "no_changes" ]; then
+            echo "No changes needed."
+            exit 0
+          fi
+
+          # Push with retry — only reset and regenerate if origin/main actually advanced
           for i in 1 2 3; do
-            if git push; then
+            if [ "$COMMIT_STATUS" = "committed" ] && git push origin HEAD:main; then
+              echo "Push succeeded on attempt $i."
               exit 0
             fi
-            echo "Push attempt $i failed, fetching latest main and regenerating..."
-            git fetch origin
-            git reset --hard origin/main
-            FLAGS=()
-            [ "$INPUT_SKIP_PINGS"   = "true" ] && FLAGS+=(--skip-pings)
-            [ "$INPUT_SKIP_TRAFFIC" = "true" ] && FLAGS+=(--skip-traffic)
-            [ "$INPUT_FORCE_UPDATE" = "true" ] && FLAGS+=(--force)
-            [ -n "$INPUT_STREAK_OVERRIDE" ] && FLAGS+=(--streak "$INPUT_STREAK_OVERRIDE")
-            [ -n "$INPUT_THEME_OVERRIDE"  ] && FLAGS+=(--theme  "$INPUT_THEME_OVERRIDE")
-            python phantom_engine.py "${FLAGS[@]}"
-            stage_and_commit
-            sleep $((i * 5))
+            echo "Push attempt $i failed." >&2
+            if [ "$i" -lt 3 ]; then
+              sleep $((i * 5))
+              if git fetch origin main; then
+                NEW_REMOTE=$(git rev-parse origin/main)
+                if [ "$NEW_REMOTE" != "$BASE_REMOTE" ]; then
+                  echo "Remote main advanced ($BASE_REMOTE -> $NEW_REMOTE); resetting and regenerating..."
+                  BASE_REMOTE="$NEW_REMOTE"
+                  git reset --hard origin/main
+                  FLAGS=()
+                  [ "$INPUT_SKIP_PINGS"   = "true" ] && FLAGS+=(--skip-pings)
+                  [ "$INPUT_SKIP_TRAFFIC" = "true" ] && FLAGS+=(--skip-traffic)
+                  [ "$INPUT_FORCE_UPDATE" = "true" ] && FLAGS+=(--force)
+                  [ -n "$INPUT_STREAK_OVERRIDE" ] && FLAGS+=(--streak "$INPUT_STREAK_OVERRIDE")
+                  [ -n "$INPUT_THEME_OVERRIDE"  ] && FLAGS+=(--theme  "$INPUT_THEME_OVERRIDE")
+                  python phantom_engine.py "${FLAGS[@]}"
+                  stage_and_commit
+                fi
+              fi
+            fi
           done
           echo "Push failed after 3 attempts" >&2
           exit 1
+
 
 
