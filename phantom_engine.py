@@ -907,8 +907,17 @@ def load_streak_state() -> dict:
     if os.path.exists(state_file):
         try:
             with open(state_file, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except (json.JSONDecodeError, IOError) as exc:
+                data = json.load(f)
+            if not isinstance(data, dict):
+                raise ValueError("root must be a JSON object")
+            lps = data.get("last_positive_streak")
+            if lps is not None and (isinstance(lps, bool) or not isinstance(lps, int)):
+                lps = None
+            szs = data.get("streak_zero_since")
+            if szs is not None and not isinstance(szs, str):
+                szs = None
+            return {"last_positive_streak": lps, "streak_zero_since": szs}
+        except (json.JSONDecodeError, IOError, ValueError) as exc:
             print(f"Warning: streak state file is corrupt ({exc}) — using defaults.", file=sys.stderr)
     return {"last_positive_streak": None, "streak_zero_since": None}
 
@@ -987,7 +996,7 @@ def compute_streak_status(streak: int, state: dict, now_ist: datetime | None = N
             days_at_zero = (ref_date - zero_date).days
             if days_at_zero >= 2:
                 return "offline"
-        except ValueError:
+        except (ValueError, TypeError):
             pass
 
     return "broken"
@@ -1115,7 +1124,8 @@ def fetch_streak(username: str, token: str | None = None, now_ist: datetime | No
 
     Primary:  GitHub GraphQL contribution calendar (uses GH_STATS_TOKEN if
               set, otherwise GITHUB_TOKEN). Most accurate; counts all types.
-    Fallback: Parses the streak-stats.demolab.com SVG.
+    Fallback: Parses the streak-stats.demolab.com SVG (skipped when now_ist is
+              explicitly simulated, as the SVG service only returns live data).
 
     Returns the streak count (int, ≥ 0) or None if all sources fail.
     On None the caller must skip the run without changing README or state.
@@ -1137,6 +1147,14 @@ def fetch_streak(username: str, token: str | None = None, now_ist: datetime | No
                 f"Warning: GraphQL streak fetch failed: {exc}",
                 file=sys.stderr,
             )
+
+    if now_ist is not None:
+        print(
+            "Warning: Skipping live SVG streak fallback during --date simulation "
+            "(pass --streak N for offline date previews).",
+            file=sys.stderr,
+        )
+        return None
 
     # Fallback: parse streak from streak-stats.demolab.com SVG
     try:
@@ -1191,8 +1209,11 @@ def _load_traffic_summary() -> dict:
         return {}
     try:
         with open(_TRAFFIC_SUMMARY_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except (IOError, json.JSONDecodeError) as exc:
+            data = json.load(f)
+        if not isinstance(data, dict):
+            raise ValueError("root must be a JSON object")
+        return data
+    except (IOError, json.JSONDecodeError, ValueError) as exc:
         print(f"Warning: traffic summary file is corrupt ({exc}) — using defaults.", file=sys.stderr)
         return {}
 
@@ -1774,8 +1795,11 @@ def _load_project_status() -> dict:
         return {}
     try:
         with open(_STATUS_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except (IOError, json.JSONDecodeError) as exc:
+            data = json.load(f)
+        if not isinstance(data, dict):
+            raise ValueError("root must be a JSON object")
+        return {k: v for k, v in data.items() if isinstance(v, dict)}
+    except (IOError, json.JSONDecodeError, ValueError) as exc:
         print(f"Warning: project status file is corrupt ({exc}) — using defaults.", file=sys.stderr)
         return {}
 
@@ -1977,8 +2001,11 @@ def _load_repo_meta() -> dict:
         return {}
     try:
         with open(_REPO_META_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except (IOError, json.JSONDecodeError) as exc:
+            data = json.load(f)
+        if not isinstance(data, dict):
+            raise ValueError("root must be a JSON object")
+        return {k: v for k, v in data.items() if isinstance(v, dict)}
+    except (IOError, json.JSONDecodeError, ValueError) as exc:
         print(f"Warning: repo meta file is corrupt ({exc}) — using defaults.", file=sys.stderr)
         return {}
 
@@ -2180,8 +2207,17 @@ def _load_run_state() -> dict:
     if os.path.exists(_RUN_STATE_FILE):
         try:
             with open(_RUN_STATE_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except (IOError, json.JSONDecodeError) as exc:
+                data = json.load(f)
+            if not isinstance(data, dict):
+                raise ValueError("root must be a JSON object")
+            cf = data.get("consecutive_failures", 0)
+            if isinstance(cf, bool) or not isinstance(cf, int) or cf < 0:
+                cf = 0
+            fin = data.get("failure_issue_number")
+            if fin is not None and (isinstance(fin, bool) or not isinstance(fin, int)):
+                fin = None
+            return {"consecutive_failures": cf, "failure_issue_number": fin}
+        except (IOError, json.JSONDecodeError, ValueError) as exc:
             print(f"Warning: run state file is corrupt ({exc}) — using defaults.", file=sys.stderr)
     return {"consecutive_failures": 0, "failure_issue_number": None}
 
@@ -2201,7 +2237,10 @@ def record_run_success(run_state: dict) -> dict:
 
 
 def record_run_failure(run_state: dict) -> dict:
-    run_state["consecutive_failures"] = run_state.get("consecutive_failures", 0) + 1
+    cf = run_state.get("consecutive_failures", 0)
+    if isinstance(cf, bool) or not isinstance(cf, int):
+        cf = 0
+    run_state["consecutive_failures"] = cf + 1
     return run_state
 
 
@@ -2867,7 +2906,7 @@ def main(argv=None):
             sys.exit(1)
         print(f"Using STREAK_OVERRIDE: {streak}")
     else:
-        streak = fetch_streak(username, now_ist=now_ist)
+        streak = fetch_streak(username, now_ist=now_ist if args.date else None)
         if streak is None:
             print(
                 "All streak sources failed — README and state left unchanged.",
@@ -3022,6 +3061,9 @@ def main(argv=None):
         print("❌ README markers missing — pipeline failing.", file=sys.stderr)
         if not args.dry_run:
             run_state = record_run_failure(run_state)
+            open_or_update_failure_issue(
+                run_state, token, username, "README markers missing or invalid"
+            )
             _save_run_state(run_state)
         sys.exit(1)
 
@@ -3077,7 +3119,9 @@ def main(argv=None):
             if _save_traffic_summary(summary) is False:
                 run_result = _RunResult.DEGRADED
             # Push full row to data branch (silently skip if no token)
-            append_traffic_to_data_branch(traffic, username, traffic_token)
+            data_branch_ok = append_traffic_to_data_branch(traffic, username, traffic_token)
+            if traffic_token and data_branch_ok is False:
+                run_result = _RunResult.DEGRADED
         summary_items.append((
             "Traffic (14d)",
             f"{traffic['views_14d']} views · {traffic['unique_visitors_14d']} unique"
@@ -3100,12 +3144,15 @@ def main(argv=None):
             print("❌ Analytics README write failed — pipeline failing.", file=sys.stderr)
             if not args.dry_run:
                 run_state = record_run_failure(run_state)
+                open_or_update_failure_issue(
+                    run_state, token, username, "analytics README write failed"
+                )
                 _save_run_state(run_state)
             sys.exit(1)
         if analytics_updated and not args.dry_run:
             print("✅ Analytics block updated in README")
 
-    # Persist streak state & reset failure counter ONLY after all README writes succeed
+    # Persist streak state & update failure counter after README writes complete
     if not args.dry_run:
         try:
             if save_streak_state(new_state) is False:
@@ -3113,10 +3160,21 @@ def main(argv=None):
         except Exception as exc:
             run_result = _RunResult.FAILED
             print(f"❌ Critical error: could not persist streak state: {exc}", file=sys.stderr)
+            run_state = record_run_failure(run_state)
+            open_or_update_failure_issue(
+                run_state, token, username, "streak state persistence failed"
+            )
+            _save_run_state(run_state)
             sys.exit(1)
 
-        run_state = record_run_success(run_state)
-        close_failure_issue(run_state, token, username)
+        if run_result == _RunResult.SUCCESS:
+            run_state = record_run_success(run_state)
+            close_failure_issue(run_state, token, username)
+        elif run_result == _RunResult.DEGRADED:
+            run_state = record_run_failure(run_state)
+            open_or_update_failure_issue(
+                run_state, token, username, "degraded run (partial service or API failure)"
+            )
         if _save_run_state(run_state) is False:
             run_result = _RunResult.FAILED
             print("❌ Critical error: could not persist run state.", file=sys.stderr)
