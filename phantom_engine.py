@@ -479,23 +479,54 @@ def get_theme_for_streak(streak: int) -> dict:
     return THEMES[get_theme_name_for_streak(streak)]
 
 
+_USER_AGENT = (
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+)
+_GH_API_VERSION = "2026-03-10"
+
+
+def _gh_headers(token: str | None = None, content_type: str | None = None) -> dict[str, str]:
+    """Build standard GitHub REST API headers with explicit API version."""
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": _GH_API_VERSION,
+        "User-Agent": _USER_AGENT,
+    }
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    if content_type:
+        headers["Content-Type"] = content_type
+    return headers
+
+
+def _is_valid_mmdd(val: str) -> bool:
+    """Return True if val is a syntactically and calendar-valid MM-DD string (allowing 02-29)."""
+    if not isinstance(val, str) or not re.fullmatch(r"(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])", val):
+        return False
+    mm, dd = val.split("-", 1)
+    try:
+        date(2000, int(mm), int(dd))  # 2000 is a leap year, so 02-29 is valid while 02-30/04-31 fail
+        return True
+    except ValueError:
+        return False
+
+
 # ── Special / Mystery day (Section 6) ─────────────────────────────────────────
-# Only is_special_today() and special_seed() know about the secret.
-# Nothing else may know WHY a day is special.
+# Note: HMAC decoy days obscure which of the ~10 annual mystery-themed days is the
+# real configured date, though all mystery-themed days are publicly visible in README.
 
 def _mmdd_env() -> str | None:
-    """Return SECRET_MMDD from environment if it is a valid MM-DD string, else None.
+    """Return SECRET_MMDD from environment if it is a valid calendar MM-DD string, else None.
 
-    Accepts: 01-01 through 12-31 (basic range check — does not verify month/day
-    combinations like Feb 30).  Logs a warning on malformed values without
-    revealing the secret value.
+    Logs a warning on malformed values without revealing the secret value.
     """
     raw = os.environ.get("SECRET_MMDD", "").strip()
     if not raw:
         return None
-    if not re.fullmatch(r"(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])", raw):
+    if not _is_valid_mmdd(raw):
         print(
-            "Warning: SECRET_MMDD is set but does not match MM-DD format — "
+            "Warning: SECRET_MMDD is set but is not a valid calendar MM-DD date — "
             "special-day theme disabled.",
             file=sys.stderr,
         )
@@ -554,7 +585,7 @@ _EVENTS_FILE = os.environ.get(
 
 
 def _load_events() -> dict:
-    """Load config/events_data.json; return empty dict on failure."""
+    """Load and validate config/events_data.json; return empty dict on failure."""
     if not os.path.exists(_EVENTS_FILE):
         return {}
     try:
@@ -566,7 +597,26 @@ def _load_events() -> dict:
     if not isinstance(data, dict) or not isinstance(data.get("festivals", {}), dict):
         print("Warning: events_data.json schema invalid — using defaults.", file=sys.stderr)
         return {}
-    return data
+    clean_festivals: dict[str, dict] = {}
+    for fest_key, info in data["festivals"].items():
+        if not isinstance(info, dict):
+            print(f"Warning: events_data.json entry {fest_key!r} is not a dict — skipping.", file=sys.stderr)
+            continue
+        raw_dates = info.get("dates", {})
+        if not isinstance(raw_dates, dict):
+            print(f"Warning: events_data.json dates for {fest_key!r} is not a dict — skipping.", file=sys.stderr)
+            continue
+        valid_dates: dict[str, str] = {}
+        for yr, mmdd in raw_dates.items():
+            if isinstance(yr, str) and re.fullmatch(r"\d{4}", yr) and isinstance(mmdd, str) and _is_valid_mmdd(mmdd):
+                valid_dates[yr] = mmdd
+            else:
+                print(
+                    f"Warning: invalid festival date {yr!r}: {mmdd!r} for {fest_key!r} — ignoring entry.",
+                    file=sys.stderr,
+                )
+        clean_festivals[fest_key] = {**info, "dates": valid_dates}
+    return {**data, "festivals": clean_festivals}
 
 
 def _lookup_festival(now: datetime) -> str | None:
@@ -591,21 +641,18 @@ def _lookup_festival(now: datetime) -> str | None:
 
 def fetch_github_anniversary(username: str, token: str | None = None) -> str | None:
     """
-    Return the account creation month-day as 'MM-DD', or None on failure.
+    Return the GitHub account creation UTC month-day as 'MM-DD', or None on failure.
     Uses the public /users endpoint — no auth required but token avoids rate limits.
     """
     try:
-        headers = {"User-Agent": _USER_AGENT, "Accept": "application/vnd.github.v3+json"}
-        if token:
-            headers["Authorization"] = f"token {token}"
         req = urllib.request.Request(
-            f"https://api.github.com/users/{username}", headers=headers
+            f"https://api.github.com/users/{username}", headers=_gh_headers(token)
         )
         with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read().decode())
-        created_at = data.get("created_at", "")          # e.g. "2021-03-15T10:22:00Z"
+        created_at = data.get("created_at", "") if isinstance(data, dict) else ""
         if created_at:
-            return datetime.fromisoformat(created_at.replace("Z", "+00:00")).astimezone(IST).strftime("%m-%d")
+            return datetime.fromisoformat(created_at.replace("Z", "+00:00")).astimezone(timezone.utc).strftime("%m-%d")
     except Exception as exc:
         print(f"  fetch_github_anniversary: {exc}", file=sys.stderr)
     return None
@@ -635,8 +682,7 @@ def _check_missing_festival_years(now_ist=None) -> None:
     try:
         req = urllib.request.Request(
             f"https://api.github.com/repos/{username}/{username}/issues?state=open&labels=reminder&per_page=100",
-            headers={"Authorization": f"token {token}", "User-Agent": _USER_AGENT,
-                     "Accept": "application/vnd.github.v3+json"},
+            headers=_gh_headers(token),
         )
         with urllib.request.urlopen(req, timeout=10) as resp:
             existing_issues = json.loads(resp.read().decode())
@@ -660,11 +706,7 @@ def _check_missing_festival_years(now_ist=None) -> None:
         req = urllib.request.Request(
             f"https://api.github.com/repos/{username}/{username}/issues",
             data=payload,
-            headers={
-                "Authorization": f"token {token}",
-                "Content-Type": "application/json",
-                "User-Agent": _USER_AGENT,
-            },
+            headers=_gh_headers(token, content_type="application/json"),
         )
         with urllib.request.urlopen(req, timeout=10) as resp:
             issue = json.loads(resp.read().decode())
@@ -780,11 +822,6 @@ def pick_theme(
 
 # ── SVG Asset Caching ──────────────────────────────────────────────────────────
 
-_USER_AGENT = (
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-)
-
 _BACKOFF = [5, 15]   # seconds between attempts
 _TIMEOUT = 30            # seconds per request
 _MIN_SIZE = 2 * 1024     # 2 KB
@@ -805,13 +842,14 @@ def _validate_svg(data: bytes) -> bool:
         return False
     for elem in root.iter():
         elem_local = elem.tag.split("}")[-1] if "}" in elem.tag else elem.tag
-        if elem_local in ("script", "foreignObject"):
+        if elem_local in ("script", "foreignObject", "iframe", "embed", "object"):
             return False
         for attr_k, attr_v in elem.attrib.items():
             attr_local = (attr_k.split("}")[-1] if "}" in attr_k else attr_k).lower()
             if attr_local.startswith("on"):
                 return False
-            if "javascript:" in str(attr_v).lower():
+            val_lower = str(attr_v).lower()
+            if "javascript:" in val_lower or "vbscript:" in val_lower or "data:text/html" in val_lower:
                 return False
     return True
 
@@ -1021,13 +1059,14 @@ def _graphql_streak(username: str, token: str, now_ist: datetime | None = None) 
     Fetch the current contribution streak via the GitHub GraphQL API.
 
     Uses the contribution calendar which counts all contribution types
-    (commits, PRs, issues, reviews) and is accurate to the calendar day.
+    (commits, PRs, issues, reviews) aligned to GitHub's UTC calendar day.
     Returns the streak count (0 is valid) or None on error.
     """
-    today_ist = (now_ist if now_ist else _now_ist()).date()
-    # GitHub contribution calendar covers exactly 1 year — 364 days lookback
-    from_date = (today_ist - timedelta(days=364)).isoformat()
-    to_date = today_ist.isoformat()
+    ref_dt = now_ist if now_ist else _now_ist()
+    today_utc = (ref_dt.astimezone(timezone.utc) if ref_dt.tzinfo else ref_dt).date()
+    # GitHub contribution calendar is UTC-based and covers at most 1 year (364 days lookback)
+    from_date = (today_utc - timedelta(days=364)).isoformat()
+    to_date = today_utc.isoformat()
 
     query = """
     query($login: String!, $from: DateTime!, $to: DateTime!) {
@@ -1052,7 +1091,7 @@ def _graphql_streak(username: str, token: str, now_ist: datetime | None = None) 
     }
     payload = json.dumps({"query": query, "variables": variables}).encode()
     headers = {
-        "Authorization": f"bearer {token}",
+        "Authorization": f"Bearer {token}",
         "Content-Type": "application/json",
         "User-Agent": _USER_AGENT,
     }
@@ -1091,9 +1130,9 @@ def _graphql_streak(username: str, token: str, now_ist: datetime | None = None) 
         if (d.get("contributionCount") or 0) > 0
     }
 
-    # Walk back from today counting consecutive days
+    # Walk back from today (UTC) counting consecutive days
     streak = 0
-    check = today_ist
+    check = today_utc
     # Allow today to not have contributions yet (it's still ongoing)
     if check not in active_dates:
         check -= timedelta(days=1)
@@ -1236,19 +1275,16 @@ def _save_traffic_summary(data: dict) -> bool:
 
 def fetch_traffic(username: str, token: str, now_ist: datetime | None = None) -> dict | None:
     """
-    Fetch profile-repo traffic from the GitHub API.
-    Requires a token with repo scope (TRAFFIC_TOKEN or GH_STATS_TOKEN).
+    Fetch profile-repo traffic from the GitHub REST API (rolling 14-day window).
+    Requires a fine-grained token with Administration: read repository permission
+    or a classic PAT with repo scope (TRAFFIC_TOKEN or GH_STATS_TOKEN).
     Returns dict or None if token is missing / request fails.
     """
     if not token:
         return None
     repo = username   # profile repo has same name as username
 
-    headers = {
-        "Authorization": f"token {token}",
-        "Accept": "application/vnd.github.v3+json",
-        "User-Agent": _USER_AGENT,
-    }
+    headers = _gh_headers(token)
 
     def _get(path: str) -> dict | list | None:
         try:
@@ -1367,11 +1403,7 @@ def _read_file_from_branch(
     Read a file's content and SHA from a specific branch via GitHub Contents API.
     Returns (content_str, sha) or (None, None) on 404/error.
     """
-    headers = {
-        "Authorization": f"token {token}",
-        "Accept": "application/vnd.github.v3+json",
-        "User-Agent": _USER_AGENT,
-    }
+    headers = _gh_headers(token)
     try:
         req = urllib.request.Request(
             f"https://api.github.com/repos/{owner}/{repo}/contents/{path}"
@@ -1397,11 +1429,7 @@ def _write_file_to_branch(
     Create or update a file on a branch via GitHub Contents API.
     Returns True on success.
     """
-    headers = {
-        "Authorization": f"token {token}",
-        "Content-Type": "application/json",
-        "User-Agent": _USER_AGENT,
-    }
+    headers = _gh_headers(token, content_type="application/json")
     payload: dict = {
         "message": commit_msg,
         "content": base64.b64encode(content_str.encode()).decode(),
@@ -1427,11 +1455,7 @@ def _ensure_data_branch(owner: str, repo: str, token: str) -> bool:
     Create the `data` branch from HEAD of main if it doesn't exist.
     Returns True if branch exists or was created successfully.
     """
-    headers = {
-        "Authorization": f"token {token}",
-        "Accept": "application/vnd.github.v3+json",
-        "User-Agent": _USER_AGENT,
-    }
+    headers = _gh_headers(token)
     # Check if branch exists
     try:
         req = urllib.request.Request(
@@ -1462,7 +1486,7 @@ def _ensure_data_branch(owner: str, repo: str, token: str) -> bool:
         req = urllib.request.Request(
             f"https://api.github.com/repos/{owner}/{repo}/git/refs",
             data=payload,
-            headers={**headers, "Content-Type": "application/json"},
+            headers=_gh_headers(token, content_type="application/json"),
         )
         with urllib.request.urlopen(req, timeout=10):
             print(f"  Created branch '{_DATA_BRANCH}'")
@@ -1475,7 +1499,9 @@ def _ensure_data_branch(owner: str, repo: str, token: str) -> bool:
 def _roll_old_rows(rows: list[dict]) -> list[dict]:
     """
     If rows exceed _MAX_DAILY_ROWS, roll the oldest into monthly totals.
-    Monthly summary rows have 'month': 'YYYY-MM' instead of 'date': 'YYYY-MM-DD'.
+    Monthly summary rows have 'month': 'YYYY-MM' instead of 'date': 'YYYY-MM-DD',
+    and store 'sum_daily_unique_visitors' / 'sum_daily_unique_cloners' (since
+    summing daily unique counts across days is not true monthly deduplication).
     """
     daily_by_date = {}
     for r in rows:
@@ -1495,18 +1521,37 @@ def _roll_old_rows(rows: list[dict]) -> list[dict]:
     for row in overflow:
         m = row["date"][:7]   # YYYY-MM
         if m not in by_month:
-            by_month[m] = {"month": m, "views": 0, "unique_visitors": 0, "clones": 0}
-        by_month[m]["views"]           += row.get("views_today") or 0
-        by_month[m]["unique_visitors"] += row.get("unique_visitors_today") or 0
-        by_month[m]["clones"]          += row.get("clones_today") or 0
+            by_month[m] = {
+                "month": m,
+                "views": 0,
+                "sum_daily_unique_visitors": 0,
+                "clones": 0,
+                "sum_daily_unique_cloners": 0,
+            }
+        by_month[m]["views"]                     += row.get("views_today") or 0
+        by_month[m]["sum_daily_unique_visitors"] += row.get("unique_visitors_today") or 0
+        by_month[m]["clones"]                    += row.get("clones_today") or 0
+        by_month[m]["sum_daily_unique_cloners"]  += row.get("unique_cloners_today") or 0
 
-    # Merge with existing monthly rows
-    existing_months = {r["month"]: r for r in monthly}
+    # Merge with existing monthly rows (migrating legacy 'unique_visitors' key if present)
+    existing_months: dict[str, dict] = {}
+    for r in monthly:
+        m = r["month"]
+        existing_months[m] = {
+            "month": m,
+            "views": r.get("views", 0),
+            "sum_daily_unique_visitors": r.get(
+                "sum_daily_unique_visitors", r.get("unique_visitors", 0)
+            ),
+            "clones": r.get("clones", 0),
+            "sum_daily_unique_cloners": r.get("sum_daily_unique_cloners", 0),
+        }
     for m, totals in by_month.items():
         if m in existing_months:
-            existing_months[m]["views"]           += totals["views"]
-            existing_months[m]["unique_visitors"] += totals["unique_visitors"]
-            existing_months[m]["clones"]          += totals["clones"]
+            existing_months[m]["views"]                     += totals["views"]
+            existing_months[m]["sum_daily_unique_visitors"] += totals["sum_daily_unique_visitors"]
+            existing_months[m]["clones"]                    += totals["clones"]
+            existing_months[m]["sum_daily_unique_cloners"]  += totals["sum_daily_unique_cloners"]
         else:
             existing_months[m] = totals
 
@@ -1663,7 +1708,7 @@ def build_analytics_block(summary: dict) -> str:
         for p in paths[:5]:
             path_rows += f"| `{_md_escape(p.get('path','?'))}` | {p.get('count',0)} | {p.get('uniques',0)} |\n"
 
-    updated_line = f"\n<sub><i>Data from GitHub Traffic API · Last updated: {updated}</i></sub>" if updated else ""
+    updated_line = f"\n<sub><i>Rolling 14-day window from GitHub Traffic API · Last updated: {updated}</i></sub>" if updated else ""
 
     return f"""<details>
 <summary>📈 Analytics</summary>
@@ -1697,8 +1742,8 @@ def update_analytics(
 
     start_idx = content.find(_ANALYTICS_START)
     end_idx   = content.find(_ANALYTICS_END)
-    if start_idx == -1 or end_idx == -1:
-        print("Analytics markers not found in README — skipping analytics update")
+    if start_idx == -1 or end_idx == -1 or end_idx <= start_idx:
+        print("Analytics markers not found or invalid in README — skipping analytics update")
         return False
 
     block = build_analytics_block(summary)
@@ -2063,9 +2108,7 @@ def fetch_repo_meta(owner: str, repo: str, token: str | None = None) -> dict:
     Returns {'release': 'v3.6.1', 'commits': 68, 'released_at': '...'}.
     Returns {} on failure (caller uses last-known cache).
     """
-    headers = {"User-Agent": _USER_AGENT, "Accept": "application/vnd.github.v3+json"}
-    if token:
-        headers["Authorization"] = f"token {token}"
+    headers = _gh_headers(token)
 
     result: dict = {}
     try:
@@ -2129,9 +2172,7 @@ def get_all_repo_meta(token: str | None = None, dry_run: bool = False) -> dict:
 
     for repo, owner in tracked.items():
         cached_entry = cache.get(repo, {})
-        headers = {"User-Agent": _USER_AGENT, "Accept": "application/vnd.github.v3+json"}
-        if token:
-            headers["Authorization"] = f"token {token}"
+        headers = _gh_headers(token)
         pushed_at = None
         try:
             req = urllib.request.Request(f"https://api.github.com/repos/{owner}/{repo}", headers=headers)
@@ -2167,9 +2208,7 @@ def fetch_recent_activity(username: str, token: str | None = None, n: int = 5, n
     Each item: {'type': str, 'repo': str, 'when': str (relative), 'detail': str}
     Returns [] on failure.
     """
-    headers = {"User-Agent": _USER_AGENT, "Accept": "application/vnd.github.v3+json"}
-    if token:
-        headers["Authorization"] = f"token {token}"
+    headers = _gh_headers(token)
     try:
         req = urllib.request.Request(
             f"https://api.github.com/users/{username}/events/public?per_page=50",
@@ -2317,11 +2356,7 @@ def open_or_update_failure_issue(run_state: dict, token: str, username: str, rea
         f"_This issue is auto-managed by the profile updater. "
         f"It will be closed when the next run succeeds._"
     )
-    headers = {
-        "Authorization": f"token {token}",
-        "Content-Type": "application/json",
-        "User-Agent": _USER_AGENT,
-    }
+    headers = _gh_headers(token, content_type="application/json")
     try:
         if existing:
             # PATCH issue body and ensure state is open — no comment spam
@@ -2368,11 +2403,7 @@ def close_failure_issue(run_state: dict, token: str, username: str) -> None:
         return
     try:
         payload = json.dumps({"state": "closed"}).encode()
-        headers = {
-            "Authorization": f"token {token}",
-            "Content-Type": "application/json",
-            "User-Agent": _USER_AGENT,
-        }
+        headers = _gh_headers(token, content_type="application/json")
         req = urllib.request.Request(
             f"https://api.github.com/repos/{username}/{username}/issues/{existing}",
             data=payload, headers=headers, method="PATCH",
@@ -2421,7 +2452,6 @@ def generate_stats_section(
     repo_meta: dict | None = None,
     activity: list | None = None,
     theme_name: str | None = None,
-    live: dict | None = None,
     *,
     theme_is_forced: bool = False,
     resolved_theme: dict | None = None,
@@ -2433,10 +2463,6 @@ def generate_stats_section(
         state = {}
     if now_ist is None:
         now_ist = _now_ist()
-    if live:
-        project_statuses = live.get("statuses", project_statuses)
-        repo_meta = live.get("meta", repo_meta)
-        activity = live.get("activity", activity)
 
     # ── Determine badge / sub-text based on status ──────────────────────────
     if theme_is_forced and theme_name and theme_name in THEMES:
@@ -2782,15 +2808,18 @@ def update_readme(
     start_marker = "<!-- DYNAMIC-STATS:START -->"
     end_marker = "<!-- DYNAMIC-STATS:END -->"
 
+    start_idx = content.find(start_marker)
+    end_idx = content.find(end_marker)
     pattern = re.compile(
         re.escape(start_marker) + r".*?" + re.escape(end_marker),
         re.DOTALL,
     )
 
-    if pattern.search(content):
+    if start_idx != -1 and end_idx != -1 and start_idx < end_idx and pattern.search(content):
         new_content = pattern.sub(
             f"{start_marker}\n{new_section}\n{end_marker}",
             content,
+            count=1,
         )
     else:
         print("Error: Could not find DYNAMIC-STATS markers in README.md",
@@ -2816,6 +2845,8 @@ def update_readme(
     # ── Inject per-project live badges ────────────────────────────────────────
     new_content = inject_per_project_live(new_content, project_statuses or {}, repo_meta or {})
 
+    logged_theme = theme_name or get_theme_name_for_streak(streak)
+
     # Compare ignoring volatile timestamp so a pure timestamp tick doesn't trigger a write
     if _strip_volatile(new_content) != _strip_volatile(content):
         if dry_run:
@@ -2823,12 +2854,12 @@ def update_readme(
             print(new_section)
             print("─────────────────────────────────────────────────────")
             print(f"[dry-run] Would update README — status: '{status}', "
-                  f"theme: '{get_theme_name_for_streak(streak)}' "
+                  f"theme: '{logged_theme}' "
                   f"(streak: {streak})")
         else:
             _atomic_write_text(readme_path, new_content)
             print(f"README updated — status: '{status}', "
-                  f"theme: '{get_theme_name_for_streak(streak)}' "
+                  f"theme: '{logged_theme}' "
                   f"(streak: {streak})")
         return True
     else:
@@ -2838,7 +2869,7 @@ def update_readme(
             return True
         print(f"No changes needed (streak: {streak}, "
               f"status: {status}, "
-              f"theme: {get_theme_name_for_streak(streak)})")
+              f"theme: {logged_theme})")
         return False
 
 
@@ -2862,7 +2893,7 @@ def parse_args(argv=None):
     parser.add_argument(
         "--date",
         metavar="YYYY-MM-DD[THH:MM]",
-        help="Simulate a specific IST date/time for theme preview.",
+        help="Simulate a specific IST date/time (implies --dry-run; read-only preview).",
     )
     parser.add_argument(
         "--streak",
@@ -2939,7 +2970,9 @@ def main(argv=None):
                     hour=12, minute=0, tzinfo=IST
                 )
             now_ist = sim_dt
-            print("Date simulation active (value not logged)")
+            # --date is strictly read-only preview mode (implies --dry-run)
+            args.dry_run = True
+            print("Date simulation active (value not logged; read-only dry-run enforced)")
 
         except ValueError as exc:
             print(f"Error: invalid --date value: {exc}", file=sys.stderr)
