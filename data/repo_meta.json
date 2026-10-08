@@ -1,20 +1,18 @@
 {
-  "Phanton-terminal": {
-    "release": "v3.6.1",
-    "pushed_at": "2026-04-03T07:07:12Z",
-    "commits": 79
-  },
   "Phantom-mail": {
     "release": "v1.1.0",
-    "pushed_at": "2026-03-18T13:14:12Z",
-    "commits": 277
+    "pushed_at": "2026-07-26T14:52:06Z",
+    "commits": 277,
+    "released_at": "2026-03-18T13:14:12Z"
   },
   "llm-prompt-engineering": {
-    "commits": 62
+    "commits": 62,
+    "pushed_at": "2026-02-14T15:42:11Z"
   },
   "Phantom-terminal": {
     "release": "v3.6.1",
-    "pushed_at": "2026-04-03T07:07:12Z",
-    "commits": 79
+    "pushed_at": "2026-04-07T20:12:36Z",
+    "commits": 79,
+    "released_at": "2026-04-03T07:07:12Z"
   }
 }
