@@ -26,10 +26,12 @@ class _RunResult:
     FAILED = "FAILED"
 
 _README_INVALID_MARKERS = "INVALID_MARKERS"
+_ANALYTICS_WRITE_ERROR = "WRITE_ERROR"
 import time
 import tempfile
 import argparse
 import hashlib
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -785,7 +787,7 @@ _MAX_SIZE = 500 * 1024   # 500 KB
 
 
 def _validate_svg(data: bytes) -> bool:
-    """Return True if data looks like a valid, script-free SVG."""
+    """Return True if data is a valid SVG free of scripts, foreignObject, and active handlers."""
     text = data.decode("utf-8", errors="replace")
     # Strip optional XML prolog
     stripped = text.lstrip()
@@ -796,18 +798,22 @@ def _validate_svg(data: bytes) -> bool:
     if not (_MIN_SIZE <= len(data) <= _MAX_SIZE):
         return False
     try:
-        root = ET.fromstring(data.decode("utf-8", errors="replace"))
+        root = ET.fromstring(text)
     except ET.ParseError:
         return False
     local_tag = root.tag.split("}")[-1] if "}" in root.tag else root.tag
     if local_tag != "svg":
         return False
-    ns = root.tag.split("}")[0].lstrip("{") if "}" in root.tag else ""
-    ns_prefix = "{" + ns + "}" if ns else ""
     for elem in root.iter():
-        tag = elem.tag
-        if tag == f"{ns_prefix}script" or tag == "script":
+        elem_local = elem.tag.split("}")[-1] if "}" in elem.tag else elem.tag
+        if elem_local in ("script", "foreignObject"):
             return False
+        for attr_k, attr_v in elem.attrib.items():
+            attr_local = (attr_k.split("}")[-1] if "}" in attr_k else attr_k).lower()
+            if attr_local.startswith("on"):
+                return False
+            if "javascript:" in str(attr_v).lower():
+                return False
     return True
 
 
@@ -836,7 +842,9 @@ def cache_graph(url: str, dest: str, timeout: int = _TIMEOUT) -> bool:
                         f"  cache_graph attempt {attempt + 1}: HTTP {resp.status}",
                         file=sys.stderr,
                     )
-                    raise ValueError(f"HTTP {resp.status}")
+                    raise urllib.error.HTTPError(
+                        url, resp.status, f"HTTP {resp.status}", getattr(resp, "headers", None), None
+                    )
                 data = resp.read()
         except Exception as exc:
             print(
@@ -844,9 +852,8 @@ def cache_graph(url: str, dest: str, timeout: int = _TIMEOUT) -> bool:
                 file=sys.stderr,
             )
             # Don't retry permanent client errors (400, 401, 403, 404)
-            exc_str = str(exc)
-            if any(code in exc_str for code in ("400", "401", "403", "404")) or getattr(exc, "code", None) in (400, 401, 403, 404):
-                print(f"  Permanent error — not retrying.", file=sys.stderr)
+            if getattr(exc, "code", None) in (400, 401, 403, 404):
+                print("  Permanent error — not retrying.", file=sys.stderr)
                 break
             if attempt < len(_BACKOFF) - 1:
                 backoff = _BACKOFF[attempt]
@@ -896,9 +903,10 @@ def cache_graph(url: str, dest: str, timeout: int = _TIMEOUT) -> bool:
 
 def load_streak_state() -> dict:
     """Load the persisted streak state from disk (data/streak_state.json)."""
-    if os.path.exists(STATE_FILE):
+    state_file = os.environ.get("STREAK_STATE_PATH") or STATE_FILE
+    if os.path.exists(state_file):
         try:
-            with open(STATE_FILE, "r", encoding="utf-8") as f:
+            with open(state_file, "r", encoding="utf-8") as f:
                 return json.load(f)
         except (json.JSONDecodeError, IOError) as exc:
             print(f"Warning: streak state file is corrupt ({exc}) — using defaults.", file=sys.stderr)
@@ -925,12 +933,33 @@ def _atomic_write_json(path: str, data: dict) -> None:
             pass
         raise
 
-def save_streak_state(state: dict) -> None:
-    """Persist the streak state to disk."""
-    parent = os.path.dirname(STATE_FILE)
+
+def _atomic_write_text(path: str, content: str) -> None:
+    """Write text atomically via temp file + os.replace."""
+    parent = os.path.dirname(path)
     if parent:
         os.makedirs(parent, exist_ok=True)
-    _atomic_write_json(STATE_FILE, state)
+    tmp_fd, tmp_path = tempfile.mkstemp(
+        dir=parent or ".", suffix=".tmp"
+    )
+    try:
+        with os.fdopen(tmp_fd, "w", encoding="utf-8") as fh:
+            fh.write(content)
+        os.replace(tmp_path, path)
+    except Exception:
+        try:
+            os.unlink(tmp_path)
+        except OSError:
+            pass
+        raise
+
+def save_streak_state(state: dict) -> None:
+    """Persist the streak state to disk."""
+    state_file = os.environ.get("STREAK_STATE_PATH") or STATE_FILE
+    parent = os.path.dirname(state_file)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+    _atomic_write_json(state_file, state)
 
 
 def _now_ist() -> datetime:
@@ -1168,11 +1197,13 @@ def _load_traffic_summary() -> dict:
         return {}
 
 
-def _save_traffic_summary(data: dict) -> None:
+def _save_traffic_summary(data: dict) -> bool:
     try:
         _atomic_write_json(_TRAFFIC_SUMMARY_FILE, data)
+        return True
     except Exception as exc:
         print(f"Warning: could not save traffic summary: {exc}", file=sys.stderr)
+        return False
 
 
 def fetch_traffic(username: str, token: str, now_ist: datetime | None = None) -> dict | None:
@@ -1215,17 +1246,13 @@ def fetch_traffic(username: str, token: str, now_ist: datetime | None = None) ->
         now_ist = _now_ist()
     today   = now_ist.strftime("%Y-%m-%d")
 
-    # Extract today's row from the daily breakdown
+    # Extract today's row from the daily breakdown (do not mislabel yesterday's row as today)
     def _today(items: list | None, count_key: str, unique_key: str) -> tuple[int, int]:
         if not items:
             return 0, 0
         for row in items:
             if _utc_ts_to_ist_date(row.get("timestamp", "")) == today:
                 return row.get(count_key, 0), row.get(unique_key, 0)
-        # GitHub reports days in UTC midnight blocks — take latest if today not found
-        if items:
-            last = items[-1]
-            return last.get(count_key, 0), last.get(unique_key, 0)
         return 0, 0
 
     existing = _load_traffic_summary()
@@ -1605,19 +1632,20 @@ def update_analytics(
     readme_path: str,
     summary: dict,
     dry_run: bool = False,
-) -> bool:
+) -> bool | str:
     """
     Replace the <!-- ANALYTICS:START/END --> block in README.
-    Returns True if anything changed.
+    Returns True if anything changed, False if no change/missing markers,
+    or _ANALYTICS_WRITE_ERROR if reading/writing README failed.
     """
     if not summary:
         return False
     try:
         with open(readme_path, "r", encoding="utf-8") as f:
             content = f.read()
-    except IOError as exc:
+    except OSError as exc:
         print(f"Warning: could not read README for analytics: {exc}", file=sys.stderr)
-        return False
+        return _ANALYTICS_WRITE_ERROR
 
     start_idx = content.find(_ANALYTICS_START)
     end_idx   = content.find(_ANALYTICS_END)
@@ -1642,17 +1670,12 @@ def update_analytics(
         print(block)
         return True
 
-    tmp = readme_path + ".analytics.tmp"
     try:
-        with open(tmp, "w", encoding="utf-8") as f:
-            f.write(new_content)
-        os.replace(tmp, readme_path)
+        _atomic_write_text(readme_path, new_content)
         return True
-    except IOError as exc:
+    except OSError as exc:
         print(f"Warning: could not write analytics block: {exc}", file=sys.stderr)
-        if os.path.exists(tmp):
-            os.remove(tmp)
-        return False
+        return _ANALYTICS_WRITE_ERROR
 
 
 # ── Stage 4: Lines pool ────────────────────────────────────────────────────────
@@ -1757,11 +1780,18 @@ def _load_project_status() -> dict:
         return {}
 
 
-def _save_project_status(data: dict) -> None:
+_optional_write_failed = False
+
+
+def _save_project_status(data: dict) -> bool:
+    global _optional_write_failed
     try:
         _atomic_write_json(_STATUS_FILE, data)
+        return True
     except Exception as exc:
+        _optional_write_failed = True
         print(f"Warning: could not save project status: {exc}", file=sys.stderr)
+        return False
 
 
 def ping_url(url: str) -> tuple[str, float]:
@@ -1791,6 +1821,7 @@ def get_project_statuses(dry_run: bool = False) -> dict[str, str]:
     Requires 2 consecutive failures before flipping to 'down'.
     On dry-run: skip pings, return last-known state.
     """
+    global _optional_write_failed
     prev = _load_project_status()
     result = {}
 
@@ -1814,7 +1845,8 @@ def get_project_statuses(dry_run: bool = False) -> dict[str, str]:
         print(f"  ping {key}: {status} ({elapsed:.1f}s) → shown={shown}")
 
     if not dry_run:
-        _save_project_status(prev)
+        if _save_project_status(prev) is False:
+            _optional_write_failed = True
     return result
 
 
@@ -1951,11 +1983,15 @@ def _load_repo_meta() -> dict:
         return {}
 
 
-def _save_repo_meta(data: dict) -> None:
+def _save_repo_meta(data: dict) -> bool:
+    global _optional_write_failed
     try:
         _atomic_write_json(_REPO_META_FILE, data)
+        return True
     except Exception as exc:
+        _optional_write_failed = True
         print(f"Warning: could not save repo meta: {exc}", file=sys.stderr)
+        return False
 
 
 def fetch_repo_meta(owner: str, repo: str, token: str | None = None) -> dict:
@@ -2012,6 +2048,7 @@ def get_all_repo_meta(token: str | None = None, dry_run: bool = False) -> dict:
     Returns cached + optionally refreshed meta for tracked repos.
     Cache key: repo name. Only re-fetches if pushed_at changed or cache empty.
     """
+    global _optional_write_failed
     tracked = {
         "Phantom-terminal": "Unknown-2829",
         "Phantom-mail":     "Unknown-2829",
@@ -2049,7 +2086,8 @@ def get_all_repo_meta(token: str | None = None, dry_run: bool = False) -> dict:
         print(f"  Pruning stale repo meta key: {k!r}")
         del cache[k]
 
-    _save_repo_meta(cache)
+    if _save_repo_meta(cache) is False:
+        _optional_write_failed = True
     return cache
 
 
@@ -2683,16 +2721,14 @@ def update_readme(
                   f"theme: '{get_theme_name_for_streak(streak)}' "
                   f"(streak: {streak})")
         else:
-            with open(readme_path, "w", encoding="utf-8") as f:
-                f.write(new_content)
+            _atomic_write_text(readme_path, new_content)
             print(f"README updated — status: '{status}', "
                   f"theme: '{get_theme_name_for_streak(streak)}' "
                   f"(streak: {streak})")
         return True
     else:
         if force and not dry_run:
-            with open(readme_path, "w", encoding="utf-8") as f:
-                f.write(new_content)
+            _atomic_write_text(readme_path, new_content)
             print(f"README force-written (no content change) — streak: {streak}")
             return True
         print(f"No changes needed (streak: {streak}, "
@@ -2760,6 +2796,8 @@ def parse_args(argv=None):
 
 
 def main(argv=None):
+    global _optional_write_failed
+    _optional_write_failed = False
     args = parse_args(argv)
 
     # ── --list-themes: print all theme names and exit ─────────────────────────
@@ -2938,6 +2976,9 @@ def main(argv=None):
     if not args.dry_run and not repo_meta:
         run_result = _RunResult.DEGRADED
 
+    if _optional_write_failed:
+        run_result = _RunResult.DEGRADED
+
     # ── Stage 4: Recent activity ─────────────────────────────────────────────
     print("Fetching recent activity…")
     if args.dry_run:
@@ -2986,16 +3027,6 @@ def main(argv=None):
 
     updated = bool(readme_result)
 
-    # Persist streak state AFTER readme update confirms success
-    if not args.dry_run:
-        try:
-            if save_streak_state(new_state) is False:
-                raise IOError("save_streak_state returned False")
-        except Exception as exc:
-            run_result = _RunResult.FAILED
-            print(f"❌ Critical error: could not persist streak state: {exc}", file=sys.stderr)
-            sys.exit(1)
-
     if updated:
         if args.dry_run:
             print("✅ Dry run complete — no files modified")
@@ -3003,16 +3034,6 @@ def main(argv=None):
             print("✅ README.md updated successfully")
     else:
         print("ℹ️  No update needed — README content unchanged")
-
-    # Reset failure counter on every successful pipeline completion
-    # (regardless of whether README content changed)
-    if not args.dry_run:
-        run_state = record_run_success(run_state)
-        close_failure_issue(run_state, token, username)
-        if _save_run_state(run_state) is False:
-            run_result = _RunResult.FAILED
-            print("❌ Critical error: could not persist run state.", file=sys.stderr)
-            sys.exit(1)
 
     # ── Stage 4: Job summary ─────────────────────────────────────────────────
     summary_items = [
@@ -3036,14 +3057,12 @@ def main(argv=None):
         or os.environ.get("GH_STATS_TOKEN", "").strip()
     )
 
-
     if args.skip_traffic:
         print("Skipping traffic fetch (--skip-traffic)")
         traffic = None
     else:
         print("Fetching traffic data…")
         traffic = None if args.dry_run else fetch_traffic(username, traffic_token, now_ist)
-
 
     if traffic:
         if not traffic.get("views_available", True) or not traffic.get("clones_available", True):
@@ -3055,7 +3074,8 @@ def main(argv=None):
         # Save summary to main branch for analytics block
         summary = _compute_rolling_totals(traffic)
         if not args.dry_run:
-            _save_traffic_summary(summary)
+            if _save_traffic_summary(summary) is False:
+                run_result = _RunResult.DEGRADED
             # Push full row to data branch (silently skip if no token)
             append_traffic_to_data_branch(traffic, username, traffic_token)
         summary_items.append((
@@ -3072,13 +3092,37 @@ def main(argv=None):
                 run_result = _RunResult.DEGRADED
             print("  Traffic fetch failed — using cached summary")
 
-    summary_items.insert(0, ("Run status", run_result))
-
     # Update analytics block in README from summary (last-known or fresh)
     if summary:
         analytics_updated = update_analytics(readme_path, summary, dry_run=args.dry_run)
+        if analytics_updated == _ANALYTICS_WRITE_ERROR:
+            run_result = _RunResult.FAILED
+            print("❌ Analytics README write failed — pipeline failing.", file=sys.stderr)
+            if not args.dry_run:
+                run_state = record_run_failure(run_state)
+                _save_run_state(run_state)
+            sys.exit(1)
         if analytics_updated and not args.dry_run:
             print("✅ Analytics block updated in README")
+
+    # Persist streak state & reset failure counter ONLY after all README writes succeed
+    if not args.dry_run:
+        try:
+            if save_streak_state(new_state) is False:
+                raise IOError("save_streak_state returned False")
+        except Exception as exc:
+            run_result = _RunResult.FAILED
+            print(f"❌ Critical error: could not persist streak state: {exc}", file=sys.stderr)
+            sys.exit(1)
+
+        run_state = record_run_success(run_state)
+        close_failure_issue(run_state, token, username)
+        if _save_run_state(run_state) is False:
+            run_result = _RunResult.FAILED
+            print("❌ Critical error: could not persist run state.", file=sys.stderr)
+            sys.exit(1)
+
+    summary_items.insert(0, ("Run status", run_result))
 
     # Write dynamic commit message for CI runner
     if not args.dry_run:
@@ -3102,11 +3146,7 @@ def main(argv=None):
         except IOError:
             pass
 
-
-
     write_job_summary(summary_items, now_ist)
-
-
 
 
 if __name__ == "__main__":
