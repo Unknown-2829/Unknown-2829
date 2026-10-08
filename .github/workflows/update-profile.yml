@@ -2,8 +2,7 @@ name: Dynamic Profile Updater
 
 on:
   schedule:
-    - cron: "0 */6 * * *"     # UTC 00:00 06:00 12:00 18:00 → IST 05:30 11:30 17:30 23:30
-    - cron: "30 18 * * *"     # UTC 18:30 → IST 00:00 midnight
+    - cron: "30 0,6,12,18 * * *"  # UTC 00:30 06:30 12:30 18:30 → IST 06:00 12:00 18:00 00:00
   workflow_dispatch:
     inputs:
       streak_override:
@@ -94,45 +93,62 @@ jobs:
           [ "$INPUT_SKIP_TRAFFIC" = "true" ] && FLAGS+=(--skip-traffic)
           [ "$INPUT_FORCE_UPDATE" = "true" ] && FLAGS+=(--force)
           [ -n "$INPUT_STREAK_OVERRIDE" ] && FLAGS+=(--streak "$INPUT_STREAK_OVERRIDE")
-          [ -n "$INPUT_SIMULATE_DATE"   ] && FLAGS+=(--date   "$INPUT_SIMULATE_DATE")
+          [ -n "$INPUT_SIMULATE_DATE"   ] && FLAGS+=(--date   "$INPUT_SIMULATE_DATE" --dry-run)
           [ -n "$INPUT_THEME_OVERRIDE"  ] && FLAGS+=(--theme  "$INPUT_THEME_OVERRIDE")
           python phantom_engine.py "${FLAGS[@]}"
 
       - name: Commit and push changes
-        if: ${{ github.event.inputs.dry_run != 'true' }}
+        if: ${{ github.event.inputs.dry_run != 'true' && !github.event.inputs.simulate_date }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+          SECRET_MMDD: ${{ secrets.SECRET_MMDD }}
+          SECRET_SALT: ${{ secrets.SECRET_SALT }}
+          TRAFFIC_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
+          GITHUB_USERNAME: Unknown-2829
+          README_PATH: README.md
+          INPUT_STREAK_OVERRIDE: ${{ github.event.inputs.streak_override }}
+          INPUT_THEME_OVERRIDE: ${{ github.event.inputs.theme_override }}
+          INPUT_SKIP_PINGS: ${{ github.event.inputs.skip_pings }}
+          INPUT_SKIP_TRAFFIC: ${{ github.event.inputs.skip_traffic }}
+          INPUT_FORCE_UPDATE: ${{ github.event.inputs.force_update }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add README.md assets/ config/
-          # Add state files in data/ — skip any that don't exist yet
-          for f in data/*.json; do
-            [ -f "$f" ] && git add -f "$f" || true
-          done
-          if git diff --quiet --cached; then
-            echo "Nothing to commit."
-            exit 0
-          fi
-          # Read dynamic contextual commit message from engine, else fallback
-          if [ -f .commit_msg ]; then
-            git commit -F .commit_msg
-            rm -f .commit_msg
-          else
-            git commit -m "⚡ Update profile stats, themes & status"
-          fi
+          stage_and_commit() {
+            git add README.md assets/ config/
+            for f in data/*.json; do
+              [ -f "$f" ] && git add -f "$f" || true
+            done
+            if git diff --quiet --cached; then
+              echo "Nothing to commit."
+              exit 0
+            fi
+            if [ -f .commit_msg ]; then
+              git commit -F .commit_msg
+              rm -f .commit_msg
+            else
+              git commit -m "⚡ Update profile stats, themes & status"
+            fi
+          }
+          stage_and_commit
 
-          # Push directly — concurrency lock means no remote divergence.
-          # Only pull+rebase if push is genuinely rejected.
+          # Push directly — if remote advanced, reset to origin/main and regenerate cleanly
           for i in 1 2 3; do
             if git push; then
               exit 0
             fi
-            echo "Push attempt $i failed, pulling and retrying..."
+            echo "Push attempt $i failed, fetching latest main and regenerating..."
             git fetch origin
-            if ! git rebase -X theirs origin/main; then
-              git rebase --abort || true
-              echo "Rebase failed on attempt $i" >&2
-              exit 1
-            fi
+            git reset --hard origin/main
+            FLAGS=()
+            [ "$INPUT_SKIP_PINGS"   = "true" ] && FLAGS+=(--skip-pings)
+            [ "$INPUT_SKIP_TRAFFIC" = "true" ] && FLAGS+=(--skip-traffic)
+            [ "$INPUT_FORCE_UPDATE" = "true" ] && FLAGS+=(--force)
+            [ -n "$INPUT_STREAK_OVERRIDE" ] && FLAGS+=(--streak "$INPUT_STREAK_OVERRIDE")
+            [ -n "$INPUT_THEME_OVERRIDE"  ] && FLAGS+=(--theme  "$INPUT_THEME_OVERRIDE")
+            python phantom_engine.py "${FLAGS[@]}"
+            stage_and_commit
             sleep $((i * 5))
           done
           echo "Push failed after 3 attempts" >&2
