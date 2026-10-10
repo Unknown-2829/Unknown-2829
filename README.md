@@ -44,7 +44,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Zero%20is%20just%20the%20start%20of%20a%20new%20streak.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Zero is just the start of a new streak." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Offline%20today.%20Dangerous%20tomorrow.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Offline today. Dangerous tomorrow." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 10 Oct 2026, 18:18 IST</code></sub>
+  <sub><code>Last refresh: 11 Oct 2026, 03:24 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
