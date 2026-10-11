@@ -40,16 +40,16 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%AA%94%20Navratri-e040fb?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Festival%20mode%3A%20on.%20Deploy%20mode%3A%20also%20on.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Festival mode: on. Deploy mode: also on." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20No%20distractions.%20Just%20the%20glow%20of%20the%20screen.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: No distractions. Just the glow of the screen." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0005,50:e040fb,100:ff9100&height=5&section=header&animation=twinkling" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -59,20 +59,20 @@ Primary Domains:
 
 <!-- Activity Graph - Themed -->
 <p align="center">
-  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0a0005&color=f48fb1&line=e040fb&point=ff4081&area_color=e040fb&area=true&hide_border=true" alt="GitHub activity graph" />
+  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=b9f6ca&line=00e676&point=69f0ae&area_color=00e676&area=true&hide_border=true" alt="GitHub activity graph" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0005,50:e040fb,100:ff9100&height=5&section=header&animation=twinkling" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <p align="center">
-  <sub>🎨 <i>🪔 Navratri | Powered by GitHub Actions</i></sub>
+  <sub>🎨 <i>Stats theme updates dynamically based on current streak | Powered by GitHub Actions</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 11 Oct 2026, 18:41 IST</code></sub>
+  <sub><code>Last refresh: 12 Oct 2026, 03:42 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
