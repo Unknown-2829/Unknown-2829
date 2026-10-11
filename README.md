@@ -4,7 +4,7 @@
   <a href="https://ayushman.live/"><img src="https://img.shields.io/badge/Portfolio-ayushman.live-6e3aff?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
   <a href="https://t.me/unknownlll2829"><img src="https://img.shields.io/badge/Telegram-@unknownlll2829-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" /></a>
   <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6"><img src="https://img.shields.io/badge/Spotify-Artist-1DB954?style=for-the-badge&logo=spotify&logoColor=white" /></a>
-  <!-- STATUS-TOP:START --><img src="https://img.shields.io/badge/Status-BUSY-ff6d00?style=for-the-badge" alt="Status: BUSY" /><!-- STATUS-TOP:END -->
+  <!-- STATUS-TOP:START --><img src="https://img.shields.io/badge/Status-ACTIVE-00ff00?style=for-the-badge" alt="Status: ACTIVE" /><!-- STATUS-TOP:END -->
 </p>
 
 ---
@@ -40,16 +40,16 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%92%94%20Streak%20Dropped-ff6d00?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%AA%94%20Navratri-e040fb?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Offline%20today.%20Dangerous%20tomorrow.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Offline today. Dangerous tomorrow." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Festival%20mode%3A%20on.%20Deploy%20mode%3A%20also%20on.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Festival mode: on. Deploy mode: also on." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0005,50:e040fb,100:ff9100&height=5&section=header&animation=twinkling" width="70%" alt="" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -59,20 +59,20 @@ Primary Domains:
 
 <!-- Activity Graph - Themed -->
 <p align="center">
-  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=b9f6ca&line=00e676&point=69f0ae&area_color=00e676&area=true&hide_border=true" alt="GitHub activity graph" />
+  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0a0005&color=f48fb1&line=e040fb&point=ff4081&area_color=e040fb&area=true&hide_border=true" alt="GitHub activity graph" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0005,50:e040fb,100:ff9100&height=5&section=header&animation=twinkling" width="70%" alt="" />
 </p>
 
 <p align="center">
-  <sub>⚡ <i>1-day streak was broken — get back in the game!</i></sub>
+  <sub>🎨 <i>🪔 Navratri | Powered by GitHub Actions</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 11 Oct 2026, 03:24 IST</code></sub>
+  <sub><code>Last refresh: 11 Oct 2026, 11:35 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -291,10 +291,10 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 
 <!-- RECENT-ACTIVITY:START -->
 - `Unknown-2829` — pushed (2d ago)
-- `Unknown-2829` — pushed (2d ago)
-- `Unknown-2829` — pushed (2d ago)
-- `Unknown-2829` — pushed (2d ago)
-- `Unknown-2829` — pushed (2d ago)
+- `Unknown-2829` — pushed (3d ago)
+- `Unknown-2829` — pushed (3d ago)
+- `Unknown-2829` — pushed (3d ago)
+- `Unknown-2829` — pushed (3d ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
@@ -383,7 +383,7 @@ Music is another creative outlet — a different way to express ideas and emotio
 ## 📬 // CONTACT
 
 <p align="center">
-  <!-- STATUS-CONTACT:START --><img src="https://img.shields.io/badge/Status-%F0%9F%9F%A0%20BUSY%20%C2%B7%20OPEN%20TO%20OPPORTUNITIES-ff6d00?style=for-the-badge" alt="Status: 🟠 BUSY · OPEN TO OPPORTUNITIES" /><!-- STATUS-CONTACT:END -->
+  <!-- STATUS-CONTACT:START --><img src="https://img.shields.io/badge/Status-%F0%9F%9F%A2%20OPEN%20TO%20OPPORTUNITIES-00ff00?style=for-the-badge" alt="Status: 🟢 OPEN TO OPPORTUNITIES" /><!-- STATUS-CONTACT:END -->
 </p>
 
 Interested In:
