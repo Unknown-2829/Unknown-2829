@@ -1008,6 +1008,232 @@ def save_streak_state(state: dict) -> None:
     _atomic_write_json(state_file, state)
 
 
+# ── Native Activity Graph Generation ──────────────────────────────────────────
+
+_CONTRIBUTION_DAYS_FILE = os.environ.get(
+    "CONTRIBUTION_DAYS_PATH", os.path.join("data", "contribution_days.json")
+)
+
+
+def _load_contribution_days() -> list[dict]:
+    """Load cached 31-day contribution history from data/contribution_days.json."""
+    if os.path.exists(_CONTRIBUTION_DAYS_FILE):
+        try:
+            with open(_CONTRIBUTION_DAYS_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            if isinstance(data, list):
+                return [d for d in data if isinstance(d, dict) and "date" in d]
+        except Exception:
+            pass
+    return []
+
+
+def _save_contribution_days(days: list[dict]) -> bool:
+    """Save 31-day contribution history atomically."""
+    try:
+        _atomic_write_json(_CONTRIBUTION_DAYS_FILE, days)
+        return True
+    except Exception as exc:
+        print(f"Warning: could not save contribution days: {exc}", file=sys.stderr)
+        return False
+
+
+def _xml_escape(s: str) -> str:
+    """Escape XML special characters."""
+    return (
+        str(s)
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+        .replace("'", "&apos;")
+    )
+
+
+def generate_activity_graph_svg(
+    days: list[dict] | None,
+    theme: dict,
+    username: str = "Unknown-2829",
+    width: int = 800,
+    height: int = 260,
+) -> str:
+    """Generate a clean, standalone, zero-dependency SVG activity line graph.
+
+    Adheres strictly to GitHub SVG sanitization (pure SVG: no foreignObject, no scripts).
+    Uses the active theme's colors: streak_bg, ring, fire, side_labels, side_nums, stroke.
+    """
+    normalized_days: list[dict] = []
+    if days:
+        normalized_days = [d for d in days if isinstance(d, dict) and "date" in d]
+
+    if not normalized_days:
+        today = date.today()
+        normalized_days = [
+            {"date": (today - timedelta(days=30 - i)).isoformat(), "contributionCount": 0}
+            for i in range(31)
+        ]
+    elif len(normalized_days) < 31:
+        try:
+            first_dt = date.fromisoformat(normalized_days[0]["date"])
+        except Exception:
+            first_dt = date.today() - timedelta(days=len(normalized_days))
+        needed = 31 - len(normalized_days)
+        prefix = [
+            {"date": (first_dt - timedelta(days=needed - i)).isoformat(), "contributionCount": 0}
+            for i in range(needed)
+        ]
+        normalized_days = prefix + normalized_days
+    elif len(normalized_days) > 31:
+        normalized_days = normalized_days[-31:]
+
+    counts = [max(0, int(d.get("contributionCount") or 0)) for d in normalized_days]
+    total_contribs = sum(counts)
+    max_count = max(counts) if counts else 0
+    avg_contribs = total_contribs / len(counts) if counts else 0.0
+
+    # Colors from theme
+    bg_color = f"#{theme.get('streak_bg', '0d1117')}"
+    line_color = f"#{theme.get('ring', '58a6ff')}"
+    point_color = f"#{theme.get('fire', '1f6feb')}"
+    label_color = f"#{theme.get('side_labels', '8b949e')}"
+    num_color = f"#{theme.get('side_nums', 'ffffff')}"
+    border_color = f"#{theme.get('stroke', '30363d')}"
+    show_area = theme.get("graph_area", "true").lower() == "true"
+
+    pad_left = 60
+    pad_right = 35
+    pad_top = 75
+    pad_bottom = 45
+    plot_w = width - pad_left - pad_right
+    plot_h = height - pad_top - pad_bottom
+
+    # Y scale with clean rounding
+    y_max = max(5, max_count)
+    if y_max <= 10:
+        y_max = ((y_max + 1) // 2) * 2 if y_max % 2 != 0 else y_max
+    else:
+        y_max = ((y_max + 4) // 5) * 5
+
+    n = len(normalized_days)
+    coords = []
+    for i, c in enumerate(counts):
+        x = pad_left + (i * plot_w / (n - 1))
+        y = pad_top + plot_h - (c / y_max * plot_h)
+        coords.append((x, y))
+
+    path_d_parts = [f"M {coords[0][0]:.2f} {coords[0][1]:.2f}"]
+    for i in range(len(coords) - 1):
+        x0, y0 = coords[i]
+        x1, y1 = coords[i + 1]
+        dx = (x1 - x0) * 0.45
+        path_d_parts.append(f"C {x0 + dx:.2f} {y0:.2f}, {x1 - dx:.2f} {y1:.2f}, {x1:.2f} {y1:.2f}")
+
+    line_path = " ".join(path_d_parts)
+    area_path = (
+        f"{line_path} L {coords[-1][0]:.2f} {pad_top + plot_h:.2f} "
+        f"L {coords[0][0]:.2f} {pad_top + plot_h:.2f} Z"
+    )
+
+    grid_svg = []
+    y_ticks = sorted(list(set([0, y_max // 3, (y_max * 2) // 3, y_max])))
+    for val in y_ticks:
+        y_pos = pad_top + plot_h - (val / y_max * plot_h)
+        grid_svg.append(
+            f'<line x1="{pad_left}" y1="{y_pos:.2f}" x2="{pad_left + plot_w}" y2="{y_pos:.2f}" '
+            f'stroke="{border_color}" stroke-opacity="0.3" stroke-dasharray="3,3" stroke-width="1" />'
+        )
+        grid_svg.append(
+            f'<text x="{pad_left - 12}" y="{y_pos + 4:.2f}" text-anchor="end" '
+            f'fill="{label_color}" font-size="11" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">{val}</text>'
+        )
+
+    x_labels_svg = []
+    sample_indices = [0, 7, 14, 21, 30]
+    for idx in sample_indices:
+        x_pos, _ = coords[idx]
+        d_str = normalized_days[idx]["date"]
+        try:
+            dt = date.fromisoformat(d_str)
+            fmt_date = dt.strftime("%b %d")
+        except Exception:
+            fmt_date = d_str
+        x_labels_svg.append(
+            f'<text x="{x_pos:.2f}" y="{pad_top + plot_h + 22}" text-anchor="middle" '
+            f'fill="{label_color}" font-size="11" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">{fmt_date}</text>'
+        )
+
+    points_svg = []
+    for (x, y), c in zip(coords, counts):
+        if c > 0:
+            points_svg.append(
+                f'<circle cx="{x:.2f}" cy="{y:.2f}" r="3" fill="{point_color}" stroke="{line_color}" stroke-width="1.5">'
+                f'<title>{c} contributions</title></circle>'
+            )
+
+    area_svg = ""
+    if show_area:
+        area_svg = (
+            f'<defs>\n'
+            f'  <linearGradient id="chartAreaGrad" x1="0" y1="0" x2="0" y2="1">\n'
+            f'    <stop offset="0%" stop-color="{line_color}" stop-opacity="0.35"/>\n'
+            f'    <stop offset="100%" stop-color="{line_color}" stop-opacity="0.0"/>\n'
+            f'  </linearGradient>\n'
+            f'</defs>\n'
+            f'<path d="{area_path}" fill="url(#chartAreaGrad)" />'
+        )
+
+    clean_user = _xml_escape(username)
+    return f"""<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card Background -->
+  <rect width="100%" height="100%" rx="10" fill="{bg_color}" stroke="{border_color}" stroke-width="1.2" />
+
+  <!-- Title & Stats Header -->
+  <text x="{pad_left}" y="36" fill="{num_color}" font-size="15" font-weight="600" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+    Activity Graph <tspan fill="{label_color}" font-weight="400" font-size="13">(Last 31 Days)</tspan>
+  </text>
+  <text x="{pad_left + plot_w}" y="36" text-anchor="end" fill="{label_color}" font-size="12" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+    Total: <tspan fill="{num_color}" font-weight="600">{total_contribs}</tspan>&#160;&#160;·&#160;&#160;Daily Avg: <tspan fill="{num_color}" font-weight="600">{avg_contribs:.1f}</tspan>&#160;&#160;·&#160;&#160;Max Day: <tspan fill="{num_color}" font-weight="600">{max_count}</tspan>
+  </text>
+
+  <!-- Y Grid -->
+  {' '.join(grid_svg)}
+
+  <!-- X Labels -->
+  {' '.join(x_labels_svg)}
+
+  <!-- Area & Line -->
+  {area_svg}
+  <path d="{line_path}" fill="none" stroke="{line_color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Data Points -->
+  {' '.join(points_svg)}
+</svg>"""
+
+
+def generate_and_save_activity_graph(
+    username: str,
+    theme: dict,
+    days: list[dict] | None = None,
+    dest: str | None = None,
+) -> bool:
+    """Generate the themed activity graph SVG and write it atomically to dest."""
+    target_dest = dest or os.path.join(ASSETS_DIR, "activity-graph.svg")
+    if not days:
+        days = _load_contribution_days()
+    svg = generate_activity_graph_svg(days, theme, username=username)
+    data = svg.encode("utf-8")
+    if not _validate_svg(data):
+        print("Warning: generated activity graph failed SVG validation", file=sys.stderr)
+        return False
+    try:
+        _atomic_write_text(target_dest, svg)
+        print(f"  activity_graph: generated and saved {target_dest} ({len(data)} bytes)")
+        return True
+    except Exception as exc:
+        print(f"Warning: could not write activity graph: {exc}", file=sys.stderr)
+        return False
+
+
 def _now_ist() -> datetime:
     """Return the current datetime in IST."""
     return datetime.now(IST)
@@ -1122,6 +1348,8 @@ def _graphql_streak(username: str, token: str, now_ist: datetime | None = None) 
         if isinstance(week, dict) and isinstance(week.get("contributionDays"), list):
             days.extend(d for d in week["contributionDays"] if isinstance(d, dict) and "date" in d)
     days.sort(key=lambda d: d["date"])
+    if days and not now_ist:
+        _save_contribution_days(days[-31:])
 
     # Build a set of dates with contributions
     active_dates: set[date] = {
@@ -2540,23 +2768,8 @@ def generate_stats_section(
         f"&animation={theme['capsule_animation']}"
     )
 
-    # ── Activity graph URL (for caching) ─────────────────────────────────────
-    graph_url_live = (
-        f"https://github-readme-activity-graph.vercel.app/graph?username={username}"
-        f"&bg_color={theme['streak_bg']}"
-        f"&color={theme['side_labels']}"
-        f"&line={theme['ring']}"
-        f"&point={theme['fire']}"
-        f"&area_color={theme['ring']}"
-        f"&area={theme['graph_area']}"
-        f"&hide_border=true"
-    )
-    graph_cached = os.path.join(ASSETS_DIR, "activity-graph.svg")
-    if use_cached_assets and os.path.exists(graph_cached):
-        graph_img_url = f"{RAW_BASE}/assets/activity-graph.svg"
-    else:
-        # No cached file yet (or manual override active) — use live themed URL
-        graph_img_url = graph_url_live
+    # ── Activity graph URL (native generated SVG in assets/) ─────────────────
+    graph_img_url = f"{RAW_BASE}/assets/activity-graph.svg"
 
     # ── Streak card URL (for caching) ────────────────────────────────────────
     streak_cached = os.path.join(ASSETS_DIR, "streak-card.svg")
@@ -3072,16 +3285,6 @@ def main(argv=None):
     if not args.dry_run and use_cached_assets:
         theme = picked_theme
 
-        graph_url = (
-            f"https://github-readme-activity-graph.vercel.app/graph?username={username}"
-            f"&bg_color={theme['streak_bg']}"
-            f"&color={theme['side_labels']}"
-            f"&line={theme['ring']}"
-            f"&point={theme['fire']}"
-            f"&area_color={theme['ring']}"
-            f"&area={theme['graph_area']}"
-            f"&hide_border=true"
-        )
         streak_url = (
             f"https://streak-stats.demolab.com?user={username}"
             f"&hide_border=true"
@@ -3097,8 +3300,12 @@ def main(argv=None):
             f"&date_format=j%20M%20Y"
         )
         os.makedirs(ASSETS_DIR, exist_ok=True)
-        print("Caching activity graph…")
-        graph_refreshed = cache_graph(graph_url, os.path.join(ASSETS_DIR, "activity-graph.svg"))
+        print("Generating native activity graph…")
+        graph_refreshed = generate_and_save_activity_graph(
+            username=username,
+            theme=picked_theme,
+            dest=os.path.join(ASSETS_DIR, "activity-graph.svg"),
+        )
         print("Caching streak card…")
         streak_refreshed = cache_graph(streak_url, os.path.join(ASSETS_DIR, "streak-card.svg"))
 
