@@ -19,6 +19,7 @@ import base64
 import hashlib
 import hmac as _hmac
 import json
+import math
 import os
 import re
 import sys
@@ -1162,11 +1163,52 @@ def generate_activity_graph_svg(
             f'fill="{label_color}" font-size="11" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">{fmt_date}</text>'
         )
 
-    duration = 1.6
+    # Calculate exact path arc length and cumulative point distances
+    cum_lens = [0.0]
+    total_len = 0.0
+    for i in range(len(coords) - 1):
+        x0, y0 = coords[i]
+        x1, y1 = coords[i + 1]
+        dx = (x1 - x0) * 0.45
+        c1x, c1y = x0 + dx, y0
+        c2x, c2y = x1 - dx, y1
+        seg_len = 0.0
+        prev_pt = (x0, y0)
+        for step in (0.2, 0.4, 0.6, 0.8, 1.0):
+            t = step
+            bx = (1 - t)**3 * x0 + 3 * (1 - t)**2 * t * c1x + 3 * (1 - t) * t**2 * c2x + t**3 * x1
+            by = (1 - t)**3 * y0 + 3 * (1 - t)**2 * t * c1y + 3 * (1 - t) * t**2 * c2y + t**3 * y1
+            seg_len += math.hypot(bx - prev_pt[0], by - prev_pt[1])
+            prev_pt = (bx, by)
+        total_len += seg_len
+        cum_lens.append(total_len)
+
+    dash_len = max(100, int(total_len + 15))
+    duration = 2.4
+    wipe_w = int(plot_w + 10)
+
+    def _time_fraction_for_progress(progress_target: float) -> float:
+        if progress_target <= 0.0:
+            return 0.0
+        if progress_target >= 1.0:
+            return 1.0
+        low, high = 0.0, 1.0
+        for _ in range(16):
+            mid = (low + high) / 2.0
+            y = 3 * mid**2 - 2 * mid**3
+            if y < progress_target:
+                low = mid
+            else:
+                high = mid
+        t = (low + high) / 2.0
+        return 3 * (1 - t)**2 * t * 0.42 + 3 * (1 - t) * t**2 * 0.58 + t**3
+
     points_svg = []
     for i, ((x, y), c) in enumerate(zip(coords, counts)):
         if c > 0:
-            delay = i * (duration / (n - 1))
+            frac = cum_lens[i] / total_len if total_len > 0 else (i / (n - 1))
+            t_frac = _time_fraction_for_progress(frac)
+            delay = round(t_frac * duration, 2)
             points_svg.append(
                 f'<circle class="chart-point" cx="{x:.2f}" cy="{y:.2f}" r="3" fill="{point_color}" stroke="{line_color}" stroke-width="1.5" '
                 f'style="animation-delay: {delay:.2f}s; transform-origin: {x:.2f}px {y:.2f}px;">'
@@ -1181,16 +1223,16 @@ def generate_activity_graph_svg(
 
     css = f"""  <style>
     @keyframes drawChartLine {{
-      from {{ stroke-dashoffset: 2600; }}
+      from {{ stroke-dashoffset: {dash_len}; }}
       to {{ stroke-dashoffset: 0; }}
     }}
     @keyframes wipeChartArea {{
       from {{ width: 0px; }}
-      to {{ width: {width}px; }}
+      to {{ width: {wipe_w}px; }}
     }}
     @keyframes popChartPoint {{
       0% {{ opacity: 0; transform: scale(0); }}
-      70% {{ opacity: 1; transform: scale(1.4); }}
+      70% {{ opacity: 1; transform: scale(1.35); }}
       100% {{ opacity: 1; transform: scale(1); }}
     }}
     @keyframes pulseActivePoint {{
@@ -1199,20 +1241,20 @@ def generate_activity_graph_svg(
       100% {{ r: 3px; }}
     }}
     .chart-line {{
-      stroke-dasharray: 2600;
-      stroke-dashoffset: 2600;
-      animation: drawChartLine {duration}s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      stroke-dasharray: {dash_len};
+      stroke-dashoffset: {dash_len};
+      animation: drawChartLine {duration}s ease-in-out both;
     }}
     .wipe-rect {{
-      animation: wipeChartArea {duration}s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      animation: wipeChartArea {duration}s ease-in-out both;
     }}
     .chart-point {{
       opacity: 0;
-      animation: popChartPoint 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, pulseActivePoint 2.8s ease-in-out {duration}s infinite;
+      animation: popChartPoint 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) both, pulseActivePoint 2.8s ease-in-out {duration}s infinite;
     }}
     @media (prefers-reduced-motion: reduce) {{
       .chart-line {{ stroke-dashoffset: 0; animation: none; }}
-      .wipe-rect {{ width: {width}px; animation: none; }}
+      .wipe-rect {{ width: {wipe_w}px; animation: none; }}
       .chart-point {{ opacity: 1; transform: none; animation: none; }}
     }}
   </style>"""
@@ -1226,7 +1268,7 @@ def generate_activity_graph_svg(
       <stop offset="100%" stop-color="{line_color}" stop-opacity="0.0"/>
     </linearGradient>
     <clipPath id="graphWipeClip">
-      <rect class="wipe-rect" x="0" y="0" width="{width}" height="{height}" />
+      <rect class="wipe-rect" x="{pad_left}" y="0" width="0" height="{height}" />
     </clipPath>
   </defs>
 
