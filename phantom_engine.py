@@ -1162,28 +1162,74 @@ def generate_activity_graph_svg(
             f'fill="{label_color}" font-size="11" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">{fmt_date}</text>'
         )
 
+    duration = 1.6
     points_svg = []
-    for (x, y), c in zip(coords, counts):
+    for i, ((x, y), c) in enumerate(zip(coords, counts)):
         if c > 0:
+            delay = i * (duration / (n - 1))
             points_svg.append(
-                f'<circle cx="{x:.2f}" cy="{y:.2f}" r="3" fill="{point_color}" stroke="{line_color}" stroke-width="1.5">'
+                f'<circle class="chart-point" cx="{x:.2f}" cy="{y:.2f}" r="3" fill="{point_color}" stroke="{line_color}" stroke-width="1.5" '
+                f'style="animation-delay: {delay:.2f}s; transform-origin: {x:.2f}px {y:.2f}px;">'
                 f'<title>{c} contributions</title></circle>'
             )
 
     area_svg = ""
     if show_area:
         area_svg = (
-            f'<defs>\n'
-            f'  <linearGradient id="chartAreaGrad" x1="0" y1="0" x2="0" y2="1">\n'
-            f'    <stop offset="0%" stop-color="{line_color}" stop-opacity="0.35"/>\n'
-            f'    <stop offset="100%" stop-color="{line_color}" stop-opacity="0.0"/>\n'
-            f'  </linearGradient>\n'
-            f'</defs>\n'
-            f'<path d="{area_path}" fill="url(#chartAreaGrad)" />'
+            f'<path class="chart-area" d="{area_path}" fill="url(#chartAreaGrad)" clip-path="url(#graphWipeClip)" />'
         )
+
+    css = f"""  <style>
+    @keyframes drawChartLine {{
+      from {{ stroke-dashoffset: 2600; }}
+      to {{ stroke-dashoffset: 0; }}
+    }}
+    @keyframes wipeChartArea {{
+      from {{ width: 0px; }}
+      to {{ width: {width}px; }}
+    }}
+    @keyframes popChartPoint {{
+      0% {{ opacity: 0; transform: scale(0); }}
+      70% {{ opacity: 1; transform: scale(1.4); }}
+      100% {{ opacity: 1; transform: scale(1); }}
+    }}
+    @keyframes pulseActivePoint {{
+      0% {{ r: 3px; }}
+      50% {{ r: 4.5px; filter: drop-shadow(0 0 2px {line_color}); }}
+      100% {{ r: 3px; }}
+    }}
+    .chart-line {{
+      stroke-dasharray: 2600;
+      stroke-dashoffset: 2600;
+      animation: drawChartLine {duration}s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }}
+    .wipe-rect {{
+      animation: wipeChartArea {duration}s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }}
+    .chart-point {{
+      opacity: 0;
+      animation: popChartPoint 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, pulseActivePoint 2.8s ease-in-out {duration}s infinite;
+    }}
+    @media (prefers-reduced-motion: reduce) {{
+      .chart-line {{ stroke-dashoffset: 0; animation: none; }}
+      .wipe-rect {{ width: {width}px; animation: none; }}
+      .chart-point {{ opacity: 1; transform: none; animation: none; }}
+    }}
+  </style>"""
 
     clean_user = _xml_escape(username)
     return f"""<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" fill="none" xmlns="http://www.w3.org/2000/svg">
+{css}
+  <defs>
+    <linearGradient id="chartAreaGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="{line_color}" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="{line_color}" stop-opacity="0.0"/>
+    </linearGradient>
+    <clipPath id="graphWipeClip">
+      <rect class="wipe-rect" x="0" y="0" width="{width}" height="{height}" />
+    </clipPath>
+  </defs>
+
   <!-- Card Background -->
   <rect width="100%" height="100%" rx="10" fill="{bg_color}" stroke="{border_color}" stroke-width="1.2" />
 
@@ -1201,11 +1247,11 @@ def generate_activity_graph_svg(
   <!-- X Labels -->
   {' '.join(x_labels_svg)}
 
-  <!-- Area & Line -->
+  <!-- Area & Line with Moving Sweep Effect -->
   {area_svg}
-  <path d="{line_path}" fill="none" stroke="{line_color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  <path class="chart-line" d="{line_path}" fill="none" stroke="{line_color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
 
-  <!-- Data Points -->
+  <!-- Synchronized Points Ignited As Line Crosses -->
   {' '.join(points_svg)}
 </svg>"""
 

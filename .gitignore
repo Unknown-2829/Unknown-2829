@@ -1,6 +1,7 @@
 # ── Dev-only (local development — never commit to profile repo) ────────────────
 tests/
 README-DEV.md
+preview_graph.html
 .github/workflows/ci-tests.yml
 
 # ── Python ─────────────────────────────────────────────────────────────────────
