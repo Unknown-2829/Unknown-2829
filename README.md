@@ -59,7 +59,7 @@ Primary Domains:
 
 <!-- Activity Graph - Themed -->
 <p align="center">
-  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=Unknown-2829&bg_color=0d1117&color=b9f6ca&line=00e676&point=69f0ae&area_color=00e676&area=true&hide_border=true" alt="GitHub activity graph" />
+  <img width="95%" src="https://raw.githubusercontent.com/Unknown-2829/Unknown-2829/main/assets/activity-graph.svg" alt="GitHub activity graph" />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 12 Oct 2026, 11:45 IST</code></sub>
+  <sub><code>Last refresh: 12 Oct 2026, 13:45 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -290,7 +290,7 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
-- `Unknown-2829` — pushed (3d ago)
+- `Unknown-2829` — pushed (just now)
 - `Unknown-2829` — pushed (4d ago)
 - `Unknown-2829` — pushed (4d ago)
 - `Unknown-2829` — pushed (4d ago)
