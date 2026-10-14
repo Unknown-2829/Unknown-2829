@@ -44,7 +44,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Phantom%20mode%3A%20active.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Phantom mode: active." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Late%20night%20commits%20hit%20different.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Late night commits hit different." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 14 Oct 2026, 17:42 IST</code></sub>
+  <sub><code>Last refresh: 14 Oct 2026, 22:55 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
