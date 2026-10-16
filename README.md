@@ -44,7 +44,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Debugging%20by%20moonlight.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Debugging by moonlight." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20No%20distractions.%20Just%20the%20glow%20of%20the%20screen.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: No distractions. Just the glow of the screen." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 16 Oct 2026, 22:20 IST</code></sub>
+  <sub><code>Last refresh: 17 Oct 2026, 02:57 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
