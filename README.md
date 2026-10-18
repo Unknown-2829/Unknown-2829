@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 18 Oct 2026, 10:22 IST</code></sub>
+  <sub><code>Last refresh: 18 Oct 2026, 16:59 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -203,7 +203,7 @@ Gemini 2.5 Flash & Pro
 
 <!-- LIVE-PROJECT:Phantom-terminal:START -->
 <p>
-  <img align="absmiddle" src="https://img.shields.io/badge/Terminal-v4.0.0%20%C2%B7%2080%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Terminal: v4.0.0 · 80 commits" /> &nbsp; (🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
+  <img align="absmiddle" src="https://img.shields.io/badge/Terminal-v4.2.2%20%C2%B7%2083%20commits-6e3aff?style=flat-square&labelColor=0d1117" alt="Terminal: v4.2.2 · 83 commits" /> &nbsp; (🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
 </p>
 <!-- LIVE-PROJECT:Phantom-terminal:END -->
 
@@ -290,11 +290,11 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
-- `Phantom-terminal` — pushed (11h ago)
-- `Phantom-terminal` — released v4.0.0 (11h ago)
-- `Unknown-2829` — pushed (5d ago)
-- `Unknown-2829` — pushed (5d ago)
-- `Unknown-2829` — pushed (5d ago)
+- `Phantom-terminal` — released v4.2.2 (just now)
+- `Phantom-terminal` — released v4.2.1 (3h ago)
+- `Phantom-terminal` — pushed (18h ago)
+- `Phantom-terminal` — pushed (17h ago)
+- `Phantom-terminal` — released v4.1.0 (6h ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
