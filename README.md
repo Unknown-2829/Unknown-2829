@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 18 Oct 2026, 16:59 IST</code></sub>
+  <sub><code>Last refresh: 18 Oct 2026, 21:31 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -290,11 +290,11 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
-- `Phantom-terminal` — released v4.2.2 (just now)
-- `Phantom-terminal` — released v4.2.1 (3h ago)
-- `Phantom-terminal` — pushed (18h ago)
-- `Phantom-terminal` — pushed (17h ago)
-- `Phantom-terminal` — released v4.1.0 (6h ago)
+- `Phantom-terminal` — released v4.2.2 (4h ago)
+- `Phantom-terminal` — released v4.2.1 (8h ago)
+- `Phantom-terminal` — pushed (23h ago)
+- `Phantom-terminal` — pushed (22h ago)
+- `Phantom-terminal` — released v4.1.0 (10h ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
