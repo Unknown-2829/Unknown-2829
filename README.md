@@ -40,16 +40,16 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8F%B9%20Dussehra-ff3d00?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Another%20day.%20Another%20line%20of%20code.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Another day. Another line of code." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20The%20terminal%20celebrates%20too.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: The terminal celebrates too." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=shark&color=0:050000,50:ff3d00,100:ffd740&height=5&section=header&animation=scaleIn" width="70%" alt="" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -64,15 +64,15 @@ Primary Domains:
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=shark&color=0:050000,50:ff3d00,100:ffd740&height=5&section=header&animation=scaleIn" width="70%" alt="" />
 </p>
 
 <p align="center">
-  <sub>🎨 <i>Stats theme updates dynamically based on current streak | Powered by GitHub Actions</i></sub>
+  <sub>🎨 <i>🏹 Dussehra | Powered by GitHub Actions</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 19 Oct 2026, 19:15 IST</code></sub>
+  <sub><code>Last refresh: 20 Oct 2026, 04:01 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -290,11 +290,11 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
+- `hitek-icmr-db-osint` — created branch legacy-v1 (3h ago)
 - `Phantom-terminal` — pushed (1d ago)
-- `Phantom-terminal` — released v4.2.3 (21h ago)
+- `Phantom-terminal` — released v4.2.3 (1d ago)
 - `Phantom-terminal` — released v4.2.2 (1d ago)
 - `Phantom-terminal` — released v4.2.1 (1d ago)
-- `Phantom-terminal` — pushed (1d ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
