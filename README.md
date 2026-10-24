@@ -40,16 +40,16 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%E2%98%81%EF%B8%8F%20Recharging-7c83fd?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Some%20code%20only%20works%20in%20the%20dark.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Some code only works in the dark." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Offline%20from%20the%20terminal.%20Online%20in%20the%20mind.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Offline from the terminal. Online in the mind." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0a0a1a,50:7c83fd,100:00d2c8&height=4&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -64,15 +64,15 @@ Primary Domains:
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0a0a1a,50:7c83fd,100:00d2c8&height=4&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <p align="center">
-  <sub>🎨 <i>Stats theme updates dynamically based on current streak | Powered by GitHub Actions</i></sub>
+  <sub>🎨 <i>Sunday — recharging 🔋 | Powered by GitHub Actions</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 24 Oct 2026, 21:38 IST</code></sub>
+  <sub><code>Last refresh: 25 Oct 2026, 02:31 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -293,7 +293,7 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 - `hitek-icmr-db-osint` — pushed (4d ago)
 - `hitek-icmr-db-osint` — pushed (4d ago)
 - `hitek-icmr-db-osint` — pushed (4d ago)
-- `Phantom-terminal` — pushed (5d ago)
+- `Phantom-terminal` — pushed (6d ago)
 - `hitek-icmr-db-osint` — pushed (4d ago)
 <!-- RECENT-ACTIVITY:END -->
 
