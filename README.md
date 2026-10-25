@@ -44,7 +44,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Every%20streak%20ends.%20New%20ones%20begin.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Every streak ends. New ones begin." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20The%20flame%20flickered.%20It%27ll%20return.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: The flame flickered. It'll return." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 25 Oct 2026, 22:08 IST</code></sub>
+  <sub><code>Last refresh: 26 Oct 2026, 02:31 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
