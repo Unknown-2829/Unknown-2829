@@ -40,11 +40,11 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%92%A4%20Offline%20%E2%80%94%20Taking%20a%20Break-546e7a?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%94%95%20Busy%20with%20Real%20Life-546e7a?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Phantom%20doesn%27t%20announce%20its%20moves.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Phantom doesn't announce its moves." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Gone%20dark.%20Back%20soon.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Gone dark. Back soon." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -68,11 +68,11 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub>💤 <i>Offline — Taking a Break</i></sub>
+  <sub>🔕 <i>Busy with Real Life</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 29 Oct 2026, 18:57 IST</code></sub>
+  <sub><code>Last refresh: 30 Oct 2026, 04:23 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -112,7 +112,7 @@ Primary Domains:
 
 <!-- LIVE-PROJECT:phantom_vault:START -->
 <p>
-  <img align="absmiddle" src="https://img.shields.io/badge/Service-%E2%9A%A1%20SLOW-ff9500?style=flat-square&labelColor=0d1117" alt="Service: slow" /> &nbsp; (🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
+  <img align="absmiddle" src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; (🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
 </p>
 <!-- LIVE-PROJECT:phantom_vault:END -->
 
@@ -291,10 +291,10 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 
 <!-- RECENT-ACTIVITY:START -->
 - `hitek-icmr-db-osint` — pushed (9d ago)
+- `hitek-icmr-db-osint` — pushed (10d ago)
 - `hitek-icmr-db-osint` — pushed (9d ago)
-- `hitek-icmr-db-osint` — pushed (9d ago)
-- `Phantom-terminal` — pushed (10d ago)
-- `hitek-icmr-db-osint` — pushed (9d ago)
+- `Phantom-terminal` — pushed (11d ago)
+- `hitek-icmr-db-osint` — pushed (10d ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
