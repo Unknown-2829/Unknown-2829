@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 29 Oct 2026, 04:14 IST</code></sub>
+  <sub><code>Last refresh: 29 Oct 2026, 18:57 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -112,7 +112,7 @@ Primary Domains:
 
 <!-- LIVE-PROJECT:phantom_vault:START -->
 <p>
-  <img align="absmiddle" src="https://img.shields.io/badge/Service-%E2%9C%85%20UP-00c851?style=flat-square&labelColor=0d1117" alt="Service: up" /> &nbsp; (🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
+  <img align="absmiddle" src="https://img.shields.io/badge/Service-%E2%9A%A1%20SLOW-ff9500?style=flat-square&labelColor=0d1117" alt="Service: slow" /> &nbsp; (🔄 Synced · <a href="https://github.com/Unknown-2829/Unknown-2829/actions">auto-updated every ~6h</a>)
 </p>
 <!-- LIVE-PROJECT:phantom_vault:END -->
 
@@ -290,9 +290,9 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
-- `hitek-icmr-db-osint` — pushed (8d ago)
 - `hitek-icmr-db-osint` — pushed (9d ago)
-- `hitek-icmr-db-osint` — pushed (8d ago)
+- `hitek-icmr-db-osint` — pushed (9d ago)
+- `hitek-icmr-db-osint` — pushed (9d ago)
 - `Phantom-terminal` — pushed (10d ago)
 - `hitek-icmr-db-osint` — pushed (9d ago)
 <!-- RECENT-ACTIVITY:END -->
