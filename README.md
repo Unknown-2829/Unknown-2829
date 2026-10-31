@@ -40,16 +40,16 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8E%83%20Happy%20Halloween-ff6600?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%E2%98%81%EF%B8%8F%20Recharging-7c83fd?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20The%20terminal%20celebrates%20too.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: The terminal celebrates too." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Sundays%20are%20for%20reading%20what%20I%27ll%20build%20tomorrow.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Sundays are for reading what I'll build tomorrow." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=shark&color=0:0a0500,50:ff6600,100:1a0033&height=6&section=header&animation=blinking" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0a0a1a,50:7c83fd,100:00d2c8&height=4&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -64,15 +64,15 @@ Primary Domains:
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=shark&color=0:0a0500,50:ff6600,100:1a0033&height=6&section=header&animation=blinking" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0a0a1a,50:7c83fd,100:00d2c8&height=4&section=header&animation=fadeIn" width="70%" alt="" />
 </p>
 
 <p align="center">
-  <sub>🎨 <i>🎃 Happy Halloween | Powered by GitHub Actions</i></sub>
+  <sub>🎨 <i>Sunday — recharging 🔋 | Powered by GitHub Actions</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 31 Oct 2026, 18:23 IST</code></sub>
+  <sub><code>Last refresh: 1 Nov 2026, 03:16 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -291,10 +291,10 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 
 <!-- RECENT-ACTIVITY:START -->
 - `hitek-icmr-db-osint` — pushed (11d ago)
+- `hitek-icmr-db-osint` — pushed (12d ago)
 - `hitek-icmr-db-osint` — pushed (11d ago)
-- `hitek-icmr-db-osint` — pushed (11d ago)
-- `Phantom-terminal` — pushed (12d ago)
-- `hitek-icmr-db-osint` — pushed (11d ago)
+- `Phantom-terminal` — pushed (13d ago)
+- `hitek-icmr-db-osint` — pushed (12d ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
