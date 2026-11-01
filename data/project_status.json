@@ -7,16 +7,16 @@
   "phantom_id": {
     "status": "up",
     "fail_count": 0,
-    "elapsed": 0.48
+    "elapsed": 0.19
   },
   "phantom_vault": {
     "status": "up",
     "fail_count": 0,
-    "elapsed": 0.27
+    "elapsed": 0.25
   },
   "portfolio": {
     "status": "up",
     "fail_count": 0,
-    "elapsed": 0.37
+    "elapsed": 0.19
   }
 }
