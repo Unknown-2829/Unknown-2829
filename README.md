@@ -40,11 +40,11 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%94%95%20Busy%20with%20Real%20Life-546e7a?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%91%20Not%20Growing...%20Or%20Am%20I%3F-546e7a?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Radio%20silence.%20Intentional.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Radio silence. Intentional." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Maybe%20cooking%20something%20secretly...%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Maybe cooking something secretly..." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -68,11 +68,11 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub>🔕 <i>Busy with Real Life</i></sub>
+  <sub>🌑 <i>Not Growing... Or Am I?</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 14 Nov 2026, 23:52 IST</code></sub>
+  <sub><code>Last refresh: 15 Nov 2026, 04:08 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -291,10 +291,10 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 
 <!-- RECENT-ACTIVITY:START -->
 - `hitek-icmr-db-osint` — pushed (25d ago)
-- `hitek-icmr-db-osint` — pushed (25d ago)
+- `hitek-icmr-db-osint` — pushed (26d ago)
 - `hitek-icmr-db-osint` — pushed (25d ago)
 - `Phantom-terminal` — pushed (27d ago)
-- `hitek-icmr-db-osint` — pushed (25d ago)
+- `hitek-icmr-db-osint` — pushed (26d ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
