@@ -4,7 +4,7 @@
   <a href="https://ayushman.live/"><img src="https://img.shields.io/badge/Portfolio-ayushman.live-6e3aff?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
   <a href="https://t.me/unknownlll2829"><img src="https://img.shields.io/badge/Telegram-@unknownlll2829-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" /></a>
   <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6"><img src="https://img.shields.io/badge/Spotify-Artist-1DB954?style=for-the-badge&logo=spotify&logoColor=white" /></a>
-  <!-- STATUS-TOP:START --><img src="https://img.shields.io/badge/Status-ACTIVE-00ff00?style=for-the-badge" alt="Status: ACTIVE" /><!-- STATUS-TOP:END -->
+  <!-- STATUS-TOP:START --><img src="https://img.shields.io/badge/Status-BUSY-ff6d00?style=for-the-badge" alt="Status: BUSY" /><!-- STATUS-TOP:END -->
 </p>
 
 ---
@@ -40,11 +40,11 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%92%94%20Streak%20Dropped-ff6d00?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20No%20distractions.%20Just%20the%20glow%20of%20the%20screen.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: No distractions. Just the glow of the screen." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Break%20the%20streak.%20Keep%20the%20momentum.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Break the streak. Keep the momentum." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -68,11 +68,11 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub>🎨 <i>Stats theme updates dynamically based on current streak | Powered by GitHub Actions</i></sub>
+  <sub>⚡ <i>1-day streak was broken — get back in the game!</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 19 Nov 2026, 02:16 IST</code></sub>
+  <sub><code>Last refresh: 19 Nov 2026, 13:13 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -292,7 +292,7 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 <!-- RECENT-ACTIVITY:START -->
 - `hitek-icmr-db-osint` — watch (1d ago)
 - `hitek-icmr-db-osint` — pushed (29d ago)
-- `hitek-icmr-db-osint` — pushed (29d ago)
+- `hitek-icmr-db-osint` — pushed (30d ago)
 - `hitek-icmr-db-osint` — pushed (29d ago)
 - `Phantom-terminal` — pushed (31d ago)
 <!-- RECENT-ACTIVITY:END -->
@@ -383,7 +383,7 @@ Music is another creative outlet — a different way to express ideas and emotio
 ## 📬 // CONTACT
 
 <p align="center">
-  <!-- STATUS-CONTACT:START --><img src="https://img.shields.io/badge/Status-%F0%9F%9F%A2%20OPEN%20TO%20OPPORTUNITIES-00ff00?style=for-the-badge" alt="Status: 🟢 OPEN TO OPPORTUNITIES" /><!-- STATUS-CONTACT:END -->
+  <!-- STATUS-CONTACT:START --><img src="https://img.shields.io/badge/Status-%F0%9F%9F%A0%20BUSY%20%C2%B7%20OPEN%20TO%20OPPORTUNITIES-ff6d00?style=for-the-badge" alt="Status: 🟠 BUSY · OPEN TO OPPORTUNITIES" /><!-- STATUS-CONTACT:END -->
 </p>
 
 Interested In:
