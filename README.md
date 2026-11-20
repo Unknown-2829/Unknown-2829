@@ -4,7 +4,7 @@
   <a href="https://ayushman.live/"><img src="https://img.shields.io/badge/Portfolio-ayushman.live-6e3aff?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
   <a href="https://t.me/unknownlll2829"><img src="https://img.shields.io/badge/Telegram-@unknownlll2829-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" /></a>
   <a href="https://open.spotify.com/artist/14RQhXQDhmN05G9Z24Fbk6"><img src="https://img.shields.io/badge/Spotify-Artist-1DB954?style=for-the-badge&logo=spotify&logoColor=white" /></a>
-  <!-- STATUS-TOP:START --><img src="https://img.shields.io/badge/Status-BUSY-ff6d00?style=for-the-badge" alt="Status: BUSY" /><!-- STATUS-TOP:END -->
+  <!-- STATUS-TOP:START --><img src="https://img.shields.io/badge/Status-AWAY-546e7a?style=for-the-badge" alt="Status: AWAY" /><!-- STATUS-TOP:END -->
 </p>
 
 ---
@@ -40,16 +40,16 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%92%94%20Streak%20Dropped-ff6d00?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%98%B6%E2%80%8D%F0%9F%8C%AB%EF%B8%8F%20Cooking%20Something%20Secretly-546e7a?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20The%20counter%20resets.%20The%20coder%20doesn%27t.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: The counter resets. The coder doesn't." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Deep%20work%20requires%20deep%20silence.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Deep work requires deep silence." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=cylinder&color=0:000000,50:212121,100:424242&height=6&section=header&animation=blinking" width="70%" alt="" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -64,15 +64,15 @@ Primary Domains:
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=cylinder&color=0:000000,50:212121,100:424242&height=6&section=header&animation=blinking" width="70%" alt="" />
 </p>
 
 <p align="center">
-  <sub>⚡ <i>1-day streak was broken — get back in the game!</i></sub>
+  <sub>😶‍🌫️ <i>Cooking Something Secretly</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 20 Nov 2026, 13:04 IST</code></sub>
+  <sub><code>Last refresh: 21 Nov 2026, 02:06 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -290,10 +290,8 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
-- `hitek-icmr-db-osint` — watch (2d ago)
-- `hitek-icmr-db-osint` — pushed (30d ago)
+- `hitek-icmr-db-osint` — watch (3d ago)
 - `hitek-icmr-db-osint` — pushed (31d ago)
-- `hitek-icmr-db-osint` — pushed (30d ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
@@ -382,7 +380,7 @@ Music is another creative outlet — a different way to express ideas and emotio
 ## 📬 // CONTACT
 
 <p align="center">
-  <!-- STATUS-CONTACT:START --><img src="https://img.shields.io/badge/Status-%F0%9F%9F%A0%20BUSY%20%C2%B7%20OPEN%20TO%20OPPORTUNITIES-ff6d00?style=for-the-badge" alt="Status: 🟠 BUSY · OPEN TO OPPORTUNITIES" /><!-- STATUS-CONTACT:END -->
+  <!-- STATUS-CONTACT:START --><img src="https://img.shields.io/badge/Status-%F0%9F%8C%91%20QUIET%20MODE%20%C2%B7%20OPEN%20TO%20OPPORTUNITIES-546e7a?style=for-the-badge" alt="Status: 🌑 QUIET MODE · OPEN TO OPPORTUNITIES" /><!-- STATUS-CONTACT:END -->
 </p>
 
 Interested In:
