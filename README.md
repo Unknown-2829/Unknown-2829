@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 20 Nov 2026, 02:22 IST</code></sub>
+  <sub><code>Last refresh: 20 Nov 2026, 13:04 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -292,9 +292,8 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 <!-- RECENT-ACTIVITY:START -->
 - `hitek-icmr-db-osint` — watch (2d ago)
 - `hitek-icmr-db-osint` — pushed (30d ago)
+- `hitek-icmr-db-osint` — pushed (31d ago)
 - `hitek-icmr-db-osint` — pushed (30d ago)
-- `hitek-icmr-db-osint` — pushed (30d ago)
-- `Phantom-terminal` — pushed (32d ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
