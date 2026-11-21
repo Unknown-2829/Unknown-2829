@@ -40,11 +40,11 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%98%B6%E2%80%8D%F0%9F%8C%AB%EF%B8%8F%20Cooking%20Something%20Secretly-546e7a?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%A4%AB%20Shh...%20Working%20on%20Something%20Big-546e7a?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Deep%20work%20requires%20deep%20silence.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Deep work requires deep silence." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Gone%20dark.%20Back%20soon.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Gone dark. Back soon." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -68,11 +68,11 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub>😶‍🌫️ <i>Cooking Something Secretly</i></sub>
+  <sub>🤫 <i>Shh... Working on Something Big</i></sub>
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 21 Nov 2026, 13:00 IST</code></sub>
+  <sub><code>Last refresh: 22 Nov 2026, 01:05 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -290,7 +290,7 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
-- `hitek-icmr-db-osint` — watch (3d ago)
+- `hitek-icmr-db-osint` — watch (4d ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
