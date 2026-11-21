@@ -2,21 +2,21 @@
   "phantom_mail": {
     "status": "up",
     "fail_count": 0,
-    "elapsed": 0.24
+    "elapsed": 0.21
   },
   "phantom_id": {
     "status": "up",
     "fail_count": 0,
-    "elapsed": 0.21
+    "elapsed": 0.28
   },
   "phantom_vault": {
     "status": "up",
     "fail_count": 0,
-    "elapsed": 0.16
+    "elapsed": 0.19
   },
   "portfolio": {
     "status": "up",
     "fail_count": 0,
-    "elapsed": 0.3
+    "elapsed": 0.1
   }
 }
