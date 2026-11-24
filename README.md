@@ -44,7 +44,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Code%20is%20the%20only%20language%20that%20matters.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Code is the only language that matters." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20The%20dark%20is%20where%20the%20real%20work%20happens.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: The dark is where the real work happens." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 24 Nov 2026, 15:41 IST</code></sub>
+  <sub><code>Last refresh: 25 Nov 2026, 04:09 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -290,7 +290,7 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
-- `hitek-icmr-db-osint` — watch (6d ago)
+- `hitek-icmr-db-osint` — watch (7d ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
