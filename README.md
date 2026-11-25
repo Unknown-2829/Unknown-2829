@@ -40,16 +40,16 @@ Primary Domains:
 
 <!-- DYNAMIC-STATS:START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%8C%B1%20Growing-00e676?style=for-the-badge&labelColor=161b22" alt="Current Status" />
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20CURRENT%20STATUS-%F0%9F%92%8E%20Consistent-448aff?style=for-the-badge&labelColor=161b22" alt="Current Status" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Commit.%20Push.%20Repeat.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Commit. Push. Repeat." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20The%20night%20shift%20never%20ends.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: The night shift never ends." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0d1117,50:448aff,100:82b1ff&height=4&section=header&animation=twinkling" width="70%" alt="" />
 </p>
 
 <!-- Streak Stats - Dynamically Themed -->
@@ -64,7 +64,7 @@ Primary Domains:
 
 <!-- Themed gradient divider with tier-specific effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:00e676,100:69f0ae&height=3&section=header&animation=fadeIn" width="70%" alt="" />
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0d1117,50:448aff,100:82b1ff&height=4&section=header&animation=twinkling" width="70%" alt="" />
 </p>
 
 <p align="center">
@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 25 Nov 2026, 14:26 IST</code></sub>
+  <sub><code>Last refresh: 26 Nov 2026, 03:22 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -290,7 +290,7 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
-- `hitek-icmr-db-osint` — watch (7d ago)
+- `hitek-icmr-db-osint` — watch (8d ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
