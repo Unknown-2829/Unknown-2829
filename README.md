@@ -44,7 +44,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20The%20diff%20grows.%20The%20ego%20shrinks.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: The diff grows. The ego shrinks." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Stars%20and%20stack%20traces.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Stars and stack traces." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 26 Nov 2026, 14:12 IST</code></sub>
+  <sub><code>Last refresh: 27 Nov 2026, 03:17 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
@@ -290,7 +290,7 @@ deployment          = ["Render", "Railway", "Self-Hosted VPS"]
 > 🔄 **GitHub Activity Feed:** _Recent public events from GitHub, auto-synced every ~6h via GitHub Actions._
 
 <!-- RECENT-ACTIVITY:START -->
-- `hitek-icmr-db-osint` — watch (8d ago)
+- `hitek-icmr-db-osint` — watch (9d ago)
 <!-- RECENT-ACTIVITY:END -->
 
 </details>
