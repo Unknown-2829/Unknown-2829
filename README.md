@@ -44,7 +44,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Stars%20and%20stack%20traces.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Stars and stack traces." />
+  <img src="https://img.shields.io/badge/%23%20TAGLINE-%E2%80%9C%20Every%20commit%20is%20a%20small%20war%20won.%20%E2%80%9D-ffffff?style=for-the-badge&labelColor=161b22" alt="Tagline: Every commit is a small war won." />
 </p>
 
 <!-- Themed gradient divider with tier-specific effect -->
@@ -72,7 +72,7 @@ Primary Domains:
 </p>
 
 <p align="center">
-  <sub><code>Last refresh: 27 Nov 2026, 03:17 IST</code></sub>
+  <sub><code>Last refresh: 27 Nov 2026, 14:22 IST</code></sub>
 </p>
 <!-- DYNAMIC-STATS:END -->
 
